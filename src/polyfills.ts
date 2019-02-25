@@ -85,3 +85,6 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
  import 'aframe-auto-detect-controllers-component';
  import 'aframe-controller-cursor-component';
  import 'aframe-physics-system';
+ import 'aframe-teleport-controls';
+ import 'aframe-text-geometry-component';
+ import 'aframe-outline';
