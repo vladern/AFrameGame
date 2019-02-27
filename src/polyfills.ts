@@ -66,3 +66,4 @@ import 'aframe';
 import 'aframe-extras';
 import 'aframe-controller-cursor-component';
 import 'aframe-physics-system';
+import 'aframe-aabb-collider-component';
