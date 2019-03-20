@@ -4,22 +4,32 @@
     <a-entity windows-motion-controls="hand: right" laser-controls="hand: right"></a-entity>
   </a-entity>
 
+  <a-entity
+    position="-3.17 2 -1.54"
+    rotation="0 70 0"
+    geometry="primitive: plane; width: 4; height: 2.5"
+    material="color: #00001f"
+    text="value: This text will be 4 units wide.">
+  </a-entity>
 
-  <ng-container *ngFor="let cubito of cubo">
+  <a-entity
+    position="0 2 -3.5"
+    geometry="primitive: plane; width: 4; height: 2.5"
+    material="shader: html; target: #htmlElement;">
+    <app-central-screen></app-central-screen>
+  </a-entity>
 
-      <a-box  [attr.position]="cubito.position"
-              [attr.width]="cubito.height"
-              [attr.height]="cubito.height"
-              [attr.depth]="cubito.height"
-              class="box"
-              #boxes id="boxes"
-              color="blue"
-              (click)="onClick($event)"
-              (hitstart)="onIntersected($event)">
-      </a-box>
+  
 
-  </ng-container>
-  <a-sky color="#6EBAA7"></a-sky>
-  <a-plane color="black" rotation="-90 0 0" width="4" height="3"></a-plane>
+  <a-entity
+    position="3.17 2 -1.54"
+    rotation="0 -70 0"
+    geometry="primitive: plane; width: 4; height: 2.5"
+    material="color: #00001f"
+    text="value: This text will be 4 units wide.">
+  </a-entity>
+  
+  <a-sky material="color: #294757" id="sky"></a-sky>
+  <a-plane color="black" id="ground" rotation="-90 0 0" width="4" height="3"></a-plane>
 </a-scene>
 
