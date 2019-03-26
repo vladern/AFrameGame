@@ -3,12 +3,8 @@
     <a-entity windows-motion-controls="hand: left" aabb-collider="objects: .box"></a-entity>
     <a-entity windows-motion-controls="hand: right" laser-controls="hand: right"></a-entity>
   </a-entity>
-  <a-assets>
-    <!-- Text Canvas -->
-    <canvas id="canvasObj" crossorigin="anonymous" webkit-playsinline=""></canvas>
-  </a-assets>
     <!-- left panel -->
-    <a-gui-flex-container 
+  <a-gui-flex-container 
     flex-direction="column" 
     justify-content="center" 
     align-items="normal" 
@@ -19,15 +15,51 @@
     position="-3.17 2 -1.54" rotation="0 70 0"
     panel-color="#00001f"
   >
-  <a-gui-label 
-    width="3.8" height="2.3"
-    value="Lado izquierdo"
-    font-family="Arial"
-    margin="0 0 0.05 0"
-    background-color="#00001f"
-    font-color="white"
-  >
-  </a-gui-label>
+    <a-entity position="0 0.8 0">
+      <a-gui-label 
+        width="3.8" height="0.2"
+        value="Warning"
+        font-family="Impact"
+        font-size="40px"
+        background-color="#00001f"
+        font-color="white"
+      >
+      </a-gui-label>
+    </a-entity>
+    <a-entity position="0 0.6 0">
+        <a-gui-label 
+          width="3.8" height="0.2"
+          value="This product is a alfa version."
+          font-family="Impact"
+          font-size="40px"
+          background-color="#00001f"
+          font-color="white"
+        >
+        </a-gui-label>
+      </a-entity>
+      <a-entity position="0 0.4 0">
+          <a-gui-label 
+            width="3.8" height="0.2"
+            value="The final product will be contain important changes."
+            font-family="Impact"
+            font-size="40px"
+            background-color="#00001f"
+            font-color="white"
+          >
+          </a-gui-label>
+        </a-entity>
+        <a-entity position="0 0.2 0">
+            <a-gui-label 
+              width="3.8" height="0.2"
+              value="The final product will be contain important changes."
+              font-family="Impact"
+              font-size="40px"
+              background-color="#00001f"
+              font-color="white"
+            >
+            </a-gui-label>
+          </a-entity>
+    
   </a-gui-flex-container>
   <!-- center panel -->
   <a-gui-flex-container 
@@ -47,7 +79,7 @@
         value="Single Player"
         font-size="60px"
         width="1" height="1"
-        font-family="Arial"
+        font-family="Impact"
         margin="0 0 0.05 0"
         (click)="onPlay()"
         toggle="true"
@@ -59,7 +91,7 @@
         value="Party"
         font-size="60px"
         width="1" height="1"
-        font-family="Arial"
+        font-family="Impact"
         margin="0 0 0.05 0"
         (click)="onPlay()"
         toggle="true"
@@ -67,12 +99,12 @@
       </a-gui-button>
     </a-entity>
     <a-entity position="1.314 0.065 0.01">
-      <a-entity position="0 0.291 0">
+      <a-entity position="0 0.291 0" style="border-radius: 10%">
         <a-gui-button
           value="How to play"
           font-size="60px"
           width="1" height="0.4"
-          font-family="Arial"
+          font-family="Impact"
           margin="0 0 0.05 0"
           (click)="onPlay()"
           toggle="true"
@@ -84,7 +116,7 @@
           value="Credits"
           font-size="60px"
           width="1" height="0.4"
-          font-family="Arial"
+          font-family="Impact"
           margin="0 0 0.05 0"
           (click)="onPlay()"
           toggle="true"
@@ -108,15 +140,105 @@
     position="3.17 2 -1.54" rotation="0 -70 0"
     panel-color="#00001f"
   >
-  <a-gui-label 
-    width="3.8" height="2.3"
-    value="Lado derecho"
-    font-family="Arial"
-    margin="0 0 0.05 0"
-    background-color="#00001f"
-    font-color="white"
-  >
-  </a-gui-label>
+  <a-entity>
+    <a-entity position="0 1.05 0">
+      <a-gui-label 
+        width="3.8" height="0.3"
+        value="PLAYER STATISTICS"
+        font-family="Impact"
+        font-size="60px"
+        margin="0 0 0.05 0"
+        background-color="#00001f"
+        font-color="white"
+      >
+      </a-gui-label>
+    </a-entity>
+    <a-entity position="-0.4 0.7 0">
+      <a-gui-button
+        value="All"
+        font-size="30px"
+        width="0.3" height="0.2"
+        font-family="Impact"
+        margin="0 0 0.05 0"
+        (click)="onPlay()"
+        toggle="true"
+      >
+      </a-gui-button>
+    </a-entity>
+    <a-entity position="0 0.7 0">
+      <a-gui-button
+        value="Free Play"
+        font-size="30px"
+        width="0.4" height="0.2"
+        font-family="Impact"
+        margin="0 0 0.05 0"
+        (click)="onPlay()"
+        toggle="true"
+      >
+      </a-gui-button>
+    </a-entity>
+    <a-entity position="0.4 0.7 0">
+      <a-gui-button
+        value="Party"
+        font-size="30px"
+        width="0.3" height="0.2"
+        font-family="Impact"
+        margin="0 0 0.05 0"
+        (click)="onPlay()"
+        toggle="true"
+      >
+      </a-gui-button>
+    </a-entity>
+    <a-entity position="-1.06 0.4 0">
+      <a-gui-label 
+        width="1.6" height="0.2"
+        value="Levels Played               79"
+        font-family="Impact"
+        font-size="40px"
+        margin="0 0 0.05 0"
+        background-color="#00001f"
+        font-color="white"
+      >
+      </a-gui-label>
+    </a-entity>
+    <a-entity position="-1.06 0.2 0">
+        <a-gui-label 
+          width="1.6" height="0.2"
+          value="Levels Cleared              20"
+          font-family="Impact"
+          font-size="40px"
+          margin="0 0 0.05 0"
+          background-color="#00001f"
+          font-color="white"
+        >
+        </a-gui-label>
+      </a-entity>
+    <a-entity position="1.06 0.4 0">
+        <a-gui-label 
+          width="1.6" height="0.2"
+          value="Good Cuts                 20005"
+          font-family="Impact"
+          font-size="40px"
+          margin="0 0 0.05 0"
+          background-color="#00001f"
+          font-color="white"
+        >
+        </a-gui-label>
+      </a-entity>
+      <a-entity position="1.06 0.2 0">
+          <a-gui-label 
+            width="1.6" height="0.2"
+            value="Bad Cuts                 20"
+            font-family="Impact"
+            font-size="40px"
+            margin="0 0 0.05 0"
+            background-color="#00001f"
+            font-color="white"
+          >
+          </a-gui-label>
+        </a-entity>
+  </a-entity>
+  
   </a-gui-flex-container>
 
   
