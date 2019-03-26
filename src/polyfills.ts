@@ -61,10 +61,11 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
-
+import 'zone.js/dist/zone';
 import 'aframe';
 import 'aframe-extras';
 import 'aframe-controller-cursor-component';
 import 'aframe-physics-system';
 import 'aframe-aabb-collider-component';
 import 'aframe-html-shader';
+import 'aframe-gui';
