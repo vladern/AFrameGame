@@ -110,19 +110,20 @@
     position="3.17 2 -1.54" rotation="0 -70 0"
     panel-color="#00001f"
   >
-  <a-entity>
-    <a-entity position="0 1.05 0">
-      <a-gui-label 
-        width="3.8" height="0.3"
-        value="PLAYER STATISTICS"
-        font-family="Impact"
-        font-size="60px"
-        margin="0 0 0.05 0"
-        background-color="#00001f"
-        font-color="white"
-      >
-      </a-gui-label>
-    </a-entity>
+  <ng-container id="rightPanelText" *ngFor="let line of rightPanelLines">
+      <a-entity [attr.position]="line.position">
+          <a-gui-label 
+            width="1.5" height="0.2"
+            [attr.value]="line.text"
+            font-family="Impact"
+            [attr.font-size]="line.fontSize"
+            background-color="#00001f"
+            font-color="white"
+          >
+          </a-gui-label>
+      </a-entity>
+    </ng-container>
+    
     <a-entity position="-0.4 0.7 0">
       <a-gui-button
         value="All"
@@ -159,55 +160,6 @@
       >
       </a-gui-button>
     </a-entity>
-    <a-entity position="-1.06 0.4 0">
-      <a-gui-label 
-        width="1.6" height="0.2"
-        value="Levels Played               79"
-        font-family="Impact"
-        font-size="40px"
-        margin="0 0 0.05 0"
-        background-color="#00001f"
-        font-color="white"
-      >
-      </a-gui-label>
-    </a-entity>
-    <a-entity position="-1.06 0.2 0">
-        <a-gui-label 
-          width="1.6" height="0.2"
-          value="Levels Cleared              20"
-          font-family="Impact"
-          font-size="40px"
-          margin="0 0 0.05 0"
-          background-color="#00001f"
-          font-color="white"
-        >
-        </a-gui-label>
-      </a-entity>
-    <a-entity position="1.06 0.4 0">
-        <a-gui-label 
-          width="1.6" height="0.2"
-          value="Good Cuts                 20005"
-          font-family="Impact"
-          font-size="40px"
-          margin="0 0 0.05 0"
-          background-color="#00001f"
-          font-color="white"
-        >
-        </a-gui-label>
-      </a-entity>
-      <a-entity position="1.06 0.2 0">
-          <a-gui-label 
-            width="1.6" height="0.2"
-            value="Bad Cuts                 20"
-            font-family="Impact"
-            font-size="40px"
-            margin="0 0 0.05 0"
-            background-color="#00001f"
-            font-color="white"
-          >
-          </a-gui-label>
-        </a-entity>
-  </a-entity>
   
   </a-gui-flex-container>
 
