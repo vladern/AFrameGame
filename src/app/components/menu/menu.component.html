@@ -1,117 +1,188 @@
-<a-scene stats physics='gravity: -1.6' antialias='true'>
-  <a-entity id="player">
-    <a-entity windows-motion-controls="hand: left" aabb-collider="objects: .box"></a-entity>
-    <a-entity windows-motion-controls="hand: right" laser-controls="hand: right"></a-entity>
-  </a-entity>
-    <!-- left panel -->
+
+<!-- left panel -->
+<a-gui-flex-container
+  id="leftPanel"
+  flex-direction="column" 
+  justify-content="center" 
+  align-items="normal" 
+  component-padding="0.1"
+  opacity="0.7" 
+  width="4" 
+  height="2.5"
+  position="-3.17 2 -1.54" rotation="0 70 0"
+  panel-color="#00001f"
+>
+<ng-container id="leftPanelText" *ngFor="let line of leftPanelLines">
+  <a-gui-label 
+    width="3.8" height="0.2"
+    [attr.value]="line.text"
+    font-family="Impact"
+    [attr.font-size]="line.fontSize"
+    background-color="#00001f"
+    font-color="white"
+  >
+  </a-gui-label>
+</ng-container>
+
+<!-- center panel -->
+</a-gui-flex-container>
+
+<a-gui-flex-container
+  id="centerPanel"
+  flex-direction="row" 
+  justify-content="center" 
+  align-items="normal" 
+  component-padding="0.1"
+  opacity="0.7" 
+  width="4" 
+  height="2.5"
+  position="0 2 -3.5" rotation="0 0 0"
+  panel-color="#00001f"
+>
+  <a-gui-button
+    position="-1 0.025 0.01"
+    value="Single Player"
+    font-size="60px"
+    width="1" height="1"
+    font-family="Impact"
+    margin="0.1 0.1 0.1 0.1"
+    (click)="goToSinglePlayer()"
+    toggle="true"
+  >
+  </a-gui-button>
+  <a-gui-button
+    value="Party"
+    font-size="60px"
+    width="1" height="1"
+    font-family="Impact"
+    margin="0.1 0.1 0.1 0.1"
+    (click)="goToParty()"
+    toggle="true"
+    >
+  </a-gui-button>
   <a-gui-flex-container
-    id="leftPanel"
-    flex-direction="column" 
-    justify-content="center" 
-    align-items="normal" 
     component-padding="0.1"
     opacity="0.7" 
-    width="4" 
-    height="2.5"
-    position="-3.17 2 -1.54" rotation="0 70 0"
+    width="1" 
+    height="1"
     panel-color="#00001f"
-  >
-    <ng-container id="leftPanelText" *ngFor="let line of leftPanelLines">
-      <a-entity [attr.position]="line.position">
-          <a-gui-label 
-            width="3.8" height="0.2"
-            [attr.value]="line.text"
+    flex-direction="column">
+      <a-gui-button
+            value="How to play"
+            font-size="60px"
+            width="1" height="0.4"
             font-family="Impact"
-            [attr.font-size]="line.fontSize"
-            background-color="#00001f"
-            font-color="white"
+            margin="0 0 0.05 0"
+            (click)="onPlay()"
+            toggle="true"
           >
-          </a-gui-label>
-      </a-entity>
-    </ng-container>
-    
+      </a-gui-button>
+      <a-gui-button
+            value="Credits"
+            font-size="60px"
+            width="1" height="0.4"
+            font-family="Impact"
+            margin="0 0 0.05 0"
+            (click)="onPlay()"
+            toggle="true"
+          >
+      </a-gui-button>
   </a-gui-flex-container>
-  <!-- center panel -->
-  <a-gui-flex-container 
+</a-gui-flex-container>
+<!-- right panel -->
+<a-gui-flex-container
+  id="rightPanel"
+  flex-direction="column" 
+  justify-content="center" 
+  align-items="normal" 
+  component-padding="0.1"
+  opacity="0.7" 
+  width="4" height="2.5"
+  position="3.17 2 -1.54" rotation="0 -70 0"
+  panel-color="#00001f"
+>
+  <a-gui-flex-container
+    id="topLabel"
     flex-direction="column" 
     justify-content="center" 
     align-items="normal" 
     component-padding="0.1"
-    opacity="0.7" 
-    width="4" 
-    height="2.5"
-    position="0 2 -3.5" rotation="0 0 0"
+    opacity="0.9" 
+    width="4" height="0.3"
     panel-color="#00001f"
   >
-  <a-entity id="menu">
-    <a-entity id="single-player-btn" position="-1.210 0.065 0.01">
-        <a-gui-button
-        value="Single Player"
-        font-size="60px"
-        width="1" height="1"
-        font-family="Impact"
-        margin="0 0 0.05 0"
-        (click)="onPlay()"
-        toggle="true"
-      >
-      </a-gui-button>
-    </a-entity>
-    <a-entity id="party-btn" position="0.091 0.065 0.01">
-        <a-gui-button
-        value="Party"
-        font-size="60px"
-        width="1" height="1"
-        font-family="Impact"
-        margin="0 0 0.05 0"
-        (click)="onPlay()"
-        toggle="true"
-      >
-      </a-gui-button>
-    </a-entity>
-    <a-entity position="1.314 0.065 0.01">
-      <a-entity position="0 0.291 0" style="border-radius: 10%">
-        <a-gui-button
-          value="How to play"
-          font-size="60px"
-          width="1" height="0.4"
-          font-family="Impact"
-          margin="0 0 0.05 0"
-          (click)="onPlay()"
-          toggle="true"
-        >
-        </a-gui-button>
-      </a-entity>
-      <a-entity position="0 -0.291 0">
-        <a-gui-button
-          value="Credits"
-          font-size="60px"
-          width="1" height="0.4"
-          font-family="Impact"
-          margin="0 0 0.05 0"
-          (click)="onPlay()"
-          toggle="true"
-        >
-        </a-gui-button>
-      </a-entity>
-      
-    </a-entity>
-  
-  </a-entity>
-  
+    <a-gui-label 
+                width="1.5" height="0.2"
+                value="Player statistics"
+                font-family="Impact"
+                font-size="50px"
+                background-color="#00001f"
+                font-color="white"
+              >
+    </a-gui-label>
   </a-gui-flex-container>
-  <!-- right panel -->
-  <a-gui-flex-container 
-    flex-direction="column" 
+  <a-gui-flex-container
+    id="buttonsContainer"
+    flex-direction="row" 
     justify-content="center" 
     align-items="normal" 
     component-padding="0.1"
-    opacity="0.7" 
-    width="4" height="2.5"
-    position="3.17 2 -1.54" rotation="0 -70 0"
+    opacity="0.5" 
+    width="4" height="0.3"
     panel-color="#00001f"
   >
-  <ng-container id="rightPanelText" *ngFor="let line of rightPanelLines">
-      <a-entity [attr.position]="line.position">
+    <a-gui-button
+      value="All"
+      font-size="30px"
+      width="0.3" height="0.2"
+      font-family="Impact"
+      margin="0.01 0.01 0.01 0.01"
+      (click)="onPlay()"
+      toggle="true"
+    >
+    </a-gui-button>
+    <a-gui-button
+      value="Single player"
+      font-size="30px"
+      width="0.5" height="0.2"
+      font-family="Impact"
+      margin="0.01 0.01 0.01 0.01"
+      (click)="onPlay()"
+      toggle="true"
+    >
+    </a-gui-button>
+    <a-gui-button
+      value="Party"
+      font-size="30px"
+      width="0.3" height="0.2"
+      font-family="Impact"
+      margin="0.01 0.01 0.01 0.01"
+      (click)="onPlay()"
+      toggle="true"
+    >
+    </a-gui-button>
+  </a-gui-flex-container>
+  <a-gui-flex-container
+    id="informationContainer"
+    flex-direction="row" 
+    justify-content="center" 
+    align-items="normal" 
+    component-padding="0.1"
+    opacity="0.5" 
+    width="4" height="2"
+    panel-color="#00001f"
+  >
+    <a-gui-flex-container
+      id="leftLabelContainer"
+      flex-direction="column" 
+      justify-content="center" 
+      align-items="normal" 
+      component-padding="0.1"
+      opacity="0.5" 
+      width="2" height="2"
+      panel-color="#00001f"
+    >
+    <ng-container id="rightPanelText" *ngFor="let line of rightPanelLines">
           <a-gui-label 
             width="1.5" height="0.2"
             [attr.value]="line.text"
@@ -121,50 +192,29 @@
             font-color="white"
           >
           </a-gui-label>
-      </a-entity>
     </ng-container>
-    
-    <a-entity position="-0.4 0.7 0">
-      <a-gui-button
-        value="All"
-        font-size="30px"
-        width="0.3" height="0.2"
-        font-family="Impact"
-        margin="0 0 0.05 0"
-        (click)="onPlay()"
-        toggle="true"
-      >
-      </a-gui-button>
-    </a-entity>
-    <a-entity position="0 0.7 0">
-      <a-gui-button
-        value="Free Play"
-        font-size="30px"
-        width="0.4" height="0.2"
-        font-family="Impact"
-        margin="0 0 0.05 0"
-        (click)="onPlay()"
-        toggle="true"
-      >
-      </a-gui-button>
-    </a-entity>
-    <a-entity position="0.4 0.7 0">
-      <a-gui-button
-        value="Party"
-        font-size="30px"
-        width="0.3" height="0.2"
-        font-family="Impact"
-        margin="0 0 0.05 0"
-        (click)="onPlay()"
-        toggle="true"
-      >
-      </a-gui-button>
-    </a-entity>
-  
+    </a-gui-flex-container>
+    <a-gui-flex-container
+      id="rightLabelContainer"
+      flex-direction="column" 
+      justify-content="center" 
+      align-items="normal" 
+      component-padding="0.1"
+      opacity="0.5" 
+      width="2" height="2"
+      panel-color="#00001f"
+    >
+      <ng-container id="rightPanelText" *ngFor="let line of rightPanelLines">
+        <a-gui-label 
+          width="1.5" height="0.2"
+          [attr.value]="line.text"
+          font-family="Impact"
+          [attr.font-size]="line.fontSize"
+          background-color="#00001f"
+          font-color="white"
+        >
+        </a-gui-label>
+      </ng-container>
+    </a-gui-flex-container>
   </a-gui-flex-container>
-
-  <a-sky material="color: #294757" id="sky"></a-sky>
-  <a-plane color="black" id="ground" rotation="-90 0 0" width="4" height="3"></a-plane>
-</a-scene>
-
-
+</a-gui-flex-container>

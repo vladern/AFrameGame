@@ -12,4 +12,11 @@ export class GameComponent implements OnInit {
   ngOnInit() {
   }
 
+  onClick($event) {
+    event.srcElement.setAttribute('animation', "property: position; dur: 1000; to: 0 1.5 -0.3;");
+  }
+
+  onIntersected($event) {
+    event.srcElement.setAttribute('animation__2', 'property: position; dur: 1000; to: 5 5 -5;');
+  }
 }

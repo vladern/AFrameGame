@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { TextLine } from 'src/app/shared/text-line/text-line.model';
+import { SceneOrchestratorService } from 'src/app/services/scene-orchestrator.service';
+import { Scene } from 'src/app/shared/scene/scene.enum';
 @Component({
   selector: 'a-menu',
   templateUrl: './menu.component.html',
@@ -9,9 +11,10 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   private _leftPanelLines: TextLine[];
   private _rightPanelLines: TextLine[];
-  constructor() { }
+  constructor(private _sceneOrchestratorSrv: SceneOrchestratorService) { }
 
   ngOnInit() {
+    this._sceneOrchestratorSrv.actualScene = Scene.initialMenu;
   }
 
 
@@ -33,6 +36,7 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterViewChecked {
       { position: "1.06 0.4 0", text: "Good Cuts                 20005", fontSize: "40px" },
       { position: "1.06 0.2 0", text: "Bad Cuts                 20", fontSize: "40px" },
     ];
+
   }
 
   ngAfterViewChecked() {
@@ -56,6 +60,22 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   onPlay($event) {
     event.srcElement.setAttribute('background-color', 'red');
+  }
+
+  goToSinglePlayer() {
+    this._sceneOrchestratorSrv.actualScene = Scene.singlePlayerMenu;
+  }
+
+  goToParty() {
+    this._sceneOrchestratorSrv.actualScene = Scene.partyMenu
+  }
+
+  goHowToPlay() {
+    // unimplemented
+  }
+
+  goToCredits() {
+    // unimplemented
   }
 
 }
