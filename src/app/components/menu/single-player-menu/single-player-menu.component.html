@@ -1,0 +1,197 @@
+
+<!-- left panel -->
+<a-gui-flex-container
+  id="leftPanel"
+  flex-direction="column" 
+  justify-content="center" 
+  align-items="normal" 
+  component-padding="0.1"
+  opacity="0.7" 
+  width="4" 
+  height="2.5"
+  position="-3.17 2 -1.54" rotation="0 70 0"
+  panel-color="#00001f"
+></a-gui-flex-container>
+<!-- center panel -->
+<a-gui-flex-container
+  id="centerPanel"
+  flex-direction="row" 
+  justify-content="center" 
+  align-items="normal" 
+  component-padding="0.1"
+  opacity="0.7" 
+  width="4" 
+  height="2.5"
+  position="0 2 -3.5" rotation="0 0 0"
+  panel-color="#00001f"
+>
+</a-gui-flex-container>
+<a-gui-flex-container
+  id="goBackPanel"
+  flex-direction="column" 
+  justify-content="center" 
+  align-items="normal" 
+  component-padding="0.1"
+  opacity="0.7" 
+  width="0.3" 
+  height="2"
+  position="-1.8 2 -3.49" rotation="0 0 0"
+  panel-color="#00001f"
+>
+  <ng-container>
+    <a-gui-button
+      value="<"
+      font-size="30px"
+      width="0.3" height="2"
+      font-family="Impact"
+      toggle="true"
+      (click)="goToInitialMenu()"
+    >
+    </a-gui-button>
+  </ng-container>
+</a-gui-flex-container>
+<a-gui-flex-container
+  id="songSelectionPanel"
+  flex-direction="column" 
+  justify-content="center" 
+  align-items="normal" 
+  component-padding="0.1"
+  opacity="0.7" 
+  width="1.4" 
+  height="2"
+  position="-0.9 2 -3.49" rotation="0 0 0"
+  panel-color="#00001f"
+>
+  <ng-container *ngFor="let song of songs">
+    <a-gui-button
+      [attr.value]="song.name"
+      font-size="30px"
+      width="1" height="0.2"
+      font-family="Impact"
+      margin="0.05 0.05 0.05 0.05"
+      toggle="true"
+      (click)="selectTheSong(song)"
+    >
+    </a-gui-button>
+  </ng-container>
+</a-gui-flex-container>
+<a-gui-flex-container
+  id="levelSelectionPanel"
+  flex-direction="column" 
+  justify-content="center" 
+  align-items="normal" 
+  component-padding="0.1"
+  opacity="0.7" 
+  width="0.6" 
+  height="2"
+  position="0.2 2 -3.49" rotation="0 0 0"
+  panel-color="#00001f"
+>
+  <ng-container>
+    <a-gui-button
+      value="Hard"
+      font-size="30px"
+      width="0.4" height="0.2"
+      font-family="Impact"
+      margin="0.05 0.05 0.05 0.05"
+      toggle="true"
+    >
+    </a-gui-button>
+  </ng-container>
+</a-gui-flex-container>
+<a-gui-flex-container
+  id="songInformationAndPlayPanel"
+  flex-direction="column" 
+  justify-content="center" 
+  align-items="normal" 
+  component-padding="0.1"
+  opacity="0.7" 
+  width="1.3" 
+  height="2"
+  position="1.22 2 -3.49" rotation="0 0 0"
+  panel-color="#00001f"
+>
+  <ng-container>
+    <a-gui-label 
+      width="0.4" height="0.2"
+      value="LEVEL"
+      font-family="Arial"
+      font-size="30px"
+      background-color="#00001f"
+      font-color="white"
+      margin="0.03 0.03 0.03 0.03"
+    >
+    </a-gui-label>
+    <a-gui-label 
+      width="1.2" height="0.2"
+      [attr.value]="selectedSong.name"
+      font-family="Arial"
+      font-size="35px"
+      background-color="#00001f"
+      font-color="white"
+      margin="0.03 0.03 0.03 0.03"
+    >
+    </a-gui-label>
+    <a-gui-label 
+      width="0.6" height="0.2"
+      value="YOUR STATS"
+      font-family="Arial"
+      font-size="30px"
+      background-color="#00001f"
+      font-color="white"
+      margin="0.03 0.03 0.03 0.03"
+    >
+    </a-gui-label>
+    <a-gui-label 
+      width="1.2" height="0.2"
+      value="Highscore               -"
+      font-family="Arial"
+      font-size="35px"
+      background-color="#00001f"
+      font-color="white"
+      margin="0.03 0.03 0.03 0.03"
+    >
+    </a-gui-label>
+    <a-gui-label 
+      width="1.2" height="0.2"
+      value="Max Combo           -"
+      font-family="Arial"
+      font-size="35px"
+      background-color="#00001f"
+      font-color="white"
+      margin="0.03 0.03 0.03 0.03"
+    >
+    </a-gui-label>
+    <a-gui-label 
+      width="1.2" height="0.2"
+      value="Max Rank               -"
+      font-family="Arial"
+      font-size="35px"
+      background-color="#00001f"
+      font-color="white"
+      margin="0.03 0.03 0.03 0.03"
+    >
+    </a-gui-label>
+    <a-gui-button
+      value="Play"
+      font-size="30px"
+      width="0.4" height="0.2"
+      font-family="Impact"
+      margin="0.05 0.05 0.05 0.05"
+      toggle="true"
+    >
+    </a-gui-button>
+  </ng-container>
+</a-gui-flex-container>
+<!-- right panel -->
+<a-gui-flex-container
+  id="rightPanel"
+  flex-direction="column" 
+  justify-content="center" 
+  align-items="normal" 
+  component-padding="0.1"
+  opacity="0.7" 
+  width="4" height="2.5"
+  position="3.17 2 -1.54" rotation="0 -70 0"
+  panel-color="#00001f"
+></a-gui-flex-container> 

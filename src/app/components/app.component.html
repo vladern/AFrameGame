@@ -1,0 +1,19 @@
+<a-scene  stats physics='gravity: -1.6' antialias='true' vr-mode-ui="enabled: true">
+    <a-entity id="player">
+      <a-entity windows-motion-controls="hand: left" aabb-collider="objects: .box"></a-entity>
+      <a-entity windows-motion-controls="hand: right" laser-controls="hand: right"></a-entity>
+    </a-entity>
+    <ng-container *ngIf="actualScene == 0">
+        <a-game></a-game>
+    </ng-container>
+
+    <ng-container *ngIf="actualScene == 1">
+        <a-menu></a-menu>
+    </ng-container>
+
+    <ng-container *ngIf="actualScene == 2">
+        <a-single-player-menu></a-single-player-menu>
+    </ng-container>
+<a-sky material="color: #294757" id="sky"></a-sky>
+<a-plane color="black" id="ground" rotation="-90 0 0" width="4" height="3"></a-plane>
+</a-scene>

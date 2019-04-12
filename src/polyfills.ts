@@ -51,19 +51,20 @@
  *  (window as any).__Zone_enable_cross_context_check = true;
  *
  */
-
+/***************************************************************************************************
+ * APPLICATION IMPORTS
+ */
+import 'aframe';
+import '../init_scripts/register-ng-primitives';
+import 'aframe-extras';
+import 'aframe-controller-cursor-component';
+import 'aframe-physics-system';
+import 'aframe-aabb-collider-component';
+import 'aframe-html-shader';
+import 'aframe-gui';
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 
 
-/***************************************************************************************************
- * APPLICATION IMPORTS
- */
-
-import 'aframe';
-import 'aframe-extras';
-import 'aframe-controller-cursor-component';
-import 'aframe-physics-system';
-import 'aframe-aabb-collider-component';
