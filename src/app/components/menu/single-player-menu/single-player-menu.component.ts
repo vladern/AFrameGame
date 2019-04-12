@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Song } from 'src/app/shared/song/song.model';
 import { SongLevels } from 'src/app/shared/song/song-levels.enum';
+import { SceneOrchestratorService } from 'src/app/services/scene-orchestrator.service';
+import { Scene } from 'src/app/shared/scene/scene.enum';
 
 @Component({
   selector: 'a-single-player-menu',
@@ -9,7 +11,7 @@ import { SongLevels } from 'src/app/shared/song/song-levels.enum';
 })
 export class SinglePlayerMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _sceneOrchestratorSrv: SceneOrchestratorService) { }
 
   private _songs: Song[];
   private _selectedSong: Song;
@@ -21,6 +23,8 @@ export class SinglePlayerMenuComponent implements OnInit {
       {name: 'Random song number 3', levels: [SongLevels.easy, SongLevels.normal, SongLevels.hard], timeInSeconds: 90},
       {name: 'Random song number 4', levels: [SongLevels.easy, SongLevels.normal, SongLevels.hard], timeInSeconds: 90},
     ];
+
+    this._selectedSong = {name: 'Random song number 1', levels: [SongLevels.easy, SongLevels.normal, SongLevels.hard], timeInSeconds: 90};
   }
 
   get songs(): Song[] {
@@ -31,15 +35,19 @@ export class SinglePlayerMenuComponent implements OnInit {
     this._songs = songs;
   }
 
-  get songSelected() {
+  get selectedSong() {
     return this._selectedSong;
   }
 
-  set songSelected(songSelected: Song) {
+  set selectedSong(songSelected: Song) {
     this._selectedSong = songSelected;
   }
 
   selectTheSong(song: Song) {
-    this.songSelected = song;
+    this._selectedSong = song;
+  }
+
+  goToInitialMenu() {
+    this._sceneOrchestratorSrv.actualScene = Scene.initialMenu;
   }
 }

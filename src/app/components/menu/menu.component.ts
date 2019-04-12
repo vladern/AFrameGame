@@ -59,10 +59,10 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   onPlay($event) {
-    event.srcElement.setAttribute('background-color', 'red');
+    // event.srcElement.setAttribute('background-color', 'red');
   }
 
-  goToSinglePlayer() {
+  goToSinglePlayerMenu() {
     this._sceneOrchestratorSrv.actualScene = Scene.singlePlayerMenu;
   }
 
