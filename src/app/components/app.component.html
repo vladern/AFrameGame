@@ -14,6 +14,10 @@
     <ng-container *ngIf="actualScene == 2">
         <a-single-player-menu></a-single-player-menu>
     </ng-container>
+
+    <ng-container *ngIf="actualScene == 3">
+        <a-party-menu></a-party-menu>
+    </ng-container>
 <a-sky material="color: #294757" id="sky"></a-sky>
 <a-plane color="black" id="ground" rotation="-90 0 0" width="4" height="3"></a-plane>
 </a-scene>
