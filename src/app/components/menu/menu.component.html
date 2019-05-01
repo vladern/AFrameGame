@@ -23,10 +23,8 @@
   >
   </a-gui-label>
 </ng-container>
-
-<!-- center panel -->
 </a-gui-flex-container>
-
+<!-- center panel -->
 <a-gui-flex-container
   id="centerPanel"
   flex-direction="row" 
@@ -68,22 +66,25 @@
     panel-color="#00001f"
     flex-direction="column">
       <a-gui-button
+            #howToPlayBtn
+            id="howToPlayBtn"
             value="How to play"
             font-size="60px"
             width="1" height="0.4"
             font-family="Impact"
             margin="0 0 0.05 0"
-            (click)="onPlay()"
+            (click)="goHowToPlay()"
             toggle="true"
           >
       </a-gui-button>
       <a-gui-button
+            id="creditsBtn"
             value="Credits"
             font-size="60px"
             width="1" height="0.4"
             font-family="Impact"
             margin="0 0 0.05 0"
-            (click)="onPlay()"
+            (click)="goToCredits()"
             toggle="true"
           >
       </a-gui-button>

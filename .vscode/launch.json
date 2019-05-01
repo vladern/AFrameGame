@@ -5,26 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
+            "type": "firefox",
             "request": "launch",
-            "name": "Launch via NPM",
-            "runtimeExecutable": "npm",
-            "runtimeArgs": [
-                "run-script",
-                "debug"
-            ],
-            "port": 8080
-            
+            "reAttach": true,
+            "name": "Firefox",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}"
         },
         {
-            "type": "node",
+            "type": "chrome",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}\\serve",
-            "preLaunchTask": "tsc: build - tsconfig.json",
-            "outFiles": [
-                "${workspaceFolder}/dist/out-tsc/**/*.js"
-            ]
+            "name": "Launch Chrome",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "edge",
+            "request": "attach",
+            "name": "Attach to Edge",
+            "port": 4200,
+            "webRoot": "${workspaceFolder}"
         }
-    ]
+        
+      ]
 }
