@@ -64,7 +64,7 @@ describe('MenuComponent', () => {
     expect(result).toBe(Scene.howToPlay);
   });
 
-  it('should change current scene to credits on click "Credits" button', ()=> {
+  it('should change current scene to credits on click "Credits" button (Test1)', ()=> {
     let button = fixture.debugElement.nativeElement.querySelector('#creditsBtn');
     button.click();
 

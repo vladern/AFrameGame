@@ -9,6 +9,7 @@ import { GameComponent } from './game/game.component';
 import { SinglePlayerMenuComponent } from './menu/single-player-menu/single-player-menu.component';
 import { PartyMenuComponent } from './menu/party-menu/party-menu.component';
 import { HowToPlayComponent } from './menu/how-to-play/how-to-play.component';
+import { CreditsComponent } from './menu/credits/credits.component';
 
 const appRoutes: Routes = [
   { path: '/game', component: GameComponent },
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
     SinglePlayerMenuComponent,
     PartyMenuComponent,
     HowToPlayComponent,
+    CreditsComponent,
   ],
   imports: [
     BrowserModule

@@ -11,3 +11,4 @@ AFRAME.registerPrimitive('a-menu', { mappings: {} });
 AFRAME.registerPrimitive('a-single-player-menu', { mappings: {} });
 AFRAME.registerPrimitive('a-party-menu', { mappings: {} });
 AFRAME.registerPrimitive('a-how-to-play', { mappings: {} });
+AFRAME.registerPrimitive('a-credits', { mappings: {} });
