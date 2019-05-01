@@ -9,3 +9,4 @@
 AFRAME.registerPrimitive('a-game', { mappings: {} }); //<- specify all your ng tags starting here
 AFRAME.registerPrimitive('a-menu', { mappings: {} });
 AFRAME.registerPrimitive('a-single-player-menu', { mappings: {} });
+AFRAME.registerPrimitive('a-party-menu', { mappings: {} });
