@@ -63,4 +63,12 @@ describe('MenuComponent', () => {
     const result = TestBed.get(SceneOrchestratorService).actualScene;
     expect(result).toBe(Scene.howToPlay);
   });
+
+  it('should change current scene to credits on click "Credits" button', ()=> {
+    let button = fixture.debugElement.nativeElement.querySelector('#creditsBtn');
+    button.click();
+
+    const result = TestBed.get(SceneOrchestratorService).actualScene;
+    expect(result).toBe(Scene.credits);
+  });
 });
