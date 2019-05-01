@@ -3,5 +3,6 @@ export enum Scene {
     initialMenu = 1,
     singlePlayerMenu = 2,
     partyMenu = 3,
-    howToPlay = 4
+    howToPlay = 4,
+    credits = 5
 }

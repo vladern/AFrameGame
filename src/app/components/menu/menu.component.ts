@@ -60,15 +60,15 @@ export class MenuComponent implements OnInit {
   }
 
   goToParty() {
-    this._sceneOrchestratorSrv.actualScene = Scene.partyMenu
+    this._sceneOrchestratorSrv.actualScene = Scene.partyMenu;
   }
 
   goHowToPlay() {
-    this._sceneOrchestratorSrv.actualScene = Scene.howToPlay
+    this._sceneOrchestratorSrv.actualScene = Scene.howToPlay;
   }
 
   goToCredits() {
-    // unimplemented
+    this._sceneOrchestratorSrv.actualScene = Scene.credits;
   }
 
 }
