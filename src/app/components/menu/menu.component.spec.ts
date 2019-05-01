@@ -27,7 +27,21 @@ describe('MenuComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('will fail', () => {
-    expect("3").toBe("3");
+  it('should change current scene to singlePlayerMenu on call goToSinglePlayerMenu()', ()=> {
+    component.goToSinglePlayerMenu();
+    const result = TestBed.get(SceneOrchestratorService).actualScene;
+    expect(result).toBe(Scene.singlePlayerMenu);
+  });
+
+  it('should change current scene to partyMenu on call goToParty()', ()=> {
+    component.goToParty();
+    const result = TestBed.get(SceneOrchestratorService).actualScene;
+    expect(result).toBe(Scene.partyMenu);
+  });
+
+  it('should change current scene to howToPlay on call goHowToPlay()', ()=> {
+    component.goHowToPlay();
+    const result = TestBed.get(SceneOrchestratorService).actualScene;
+    expect(result).toBe(Scene.howToPlay);
   });
 });
