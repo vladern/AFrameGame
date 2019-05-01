@@ -20,7 +20,6 @@ describe('MenuComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MenuComponent);
     component = fixture.componentInstance;
-    sceneOrchestratorSrv = new SceneOrchestratorService();
     fixture.detectChanges();
   });
 
