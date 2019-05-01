@@ -64,7 +64,7 @@ export class MenuComponent implements OnInit {
   }
 
   goHowToPlay() {
-    // unimplemented
+    this._sceneOrchestratorSrv.actualScene = Scene.howToPlay
   }
 
   goToCredits() {

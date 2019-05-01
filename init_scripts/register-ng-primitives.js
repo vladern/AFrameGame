@@ -10,3 +10,4 @@ AFRAME.registerPrimitive('a-game', { mappings: {} }); //<- specify all your ng t
 AFRAME.registerPrimitive('a-menu', { mappings: {} });
 AFRAME.registerPrimitive('a-single-player-menu', { mappings: {} });
 AFRAME.registerPrimitive('a-party-menu', { mappings: {} });
+AFRAME.registerPrimitive('a-how-to-play', { mappings: {} });

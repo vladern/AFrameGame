@@ -44,4 +44,23 @@ describe('MenuComponent', () => {
     const result = TestBed.get(SceneOrchestratorService).actualScene;
     expect(result).toBe(Scene.howToPlay);
   });
+
+  it('should call goHowToPlay() on click "How to play" button', () => {
+    spyOn(component, 'goHowToPlay');
+
+    let button = fixture.debugElement.nativeElement.querySelector('#howToPlayBtn');
+    button.click();
+
+    fixture.whenStable().then(() => {
+      expect(component.goHowToPlay).toHaveBeenCalled();
+    });
+  });
+
+  it('should change current scene to howToPlay on click "How to play" button', ()=> {
+    let button = fixture.debugElement.nativeElement.querySelector('#howToPlayBtn');
+    button.click();
+
+    const result = TestBed.get(SceneOrchestratorService).actualScene;
+    expect(result).toBe(Scene.howToPlay);
+  });
 });
