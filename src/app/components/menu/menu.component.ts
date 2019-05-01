@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TextLine } from 'src/app/shared/text-line/text-line.model';
 import { SceneOrchestratorService } from 'src/app/services/scene-orchestrator.service';
 import { Scene } from 'src/app/shared/scene/scene.enum';
@@ -7,7 +7,7 @@ import { Scene } from 'src/app/shared/scene/scene.enum';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class MenuComponent implements OnInit {
 
   private _leftPanelLines: TextLine[];
   private _rightPanelLines: TextLine[];
@@ -15,10 +15,7 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   ngOnInit() {
     this._sceneOrchestratorSrv.actualScene = Scene.initialMenu;
-  }
 
-
-  ngAfterViewInit() {
     this._leftPanelLines = [
       { position: "0 0.8 0", text: "Warnign!!", fontSize: "60px" },
       { position: "0 0.6 0", text: "This is a alfa version of the game.", fontSize: "40px" },
@@ -36,10 +33,6 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterViewChecked {
       { position: "1.06 0.4 0", text: "Good Cuts                 20005", fontSize: "40px" },
       { position: "1.06 0.2 0", text: "Bad Cuts                 20", fontSize: "40px" },
     ];
-
-  }
-
-  ngAfterViewChecked() {
   }
 
   get leftPanelLines(): TextLine[] {

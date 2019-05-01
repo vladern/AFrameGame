@@ -30,14 +30,6 @@ export class AppComponent {
   }
 
   ngAfterViewInit() {
-    console.log(`WrapperSceneComponent.toggleSubScenes: entered`);
-    let ssa = document.querySelector('a-game');
-    let ssb = document.querySelector('a-menu');
-    let ssaVisible : any= ssa.getAttribute('visible');
-    let ssbVisible : any= ssb.getAttribute('visible');
-
-    ssa.setAttribute('visible', ssaVisible ? 'false' : 'true');
-    ssb.setAttribute('visible', ssbVisible ? 'false' : 'true');
   }
 
   get actualScene() {
