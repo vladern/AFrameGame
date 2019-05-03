@@ -26,13 +26,12 @@ fdescribe('AppComponent', () => {
   });
 
   it('should exist a camara on center', ()=> {
-    const camara = fixture.debugElement.nativeElement.querySelector('#camara');
+    const camara = fixture.debugElement.nativeElement.querySelector('#camera');
     expect(camara).toBeTruthy();
   });
 
   it('default camara position should be 0 1.7 0', ()=> {
-    const position = fixture.debugElement.nativeElement.querySelector('#camara').getAttribute('position');
-    expect(position).toBe('0 1.7 0');
+    expect(component.cameraPosition).toContain("0 1.7 0");
   });
 
   it('when player is in the play area, warning is not showing', ()=>{

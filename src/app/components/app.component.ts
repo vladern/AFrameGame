@@ -8,31 +8,43 @@ import { Scene } from '../shared/scene/scene.enum';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-
-  public cubo = [ { position: '-0.5 1   -3', height: '0.4' },
-                  { position: '0    1   -3', height: '0.4' },
-                  { position: '0.5  1   -3', height: '0.4' },
-                  { position: '-0.5 1.5 -3', height: '0.4' },
-                  { position: '0    1.5 -3', height: '0.4' },
-                  { position: '0.5  1.5 -3', height: '0.4' },
-                  { position: '-0.5 2.0 -3', height: '0.4' },
-                  { position: '0    2.0 -3', height: '0.4' },
-                  { position: '0.5  2.0 -3', height: '0.4' }
-                ];
-          
+  
+  private _playerPosition: string;
+  private _showPositionWarning: boolean;
+  private _cameraPosition: string;
 
   constructor(private _sceneOrchestrationsrv: SceneOrchestratorService) { }
 
   ngOnInit() {
     this._sceneOrchestrationsrv.actualScene = Scene.initialMenu;
-
-    
+    this._playerPosition="0 0 0";
+    this._showPositionWarning=false;
+    this._cameraPosition="0 1.7 0"
   }
-
-  ngAfterViewInit() {
-  }
-
-  get actualScene() {
+  public get actualScene() {
     return this._sceneOrchestrationsrv.actualScene;
+  }
+
+  public get playerPosition(): string {
+    return this._playerPosition;
+  }
+
+  public set playerPosition(value: string) {
+    this._playerPosition = value;
+  }
+
+  public get showPositionWarning(): boolean {
+    return this._showPositionWarning;
+  }
+
+  public set showPositionWarning(value: boolean) {
+    this._showPositionWarning = value;
+  }
+
+  public get cameraPosition(): string {
+    return this._cameraPosition;
+  }
+  public set cameraPosition(value: string) {
+    this._cameraPosition = value;
   }
 }
