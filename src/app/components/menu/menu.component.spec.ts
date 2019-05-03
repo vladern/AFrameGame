@@ -6,7 +6,6 @@ import { Scene } from 'src/app/shared/scene/scene.enum';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
-  let sceneOrchestratorSrv: SceneOrchestratorService;
   let fixture: ComponentFixture<MenuComponent>;
 
   beforeEach(async(() => {
