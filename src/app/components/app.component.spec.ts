@@ -25,17 +25,22 @@ fdescribe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should exist a camara on center', ()=> {
+  it('should exist a camara on center', () => {
     const camara = fixture.debugElement.nativeElement.querySelector('#camera');
     expect(camara).toBeTruthy();
   });
 
-  it('default camara position should be 0 1.7 0', ()=> {
-    expect(component.cameraPosition).toContain("0 1.7 0");
+  it('default camara position should be 0 1.7 0', () => {
+    expect(component.cameraPosition).toContain('0 1.7 0');
   });
 
-  it('when player is in the play area, warning is not showing', ()=>{
-    component.playerPosition = "0 0 0";
+  it('when player is in the play area, warning is not showing', () => {
+    component.playerPosition = '0 0 0';
     expect(component.showPositionWarning).toBe(false);
+  });
+
+  it('when player is not in the play area, warning is showing', () => {
+    component.playerPosition = '4 0 0';
+    expect(component.showPositionWarning).toBe(true);
   });
 });
