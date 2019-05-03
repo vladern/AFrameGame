@@ -23,4 +23,10 @@ fdescribe('AppComponent', () => {
     const camara = fixture.debugElement.nativeElement.querySelector('#camara');
     expect(camara).toBeTruthy();
   });
+
+  it('defauld camara position should be 0 1.7 0', ()=> {
+    const fixture = TestBed.createComponent(AppComponent);
+    const position = fixture.debugElement.nativeElement.querySelector('#camara').getAttribute('position');
+    expect(position).toBe('0 1.7 0');
+  });
 });
