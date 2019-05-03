@@ -4,7 +4,7 @@ import { SceneOrchestratorService } from 'src/app/services/scene-orchestrator.se
 import { MenuComponent } from './menu.component';
 import { Scene } from 'src/app/shared/scene/scene.enum';
 
-describe('MenuComponent', () => {
+fdescribe('MenuComponent', () => {
   let component: MenuComponent;
   let sceneOrchestratorSrv: SceneOrchestratorService;
   let fixture: ComponentFixture<MenuComponent>;
