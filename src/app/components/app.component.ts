@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SceneOrchestratorService } from '../services/scene-orchestrator.service';
 import { Scene } from '../shared/scene/scene.enum';
+import { Position } from '../shared/position/position.model';
+
 
 @Component({
   selector: 'app-root',
@@ -8,29 +10,23 @@ import { Scene } from '../shared/scene/scene.enum';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  
-  private _playerPosition: string;
   private _showPositionWarning: boolean;
-  private _cameraPosition: string;
-
+  private _cameraPosition: Position;
+  @ViewChild('camera') input: ElementRef;
   constructor(private _sceneOrchestrationsrv: SceneOrchestratorService) { }
 
   ngOnInit() {
     this._sceneOrchestrationsrv.actualScene = Scene.initialMenu;
-    this._playerPosition="0 0 0";
     this._showPositionWarning=false;
-    this._cameraPosition="0 1.7 0"
+    this._cameraPosition = {x: 0, y: 1.7, z: 0};
+
+    setInterval(()=> {
+      const cameraPosition = this.input.nativeElement.getAttribute('position');
+      this.setCameraPosition(cameraPosition);
+    },50);
   }
   public get actualScene() {
     return this._sceneOrchestrationsrv.actualScene;
-  }
-
-  public get playerPosition(): string {
-    return this._playerPosition;
-  }
-
-  public set playerPosition(value: string) {
-    this._playerPosition = value;
   }
 
   public get showPositionWarning(): boolean {
@@ -41,10 +37,25 @@ export class AppComponent {
     this._showPositionWarning = value;
   }
 
-  public get cameraPosition(): string {
-    return this._cameraPosition;
+  public getCameraPosition(): string {
+    return this._cameraPosition.x + ' ' + this._cameraPosition.y + ' ' + this._cameraPosition.z;
   }
-  public set cameraPosition(value: string) {
+  public setCameraPosition(value: Position) {
     this._cameraPosition = value;
+    this._checkThatCameraPositionIsInThePlayArea();
+  }
+
+  private _checkThatCameraPositionIsInThePlayArea() {
+    const frontLimit = 2;
+    const backLimit = -2;
+    const leftLimit = -2;
+    const rightLimit = 2;
+
+    if(this._cameraPosition.x <= leftLimit ||  this._cameraPosition.x >= rightLimit || 
+      this._cameraPosition.z >= frontLimit || this._cameraPosition.z <= backLimit) {
+      this.showPositionWarning = true;
+    } else {
+      this.showPositionWarning = false;
+    }
   }
 }

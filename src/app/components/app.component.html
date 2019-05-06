@@ -1,6 +1,6 @@
 <a-scene  stats antialias='true' vr-mode-ui="enabled: true">
     <a-entity id="player">
-      <a-camera id="camera" [attr.position]="cameraPosition"></a-camera>
+      <a-camera id="camera" #camera [attr.position]="getCameraPosition()"></a-camera>
       <a-entity windows-motion-controls="hand: left" aabb-collider="objects: .box"></a-entity>
       <a-entity windows-motion-controls="hand: right" laser-controls="hand: right"></a-entity>
     </a-entity>
