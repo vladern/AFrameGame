@@ -53,6 +53,6 @@ fdescribe('AppComponent', () => {
   it('when cameraPosition is in the play area, warning is not shown for the player', () => {
     component.setCameraPosition({x:0, y:0, z:0});
     const areaWarning = fixture.debugElement.nativeElement.querySelector('#areaWarning');
-    expect(areaWarning).toBeUndefined();
+    expect(areaWarning).toBeNull();
   });
 });
