@@ -43,4 +43,9 @@ fdescribe('AppComponent', () => {
     component.setCameraPosition({x:4, y:0, z:0});
     expect(component.showPositionWarning).toBe(true);
   });
+
+  it('when cameraPosition is not in the play area, warning is shown for the player', () => {
+    const areaWarning = fixture.debugElement.nativeElement.querySelector('#areaWarning');
+    expect(areaWarning).toBeTruthy();
+  });
 });
