@@ -31,16 +31,16 @@ fdescribe('AppComponent', () => {
   });
 
   it('default camara position should be 0 1.7 0', () => {
-    expect(component.cameraPosition).toContain('0 1.7 0');
+    expect(component.getCameraPosition()).toContain('0 1.7 0');
   });
 
-  it('when playerPosition is in the play area, showPositionWarning is false', () => {
-    component.playerPosition = '0 0 0';
+  it('when cameraPosition is in the play area, showPositionWarning is false', () => {
+    component.setCameraPosition({x:0 ,y:0, z:0});
     expect(component.showPositionWarning).toBe(false);
   });
 
-  it('when playerPosition is not in the play area, showPositionWarning is true', () => {
-    component.playerPosition = '4 0 0';
+  it('when cameraPosition is not in the play area, showPositionWarning is true', () => {
+    component.setCameraPosition({x:4, y:0, z:0});
     expect(component.showPositionWarning).toBe(true);
   });
 });
