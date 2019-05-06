@@ -34,12 +34,12 @@ fdescribe('AppComponent', () => {
     expect(component.cameraPosition).toContain('0 1.7 0');
   });
 
-  it('when player is in the play area, warning is not showing', () => {
+  it('when playerPosition is in the play area, showPositionWarning is false', () => {
     component.playerPosition = '0 0 0';
     expect(component.showPositionWarning).toBe(false);
   });
 
-  it('when player is not in the play area, warning is showing', () => {
+  it('when playerPosition is not in the play area, showPositionWarning is true', () => {
     component.playerPosition = '4 0 0';
     expect(component.showPositionWarning).toBe(true);
   });
