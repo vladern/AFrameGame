@@ -1,7 +1,7 @@
 <a-scene  stats antialias='true' vr-mode-ui="enabled: true">
     <a-entity id="player">
       <a-camera id="camera" #camera [attr.position]="getCameraPosition()">
-        <a-text id="areaWarning" value="Warning you are out of play area!" color="red" position="0 -0.2 -0.5" height="0.5" width="1" align="center"></a-text>
+        <a-text id="areaWarning" *ngIf="showPositionWarning" value="Warning you are out of play area!" color="red" position="0 -0.2 -0.5" height="0.5" width="1" align="center"></a-text>
       </a-camera>
       <a-entity windows-motion-controls="hand: left" aabb-collider="objects: .box"></a-entity>
       <a-entity windows-motion-controls="hand: right" laser-controls="hand: right"></a-entity>
