@@ -46,10 +46,10 @@ export class AppComponent {
   }
 
   private _checkThatCameraPositionIsInThePlayArea() {
-    const frontLimit = 2;
-    const backLimit = -2;
-    const leftLimit = -2;
-    const rightLimit = 2;
+    const frontLimit = 1;
+    const backLimit = -1;
+    const leftLimit = -1;
+    const rightLimit = 1;
 
     if(this._cameraPosition.x <= leftLimit ||  this._cameraPosition.x >= rightLimit || 
       this._cameraPosition.z >= frontLimit || this._cameraPosition.z <= backLimit) {
