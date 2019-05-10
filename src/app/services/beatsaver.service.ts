@@ -17,4 +17,10 @@ export class BeatsaverService {
     const songInfoURL: string = 'https://beatsaver.com/api/songs/detail/' + key;
     return this._http.get(songInfoURL);
   }
+
+  public getSongCoverImageURL(key: string) {
+    const songCoverBaseURL: string = 'https://beatsaver.com/storage/songs';
+    const id: string = key.split('-')[0];
+    return songCoverBaseURL + '/' + id + '/' + key + '.png'
+  }
 }

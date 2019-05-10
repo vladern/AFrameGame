@@ -32,4 +32,12 @@ describe('BeatsaverService', () => {
         expect(resultKey).toEqual(songKey);
     });
   });
+
+  it('should return URL of the song cover image', () => {
+    const service: BeatsaverService = TestBed.get(BeatsaverService);
+    const songKey = '2811-8516';
+    const expectedSongCoverImageURL: string = 'https://beatsaver.com/storage/songs/2811/2811-8516.png';
+    const result = service.getSongCoverImageURL(songKey);
+    expect(result).toEqual(expectedSongCoverImageURL);
+  });
 });
