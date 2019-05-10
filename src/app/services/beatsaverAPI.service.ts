@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class BeatsaverService {
+export class BeatsaverAPIService {
 
   constructor(private _http: HttpClient) { }
 
