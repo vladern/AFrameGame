@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { BeatsaverAPIService } from './beatsaverAPI.service';
 import { HttpClientModule } from '@angular/common/http';
 import { doesNotThrow } from 'assert';
-fdescribe('BeatsaverAPIService', () => {
+describe('BeatsaverAPIService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     providers: [BeatsaverAPIService],

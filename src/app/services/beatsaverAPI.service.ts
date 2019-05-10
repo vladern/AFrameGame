@@ -19,6 +19,7 @@ export class BeatsaverAPIService {
 
   public getSongInformationJSON(key: string): Observable<Object> {
     const songInfoURL: string = this._baseURL + '/api/songs/detail/' + key;
+    console.log(songInfoURL);
     return this._http.get(songInfoURL);
   }
 
