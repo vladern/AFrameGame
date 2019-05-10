@@ -16,7 +16,7 @@ fdescribe('BeatsaverAPIService', () => {
 
   it('should return a JSON with TOP 25 songs', (done: DoneFn)=> {
     const service: BeatsaverAPIService = TestBed.get(BeatsaverAPIService);
-    service.getTOP25SongsJSON()
+    service.getTOPAllSongsJSON()
       .subscribe((response) => {
         expect(response).toBeTruthy();
         done();
@@ -30,7 +30,6 @@ fdescribe('BeatsaverAPIService', () => {
       .subscribe((response) => {
         const song = response['song'];
         const resultKey = song['key'];
-        console.log(resultKey);
         expect(resultKey).toEqual(songKey);
         done();
     });
@@ -47,10 +46,8 @@ fdescribe('BeatsaverAPIService', () => {
   it('should return a zip file with all information about the song', (done: DoneFn) => {
     const service: BeatsaverAPIService = TestBed.get(BeatsaverAPIService);
     const songKey = '2811-8516';
-    service.getZipFileToPlayTheSong(songKey)
-    .subscribe((response: File) => {
-      expect(response.type).toEqual('zip');
-      done();
-    });
+    const file = service.getZipFileToPlayTheSong(songKey);
+    expect(file).toBeTruthy();
+    done();
   });
 });
