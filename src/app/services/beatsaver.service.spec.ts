@@ -20,4 +20,16 @@ describe('BeatsaverService', () => {
         expect(response).toBeTruthy();
     });
   });
+
+  it('should return a JSON with information about a song', () => {
+    const service: BeatsaverService = TestBed.get(BeatsaverService);
+    const songKey = '2811-8516';
+    service.getSongInformationJSON(songKey)
+      .subscribe((response) => {
+        const song = response['song'];
+        const resultKey = song['key'];
+        console.log(resultKey);
+        expect(resultKey).toEqual(songKey);
+    });
+  });
 });
