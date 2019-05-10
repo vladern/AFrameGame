@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { BeatsaverAPIService } from './beatsaverAPI.service';
 import { HttpClientModule } from '@angular/common/http';
-describe('BeatsaverAPIService', () => {
+import { doesNotThrow } from 'assert';
+fdescribe('BeatsaverAPIService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     providers: [BeatsaverAPIService],
@@ -13,15 +14,16 @@ describe('BeatsaverAPIService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return a JSON with TOP 25 songs', ()=> {
+  it('should return a JSON with TOP 25 songs', (done: DoneFn)=> {
     const service: BeatsaverAPIService = TestBed.get(BeatsaverAPIService);
     service.getTOP25SongsJSON()
       .subscribe((response) => {
         expect(response).toBeTruthy();
+        done();
     });
   });
 
-  it('should return a JSON with information about a song', () => {
+  it('should return a JSON with information about a song', (done: DoneFn) => {
     const service: BeatsaverAPIService = TestBed.get(BeatsaverAPIService);
     const songKey = '2811-8516';
     service.getSongInformationJSON(songKey)
@@ -30,6 +32,7 @@ describe('BeatsaverAPIService', () => {
         const resultKey = song['key'];
         console.log(resultKey);
         expect(resultKey).toEqual(songKey);
+        done();
     });
   });
 
@@ -41,12 +44,13 @@ describe('BeatsaverAPIService', () => {
     expect(result).toEqual(expectedSongCoverImageURL);
   });
 
-  it('should return a zip file with all information about the song', () => {
+  it('should return a zip file with all information about the song', (done: DoneFn) => {
     const service: BeatsaverAPIService = TestBed.get(BeatsaverAPIService);
     const songKey = '2811-8516';
     service.getZipFileToPlayTheSong(songKey)
     .subscribe((response: File) => {
       expect(response.type).toEqual('zip');
+      done();
     });
   });
 });
