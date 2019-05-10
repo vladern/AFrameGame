@@ -40,4 +40,13 @@ describe('BeatsaverService', () => {
     const result = service.getSongCoverImageURL(songKey);
     expect(result).toEqual(expectedSongCoverImageURL);
   });
+
+  it('should return a zip file with all information about the song', () => {
+    const service: BeatsaverService = TestBed.get(BeatsaverService);
+    const songKey = '2811-8516';
+    service.getZipFileToPlayTheSong(songKey)
+    .subscribe((response: File) => {
+      expect(response.type).toEqual('zip');
+    });
+  });
 });

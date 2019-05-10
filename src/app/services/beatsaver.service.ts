@@ -23,4 +23,10 @@ export class BeatsaverService {
     const id: string = key.split('-')[0];
     return songCoverBaseURL + '/' + id + '/' + key + '.png'
   }
+
+  public getZipFileToPlayTheSong(key: string) {
+    const songZipFileBaseURL: string = 'https://beatsaver.com/storage/songs/';
+    const id: string = key.split('-')[0];
+    return this._http.get(songZipFileBaseURL + '/' + id + '/' + key + '.zip');
+  }
 }
