@@ -5,22 +5,21 @@ import { Stats } from '../shared/difficulty/difficulty.model';
 export class FormatHelper {
     public static formatFromSongInformationJSONToSong(songInfoJSON): Song {
         return {
-            id: songInfoJSON.song.id,
-            key: songInfoJSON.song.key,
-            songName: songInfoJSON.song.songName,
-            songSubName: songInfoJSON.song.songSubName,
-            authorName: songInfoJSON.song.authorName,
-            bpm: songInfoJSON.song.bpm,
-            difficulties: this._formatFromSongDifficultyInformationJSONToDifficultyArray(songInfoJSON.song.difficulties),
-            downloadUrl: songInfoJSON.song.downloadUrl,
-            coverUrl: songInfoJSON.song.coverUrl
+            id: songInfoJSON.id,
+            key: songInfoJSON.key,
+            songName: songInfoJSON.songName,
+            songSubName: songInfoJSON.songSubName,
+            authorName: songInfoJSON.authorName,
+            bpm: songInfoJSON.bpm,
+            difficulties: this._formatFromSongDifficultyInformationJSONToDifficultyArray(songInfoJSON.difficulties),
+            downloadUrl: songInfoJSON.downloadUrl,
+            coverUrl: songInfoJSON.coverUrl
         };
     }
 
     private static _formatFromSongDifficultyInformationJSONToDifficultyArray(songDifficultiesJSON) : Difficulty[] {
         let songDifficulties: Difficulty[] = [];
         if (songDifficultiesJSON.Easy != undefined) {
-            console.log('Easy')
             songDifficulties.push({
                 difficulty: songDifficultiesJSON.Easy.difficulty,
                 audioPath: songDifficultiesJSON.Easy.audioPath,
@@ -30,7 +29,6 @@ export class FormatHelper {
             });
         }
         if (songDifficultiesJSON.Normal != undefined) {
-            console.log('Normal')
             songDifficulties.push({
                 difficulty: songDifficultiesJSON.Normal.difficulty,
                 audioPath: songDifficultiesJSON.Normal.audioPath,
@@ -40,7 +38,6 @@ export class FormatHelper {
             });
         }
         if (songDifficultiesJSON.Hard != undefined) {
-            console.log('Hard')
             songDifficulties.push({
                 difficulty: songDifficultiesJSON.Hard.difficulty,
                 audioPath: songDifficultiesJSON.Hard.audioPath,
@@ -50,7 +47,6 @@ export class FormatHelper {
             });
         }
         if (songDifficultiesJSON.Expert != undefined) {
-            console.log('Expert')
             songDifficulties.push({
                 difficulty: songDifficultiesJSON.Expert.difficulty,
                 audioPath: songDifficultiesJSON.Expert.audioPath,
@@ -60,7 +56,6 @@ export class FormatHelper {
             });
         }
         if (songDifficultiesJSON.ExpertPlus != undefined) {
-            console.log('ExpertPlus')
             songDifficulties.push({
                 difficulty: songDifficultiesJSON.ExpertPlus.difficulty,
                 audioPath: songDifficultiesJSON.ExpertPlus.audioPath,
