@@ -21,13 +21,9 @@ export class SinglePlayerMenuComponent implements OnInit {
   private _songSrvSubscription: Subscription;
 
   ngOnInit() {
-    console.log(this._songSrv)
-    console.log(this._sceneOrchestratorSrv)
     this._songSrvSubscription = this._songSrv.getTopRaitedSongsList().subscribe(
       (result: Song[]) => {
-        console.log(result)
         this._songs = result;
-        console.log(this._songs)
         if (result.length >= 5) {
           this._songsToBeShown = result.slice(0, 5);
         } else {
