@@ -62,9 +62,9 @@
   position="-0.9 2 -3.49" rotation="0 0 0"
   panel-color="#00001f"
 >
-  <!-- <ng-container *ngFor="let song of songs">
+  <ng-container *ngFor="let song of songsToBeShown">
     <a-gui-button
-      [attr.value]="song.name"
+      [attr.value]="song.songName"
       font-size="30px"
       width="1" height="0.2"
       font-family="Impact"
@@ -73,7 +73,7 @@
       (click)="selectTheSong(song)"
     >
     </a-gui-button>
-  </ng-container> -->
+  </ng-container>
 </a-gui-flex-container>
 <a-gui-flex-container
   id="levelSelectionPanel"

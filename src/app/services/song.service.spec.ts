@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SongService } from './song.service';
 import { Song } from '../shared/song/song.model';
 
-fdescribe('SongService', () => {
+describe('SongService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [SongService],
     imports: [ HttpClientModule ]

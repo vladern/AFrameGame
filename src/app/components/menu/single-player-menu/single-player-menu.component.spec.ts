@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { SinglePlayerMenuComponent } from './single-player-menu.component';
+import { HttpClientModule } from '@angular/common/http';
+import { Song } from 'src/app/shared/song/song.model';
 
 describe('SinglePlayerMenuComponent', () => {
   let component: SinglePlayerMenuComponent;
@@ -9,7 +11,9 @@ describe('SinglePlayerMenuComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SinglePlayerMenuComponent ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+      providers: [SinglePlayerMenuComponent],
+      imports: [ HttpClientModule ],
     })
     .compileComponents();
   }));
@@ -22,5 +26,12 @@ describe('SinglePlayerMenuComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('On init the component shold get the songs', () => {
+    spyOn(component, 'ngOnInit');
+    fixture.whenStable().then(() => {
+      expect(component.songsToBeShown).toBeGreaterThan(0);
+    });
   });
 });

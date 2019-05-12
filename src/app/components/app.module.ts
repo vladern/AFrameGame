@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -10,6 +10,8 @@ import { SinglePlayerMenuComponent } from './menu/single-player-menu/single-play
 import { PartyMenuComponent } from './menu/party-menu/party-menu.component';
 import { HowToPlayComponent } from './menu/how-to-play/how-to-play.component';
 import { CreditsComponent } from './menu/credits/credits.component';
+import { SongService } from '../services/song.service';
+import { BeatsaverAPIService } from '../services/beatsaverAPI.service';
 
 const appRoutes: Routes = [
   { path: '/game', component: GameComponent },
@@ -29,9 +31,10 @@ const appRoutes: Routes = [
     CreditsComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClientModule, HttpClient, SongService, BeatsaverAPIService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
