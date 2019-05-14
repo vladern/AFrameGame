@@ -58,11 +58,34 @@ export class SinglePlayerMenuComponent implements OnInit {
   selectTheSong(song: Song) {
     this._selectedSong = song;
     this.showSongDifficulties = true;
+    this.showSongInfo = false;
   }
 
   selectTheDifficulty(index: number) {
     this._selectedDifficulty = index;
     this.showSongInfo = true;
+  }
+
+  getSongNameToShow() {
+    return  this._selectedSong.songName;
+  }
+
+  getAuthorNameToShow() {
+    return this._selectedSong.authorName;
+  }
+
+  getSongSubnameToShow() {
+    return this._selectedSong.songSubName;
+  }
+
+  getBPMToShow() {
+    return 'Beats per minute: ' + this._selectedSong.bpm;
+  }
+
+  getDurationToShow() {
+    const min: number = Math.round(this.selectedSong.difficulties[0].stats.time / this.selectedSong.bpm);
+    const seg: number = Math.round((this.selectedSong.difficulties[0].stats.time / this.selectedSong.bpm - min)*100); 
+    return 'Duration: ' + min + 'm' + seg + 's';
   }
 
   goToInitialMenu() {

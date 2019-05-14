@@ -41,7 +41,7 @@
   <ng-container>
     <a-gui-button
       value="<"
-      font-size="30px"
+      font-size="50px"
       width="0.3" height="2"
       font-family="Impact"
       toggle="true"
@@ -66,7 +66,7 @@
     <a-gui-button
       [attr.value]="song.songName"
       font-size="30px"
-      width="1" height="0.2"
+      width="1.1" height="0.2"
       font-family="Impact"
       margin="0.05 0.05 0.05 0.05"
       toggle="true"
@@ -117,28 +117,9 @@
 >
   <ng-container>
     <a-gui-label 
-      width="0.4" height="0.2"
-      value="LEVEL"
-      font-family="Arial"
-      font-size="30px"
-      background-color="#00001f"
-      font-color="white"
-      margin="0.03 0.03 0.03 0.03"
-    >
-    </a-gui-label>
-    <!-- <a-gui-label 
+      id='songName'
       width="1.2" height="0.2"
-      [attr.value]="selectedSong.name"
-      font-family="Arial"
-      font-size="35px"
-      background-color="#00001f"
-      font-color="white"
-      margin="0.03 0.03 0.03 0.03"
-    >
-    </a-gui-label> -->
-    <a-gui-label 
-      width="0.6" height="0.2"
-      value="YOUR STATS"
+      [attr.value]="getSongNameToShow()"
       font-family="Arial"
       font-size="30px"
       background-color="#00001f"
@@ -147,8 +128,31 @@
     >
     </a-gui-label>
     <a-gui-label 
+      id='songSubName'
       width="1.2" height="0.2"
-      value="Highscore               -"
+      [attr.value]="getSongSubnameToShow()"
+      font-family="Arial"
+      font-size="35px"
+      background-color="#00001f"
+      font-color="white"
+      margin="0.03 0.03 0.03 0.03"
+    >
+    </a-gui-label>
+    <a-gui-label
+      id='authorName'
+      width="1.2" height="0.2"
+      [attr.value]="getAuthorNameToShow()"
+      font-family="Arial"
+      font-size="30px"
+      background-color="#00001f"
+      font-color="white"
+      margin="0.03 0.03 0.03 0.03"
+    >
+    </a-gui-label>
+    <a-gui-label 
+      id='bpm'
+      width="1.2" height="0.2"
+      [attr.value]="getBPMToShow()"
       font-family="Arial"
       font-size="35px"
       background-color="#00001f"
@@ -157,18 +161,9 @@
     >
     </a-gui-label>
     <a-gui-label 
+      id='duration'
       width="1.2" height="0.2"
-      value="Max Combo           -"
-      font-family="Arial"
-      font-size="35px"
-      background-color="#00001f"
-      font-color="white"
-      margin="0.03 0.03 0.03 0.03"
-    >
-    </a-gui-label>
-    <a-gui-label 
-      width="1.2" height="0.2"
-      value="Max Rank               -"
+      [attr.value]="getDurationToShow()"
       font-family="Arial"
       font-size="35px"
       background-color="#00001f"
