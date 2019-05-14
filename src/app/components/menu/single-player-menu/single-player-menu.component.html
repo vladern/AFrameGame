@@ -88,7 +88,7 @@
   position="0.2 2 -3.49" rotation="0 0 0"
   panel-color="#00001f"
 >
-  <ng-container *ngFor="let difficulty of selectedSong.difficulties">
+  <ng-container *ngFor="let difficulty of selectedSong.difficulties; let i = index">
     <a-gui-button
       id="difficultyBtn"
       [attr.value]="difficulty.difficulty"
@@ -102,6 +102,7 @@
   </ng-container>
 </a-gui-flex-container>
 <a-gui-flex-container
+  *ngIf="showSongInfo"
   id="songInformationAndPlayPanel"
   flex-direction="column" 
   justify-content="center" 

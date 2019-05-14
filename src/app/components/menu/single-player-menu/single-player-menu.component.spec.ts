@@ -85,5 +85,14 @@ fdescribe('SinglePlayerMenuComponent', () => {
     expect(dificulties[1].getAttribute('value')).toBe(selectedSong.difficulties[1].difficulty, 'second button should be Expert');
   });
 
+  it('While a difficulty is no selected song information panel should not apear', () => {   
+    component.ngOnInit();
+    const selectedSong: Song = component.songsToBeShown[1];
+    component.selectTheSong(selectedSong);
+    fixture.detectChanges();
+    let songInfoPanel = fixture.debugElement.nativeElement.querySelector('#songInformationAndPlayPanel');
+    expect(songInfoPanel).toBeNull();
+  });
+
   
 });
