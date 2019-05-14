@@ -19,17 +19,17 @@ export class SinglePlayerMenuComponent implements OnInit {
   private _songsToBeShown: Song[];
   private _selectedSong: Song;
   private _songSrvSubscription: Subscription;
-  private _showSongDificulties: boolean = false;  
+  private _showSongDifficulties: boolean = false;  
 
   ngOnInit() {
     this.obtainSongsToBeShown();
   }
 
-  public get showSongDificulties(): boolean {
-    return this._showSongDificulties;
+  public get showSongDifficulties(): boolean {
+    return this._showSongDifficulties;
   }
-  public set showSongDificulties(value: boolean) {
-    this._showSongDificulties = value;
+  public set showSongDifficulties(value: boolean) {
+    this._showSongDifficulties = value;
   }
 
   public get songsToBeShown(): Song[] {
@@ -48,7 +48,7 @@ export class SinglePlayerMenuComponent implements OnInit {
 
   selectTheSong(song: Song) {
     this._selectedSong = song;
-    this.showSongDificulties = true;
+    this.showSongDifficulties = true;
   }
 
   goToInitialMenu() {

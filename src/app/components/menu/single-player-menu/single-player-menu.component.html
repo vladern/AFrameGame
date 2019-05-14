@@ -76,7 +76,7 @@
   </ng-container>
 </a-gui-flex-container>
 <a-gui-flex-container
-  *ngIf="showSongDificulties"
+  *ngIf="showSongDifficulties"
   id="levelSelectionPanel"
   flex-direction="column" 
   justify-content="center" 
@@ -88,10 +88,11 @@
   position="0.2 2 -3.49" rotation="0 0 0"
   panel-color="#00001f"
 >
-  <ng-container>
+  <ng-container *ngFor="let dificulty of selectedSong.difficulties">
     <a-gui-button
+      id="dificultyBtn"
       value="Hard"
-      font-size="30px"
+      font-size="40px"
       width="0.4" height="0.2"
       font-family="Impact"
       margin="0.05 0.05 0.05 0.05"
