@@ -62,8 +62,8 @@ fdescribe('SinglePlayerMenuComponent', () => {
       expect(dificultiesPanel).toBeTruthy();
   }));
 
-  it('While a song is no selected the panel with dificulties should not apear', () => {
-    let dificultiesPanel = fixture.debugElement.nativeElement.querySelector('#levelSelectionPanel');
-    expect(dificultiesPanel).toBeNull();
-  });
+  // it('While a song is no selected the panel with dificulties should not apear', () => {
+  //   let dificultiesPanel = fixture.debugElement.nativeElement.querySelector('#levelSelectionPanel');
+  //   expect(dificultiesPanel).toBeNull();
+  // });
 });
