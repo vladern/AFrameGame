@@ -58,12 +58,13 @@ fdescribe('SinglePlayerMenuComponent', () => {
       component.ngOnInit();
       const selectedSong: Song = component.songsToBeShown[0];
       component.selectTheSong(selectedSong);
+      fixture.detectChanges();
       let dificultiesPanel = fixture.debugElement.nativeElement.querySelector('#levelSelectionPanel');
       expect(dificultiesPanel).toBeTruthy();
   }));
 
-  // it('While a song is no selected the panel with dificulties should not apear', () => {
-  //   let dificultiesPanel = fixture.debugElement.nativeElement.querySelector('#levelSelectionPanel');
-  //   expect(dificultiesPanel).toBeNull();
-  // });
+  it('While a song is no selected the panel with dificulties should not apear', () => {
+     let dificultiesPanel = fixture.debugElement.nativeElement.querySelector('#levelSelectionPanel');
+     expect(dificultiesPanel).toBeNull();
+  });
 });
