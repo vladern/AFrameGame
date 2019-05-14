@@ -60,6 +60,11 @@ export class SinglePlayerMenuComponent implements OnInit {
     this.showSongDifficulties = true;
   }
 
+  selectTheDifficulty(index: number) {
+    this._selectedDifficulty = index;
+    this.showSongInfo = true;
+  }
+
   goToInitialMenu() {
     this._sceneOrchestratorSrv.actualScene = Scene.initialMenu;
   }

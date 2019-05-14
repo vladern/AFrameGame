@@ -94,5 +94,17 @@ fdescribe('SinglePlayerMenuComponent', () => {
     expect(songInfoPanel).toBeNull();
   });
 
+  it('When you click on a dificulty button should apear information panel', () => {   
+    component.ngOnInit();
+    const selectedSong: Song = component.songsToBeShown[1];
+    component.selectTheSong(selectedSong);
+    fixture.detectChanges();
+    let dificulties = fixture.debugElement.nativeElement.querySelectorAll('#difficultyBtn');
+    dificulties[0].click();
+    fixture.detectChanges();
+    let songInfoPanel = fixture.debugElement.nativeElement.querySelector('#songInformationAndPlayPanel');
+    expect(songInfoPanel).toBeTruthy();
+  });
+
   
 });
