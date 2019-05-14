@@ -88,10 +88,10 @@
   position="0.2 2 -3.49" rotation="0 0 0"
   panel-color="#00001f"
 >
-  <ng-container *ngFor="let dificulty of selectedSong.difficulties">
+  <ng-container *ngFor="let difficulty of selectedSong.difficulties">
     <a-gui-button
-      id="dificultyBtn"
-      value="Hard"
+      id="difficultyBtn"
+      [attr.value]="difficulty.difficulty"
       font-size="40px"
       width="0.4" height="0.2"
       font-family="Impact"
