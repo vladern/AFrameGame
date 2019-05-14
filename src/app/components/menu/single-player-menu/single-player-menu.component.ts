@@ -21,15 +21,7 @@ export class SinglePlayerMenuComponent implements OnInit {
   private _songSrvSubscription: Subscription;
 
   ngOnInit() {
-    this._songSrvSubscription = this._songSrv.getTopRaitedSongsList().subscribe(
-      (result: Song[]) => {
-        this._songs = result;
-        if (result.length >= 5) {
-          this._songsToBeShown = result.slice(0, 5);
-        } else {
-          this._songsToBeShown = result;
-        }
-      });
+    this.obtainSongsToBeShown();
   }
 
   public get songsToBeShown(): Song[] {
@@ -53,5 +45,17 @@ export class SinglePlayerMenuComponent implements OnInit {
 
   goToInitialMenu() {
     this._sceneOrchestratorSrv.actualScene = Scene.initialMenu;
+  }
+
+  public obtainSongsToBeShown() {
+    this._songSrvSubscription = this._songSrv.getTopRaitedSongsList().subscribe(
+      (result: Song[]) => {
+        this._songs = result;
+        if (result.length >= 5) {
+          this._songsToBeShown = result.slice(0, 5);
+        } else {
+          this._songsToBeShown = result;
+        }
+      });
   }
 }
