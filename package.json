@@ -23,7 +23,7 @@
     "aframe-aabb-collider-component": "^3.1.0",
     "aframe-controller-cursor-component": "^0.2.7",
     "aframe-extras": "^6.0.0",
-    "aframe-gui": "^0.3.2",
+    "aframe-gui": "^0.3.3",
     "aframe-html-shader": "^0.2.0",
     "aframe-physics-system": "^3.3.0",
     "core-js": "^2.5.4",
