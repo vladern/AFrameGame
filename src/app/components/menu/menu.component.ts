@@ -17,14 +17,10 @@ export class MenuComponent implements OnInit {
     this._sceneOrchestratorSrv.actualScene = Scene.initialMenu;
 
     this._leftPanelLines = [
-      { position: "0 0.8 0", text: "Warnign!!", fontSize: "60px" },
-      { position: "0 0.6 0", text: "This is a alfa version of the game.", fontSize: "40px" },
-      { position: "0 0.4 0", text: "Final version will containt important changes.", fontSize: "40px" },
-      { position: "0 0.2 0", text: "The project is under development and undestand it as such.", fontSize: "40px" },
-      { position: "0 0 0", text: "The project is under development and undestand it as such.", fontSize: "40px" },
-      { position: "0 -0.2 0", text: "Bla bla bla bla bal aklñasdinwn ehreiuan ", fontSize: "40px" },
-      { position: "0 -0.4 0", text: "Ñianei bhehaaie ehqahei na neiei ne hey kn .", fontSize: "40px" },
-      { position: "0 -0.6 0", text: "Ien qiei fhan ei nein añnei .", fontSize: "40px" },
+      { position: "0 0.8 0", text: "Warnign!!", fontSize: "80px" },
+      { position: "0 0.6 0", text: "This is a alfa version of the game.", fontSize: "50px" },
+      { position: "0 0.4 0", text: "Final version will containt important changes.", fontSize: "50px" },
+      { position: "0 0.2 0", text: "The project is under development and undestand it as such.", fontSize: "50px" }
     ];
     this._rightPanelLines = [
       { position: "0 1.05 0", text: "PLAYER STATISTICS", fontSize: "60px" },
