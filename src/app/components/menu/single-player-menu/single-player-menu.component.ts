@@ -24,6 +24,7 @@ export class SinglePlayerMenuComponent implements OnInit {
   private _showSongInfo: boolean = false;
   private _showScrollDownBtn: boolean = true;
   private _showScrollUpBtn: boolean = false;
+  private _firstSongShownIndex: number = 0;
   private _lastSongShownIndex: number = 4;
   
   ngOnInit() {
@@ -122,6 +123,7 @@ export class SinglePlayerMenuComponent implements OnInit {
         } else {
           this.showScrollDownBtn = true;
         }
+        this._firstSongShownIndex = this._lastSongShownIndex;
         this._lastSongShownIndex = nextIndex;
         this.showScrollUpBtn = true;
         ok = false;
@@ -131,8 +133,16 @@ export class SinglePlayerMenuComponent implements OnInit {
 
   lastSongsToBeShown() {
     if (this._lastSongShownIndex > 4) {
-      this._songsToBeShown = this._songs.slice(this._lastSongShownIndex - 5, this._lastSongShownIndex);
-        this._lastSongShownIndex -= 5;
+      let cont  = 0;
+      while(cont < 5) {
+        this._songsToBeShown = this._songs.slice(this._firstSongShownIndex--, this._lastSongShownIndex--);
+        cont++
+      }
+      if(this._lastSongShownIndex <= 4) {
+        this._showScrollUpBtn=false;
+      }
+    } else {
+      this.showScrollUpBtn = false;
     }
   }
  

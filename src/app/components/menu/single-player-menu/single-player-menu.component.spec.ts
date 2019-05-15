@@ -156,4 +156,17 @@ fdescribe('SinglePlayerMenuComponent', () => {
     let scrollUpBtn = fixture.debugElement.nativeElement.querySelector('#scrollUpBtn');
     expect(scrollUpBtn).toBeNull();
   });
+
+  it('When you return to the top of disponible songs, up button should disapear', () => {
+    component.ngOnInit();
+    fixture.detectChanges();
+    let scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
+    scrollDownBtn.click();
+    fixture.detectChanges();
+    let scrollUpBtn = fixture.debugElement.nativeElement.querySelector('#scrollUpBtn');
+    scrollUpBtn.click();
+    fixture.detectChanges();
+    scrollUpBtn = fixture.debugElement.nativeElement.querySelector('#scrollUpBtn');
+    expect(scrollUpBtn).toBeNull();
+  });
 });
