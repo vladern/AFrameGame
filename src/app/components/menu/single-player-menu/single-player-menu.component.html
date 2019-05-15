@@ -75,11 +75,11 @@
     </a-gui-button>
   </ng-container>
   <a-gui-button
+    *ngIf="showScrollDownBtn"
     id="scrollDownBtn"
     width="1.1" height="0.2"
     value="↓"
-    font-size="80px"
-    font-weight="800"
+    font-size="70px"
     (click)="nextSongsToBeShown()"
   >
   </a-gui-button>

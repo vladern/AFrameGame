@@ -22,10 +22,17 @@ export class SinglePlayerMenuComponent implements OnInit {
   private _songSrvSubscription: Subscription;
   private _showSongDifficulties: boolean = false;
   private _showSongInfo: boolean = false;
+  private _showScrollDownBtn: boolean = true;
   private _lastSongShownIndex: number = 4;
   
   ngOnInit() {
     this.obtainSongsToBeShown();
+  }
+  public get showScrollDownBtn(): boolean {
+    return this._showScrollDownBtn;
+  }
+  public set showScrollDownBtn(value: boolean) {
+    this._showScrollDownBtn = value;
   }
 
   public get showSongInfo(): boolean {
@@ -101,6 +108,11 @@ export class SinglePlayerMenuComponent implements OnInit {
         nextIndex--;
       } else {
         this._songsToBeShown = this._songs.slice(this._lastSongShownIndex, nextIndex);
+        if (this._songsToBeShown.length < 5) {
+          this.showScrollDownBtn = false;
+        } else {
+          this.showScrollDownBtn = true;
+        }
         this._lastSongShownIndex = nextIndex;
         ok = false;
       }
