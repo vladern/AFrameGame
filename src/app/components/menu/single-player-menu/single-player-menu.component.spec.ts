@@ -127,7 +127,7 @@ fdescribe('SinglePlayerMenuComponent', () => {
     expect(component.songsToBeShown[0].id).not.toBe(oldShownSongs[0].id);
   });
 
-  it('When list of songs shown is under 5 down button should not to be shown', () => {
+  it('When list of songs shown is under 5, down button should not to be shown', () => {
     component.ngOnInit();
     fixture.detectChanges();
     let scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
@@ -148,5 +148,12 @@ fdescribe('SinglePlayerMenuComponent', () => {
     scrollUpBtn.click();
     fixture.detectChanges();
     expect(component.songsToBeShown[0].id).not.toBe(oldShownSongs[0].id);
+  });
+
+  it('At the begining, up button should not apear', () => {
+    component.ngOnInit();
+    fixture.detectChanges();
+    let scrollUpBtn = fixture.debugElement.nativeElement.querySelector('#scrollUpBtn');
+    expect(scrollUpBtn).toBeNull();
   });
 });

@@ -23,11 +23,20 @@ export class SinglePlayerMenuComponent implements OnInit {
   private _showSongDifficulties: boolean = false;
   private _showSongInfo: boolean = false;
   private _showScrollDownBtn: boolean = true;
+  private _showScrollUpBtn: boolean = false;
   private _lastSongShownIndex: number = 4;
   
   ngOnInit() {
     this.obtainSongsToBeShown();
   }
+
+  public get showScrollUpBtn(): boolean {
+    return this._showScrollUpBtn;
+  }
+  public set showScrollUpBtn(value: boolean) {
+    this._showScrollUpBtn = value;
+  }
+
   public get showScrollDownBtn(): boolean {
     return this._showScrollDownBtn;
   }
@@ -114,6 +123,7 @@ export class SinglePlayerMenuComponent implements OnInit {
           this.showScrollDownBtn = true;
         }
         this._lastSongShownIndex = nextIndex;
+        this.showScrollUpBtn = true;
         ok = false;
       }
     }
