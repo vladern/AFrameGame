@@ -117,7 +117,13 @@ export class SinglePlayerMenuComponent implements OnInit {
         ok = false;
       }
     }
-    
+  }
+
+  lastSongsToBeShown() {
+    if (this._lastSongShownIndex > 4) {
+      this._songsToBeShown = this._songs.slice(this._lastSongShownIndex - 5, this._lastSongShownIndex);
+        this._lastSongShownIndex -= 5;
+    }
   }
  
   public obtainSongsToBeShown() {

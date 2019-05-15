@@ -137,4 +137,16 @@ fdescribe('SinglePlayerMenuComponent', () => {
     expect(scrollDownBtn).toBeNull();
   });
 
+  it('When you click on scroll up button, list of song should change', () => {
+    component.ngOnInit();
+    fixture.detectChanges();
+    let scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
+    scrollDownBtn.click();
+    fixture.detectChanges();
+    const oldShownSongs: Song[] = component.songsToBeShown.map(x => Object.assign({}, x));
+    let scrollUpBtn = fixture.debugElement.nativeElement.querySelector('#scrollUpBtn');
+    scrollUpBtn.click();
+    fixture.detectChanges();
+    expect(component.songsToBeShown[0].id).not.toBe(oldShownSongs[0].id);
+  });
 });
