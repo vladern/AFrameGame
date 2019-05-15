@@ -127,4 +127,14 @@ fdescribe('SinglePlayerMenuComponent', () => {
     const seg: number = Math.round((selectedSong.difficulties[0].stats.time / selectedSong.bpm - min)*100); 
     expect(duration.getAttribute('value')).toBe('Duration: ' + min + 'm' + seg + 's', 'duration of the song');
   });
+
+  it('When you click on scroll down button, list of song should change', () => {
+    component.ngOnInit();
+    fixture.detectChanges();
+    const oldShownSongs: Song[] = component.songsToBeShown.map(x => Object.assign({}, x));
+    let scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
+    scrollDownBtn.click();
+    fixture.detectChanges();
+    expect(component.songsToBeShown[0].id).not.toBe(oldShownSongs[0].id);
+  });
 });

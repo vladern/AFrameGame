@@ -21,7 +21,8 @@ export class SinglePlayerMenuComponent implements OnInit {
   private _selectedDifficulty: number = -1;
   private _songSrvSubscription: Subscription;
   private _showSongDifficulties: boolean = false;
-  private _showSongInfo: boolean = false; 
+  private _showSongInfo: boolean = false;
+  private _lastSongShownIndex: number = 4;
   
   ngOnInit() {
     this.obtainSongsToBeShown();
@@ -92,6 +93,21 @@ export class SinglePlayerMenuComponent implements OnInit {
     this._sceneOrchestratorSrv.actualScene = Scene.initialMenu;
   }
 
+  nextSongsToBeShown() {
+    let nextIndex: number = this._lastSongShownIndex + 5;
+    let ok: boolean = true;
+    while(ok) {
+      if (nextIndex > this._songs.length) {
+        nextIndex--;
+      } else {
+        this._songsToBeShown = this._songs.slice(this._lastSongShownIndex, nextIndex);
+        this._lastSongShownIndex = nextIndex;
+        ok = false;
+      }
+    }
+    
+  }
+ 
   public obtainSongsToBeShown() {
     this._songSrvSubscription = this._songSrv.getTopRaitedSongsList().subscribe(
       (result: Song[]) => {

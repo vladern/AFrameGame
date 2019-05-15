@@ -40,7 +40,7 @@
 >
   <ng-container>
     <a-gui-button
-      value="<"
+      value="←"
       font-size="50px"
       width="0.3" height="2"
       font-family="Impact"
@@ -74,6 +74,15 @@
     >
     </a-gui-button>
   </ng-container>
+  <a-gui-button
+    id="scrollDownBtn"
+    width="1.1" height="0.2"
+    value="↓"
+    font-size="80px"
+    font-weight="800"
+    (click)="nextSongsToBeShown()"
+  >
+  </a-gui-button>
 </a-gui-flex-container>
 <a-gui-flex-container
   *ngIf="showSongDifficulties"
