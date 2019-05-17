@@ -26,7 +26,7 @@ export class SinglePlayerMenuComponent implements OnInit {
   private _showScrollUpBtn: boolean = false;
   private _firstSongShownIndex: number = 0;
   private _lastSongShownIndex: number = 4;
-  
+
   ngOnInit() {
     this.obtainSongsToBeShown();
   }
@@ -85,7 +85,7 @@ export class SinglePlayerMenuComponent implements OnInit {
   }
 
   getSongNameToShow() {
-    return  this._selectedSong.songName;
+    return this._selectedSong.songName;
   }
 
   getAuthorNameToShow() {
@@ -102,7 +102,7 @@ export class SinglePlayerMenuComponent implements OnInit {
 
   getDurationToShow() {
     const min: number = Math.round(this.selectedSong.difficulties[0].stats.time / this.selectedSong.bpm);
-    const seg: number = Math.round((this.selectedSong.difficulties[0].stats.time / this.selectedSong.bpm - min)*100); 
+    const seg: number = Math.round((this.selectedSong.difficulties[0].stats.time / this.selectedSong.bpm - min) * 100);
     return 'Duration: ' + min + 'm' + seg + 's';
   }
 
@@ -112,12 +112,12 @@ export class SinglePlayerMenuComponent implements OnInit {
 
   nextSongsToBeShown() {
     let nextIndex: number = this._lastSongShownIndex + 5;
-    let ok: boolean = true;
-    while(ok) {
+    let ok = true;
+    while (ok) {
       if (nextIndex > this._songs.length) {
         nextIndex--;
       } else {
-        this._songsToBeShown = this._songs.slice(this._lastSongShownIndex, nextIndex);
+        this._songsToBeShown = this._songs.slice(this._lastSongShownIndex + 1, nextIndex + 1);
         if (this._songsToBeShown.length < 5) {
           this.showScrollDownBtn = false;
         } else {
@@ -132,20 +132,26 @@ export class SinglePlayerMenuComponent implements OnInit {
   }
 
   lastSongsToBeShown() {
-    if (this._lastSongShownIndex > 4) {
-      let cont  = 0;
-      while(cont < 5) {
-        this._songsToBeShown = this._songs.slice(this._firstSongShownIndex--, this._lastSongShownIndex--);
-        cont++
-      }
-      if(this._lastSongShownIndex <= 4) {
-        this._showScrollUpBtn=false;
-      }
-    } else {
+    let a = this._firstSongShownIndex - 5;
+    let b = this._firstSongShownIndex - 5;
+
+    if (a < 0) {
+      a = 0;
+    }
+    if (b < 4) {
+      b = 4;
+    }
+    if (b - a < 4) {
+      b = (this._songs.length - 1) - this.songsToBeShown.length;
+    }
+    this._firstSongShownIndex = a;
+    this._lastSongShownIndex = b;
+    if (this._firstSongShownIndex === 0) {
       this.showScrollUpBtn = false;
     }
+    this._songsToBeShown = this._songs.slice(a, b + 1);
   }
- 
+
   public obtainSongsToBeShown() {
     this._songSrvSubscription = this._songSrv.getTopRaitedSongsList().subscribe(
       (result: Song[]) => {
