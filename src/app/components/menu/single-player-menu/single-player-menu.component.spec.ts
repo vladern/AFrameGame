@@ -46,12 +46,12 @@ fdescribe('SinglePlayerMenuComponent', () => {
     const selectedSong: Song = component.songsToBeShown[0];
     component.selectTheSong(selectedSong);
     fixture.detectChanges();
-    let dificultiesPanel = fixture.debugElement.nativeElement.querySelector('#levelSelectionPanel');
+    const dificultiesPanel = fixture.debugElement.nativeElement.querySelector('#levelSelectionPanel');
     expect(dificultiesPanel).toBeTruthy();
   }));
 
   it('While a song is no selected the panel with dificulties should not apear', () => {
-    let dificultiesPanel = fixture.debugElement.nativeElement.querySelector('#levelSelectionPanel');
+    const dificultiesPanel = fixture.debugElement.nativeElement.querySelector('#levelSelectionPanel');
     expect(dificultiesPanel).toBeNull();
   });
 
@@ -60,7 +60,7 @@ fdescribe('SinglePlayerMenuComponent', () => {
     const selectedSong: Song = component.songsToBeShown[1];
     component.selectTheSong(selectedSong);
     fixture.detectChanges();
-    let dificulties = fixture.debugElement.nativeElement.querySelectorAll('#difficultyBtn');
+    const dificulties = fixture.debugElement.nativeElement.querySelectorAll('#difficultyBtn');
     expect(dificulties.length).toBe(selectedSong.difficulties.length);
   });
 
@@ -69,7 +69,7 @@ fdescribe('SinglePlayerMenuComponent', () => {
     const selectedSong: Song = component.songsToBeShown[1];
     component.selectTheSong(selectedSong);
     fixture.detectChanges();
-    let dificulties = fixture.debugElement.nativeElement.querySelectorAll('#difficultyBtn');
+    const dificulties = fixture.debugElement.nativeElement.querySelectorAll('#difficultyBtn');
     expect(dificulties[0].getAttribute('value')).toBe(selectedSong.difficulties[0].difficulty, 'first button should be Hard');
     expect(dificulties[1].getAttribute('value')).toBe(selectedSong.difficulties[1].difficulty, 'second button should be Expert');
   });
@@ -79,7 +79,7 @@ fdescribe('SinglePlayerMenuComponent', () => {
     const selectedSong: Song = component.songsToBeShown[1];
     component.selectTheSong(selectedSong);
     fixture.detectChanges();
-    let songInfoPanel = fixture.debugElement.nativeElement.querySelector('#songInformationAndPlayPanel');
+    const songInfoPanel = fixture.debugElement.nativeElement.querySelector('#songInformationAndPlayPanel');
     expect(songInfoPanel).toBeNull();
   });
 
@@ -88,10 +88,10 @@ fdescribe('SinglePlayerMenuComponent', () => {
     const selectedSong: Song = component.songsToBeShown[1];
     component.selectTheSong(selectedSong);
     fixture.detectChanges();
-    let dificulties = fixture.debugElement.nativeElement.querySelectorAll('#difficultyBtn');
+    const dificulties = fixture.debugElement.nativeElement.querySelectorAll('#difficultyBtn');
     dificulties[0].click();
     fixture.detectChanges();
-    let songInfoPanel = fixture.debugElement.nativeElement.querySelector('#songInformationAndPlayPanel');
+    const songInfoPanel = fixture.debugElement.nativeElement.querySelector('#songInformationAndPlayPanel');
     expect(songInfoPanel).toBeTruthy();
   });
 
@@ -100,20 +100,20 @@ fdescribe('SinglePlayerMenuComponent', () => {
     const selectedSong: Song = component.songsToBeShown[0];
     component.selectTheSong(selectedSong);
     fixture.detectChanges();
-    let dificulties = fixture.debugElement.nativeElement.querySelectorAll('#difficultyBtn');
+    const dificulties = fixture.debugElement.nativeElement.querySelectorAll('#difficultyBtn');
     dificulties[0].click();
     fixture.detectChanges();
-    let songName = fixture.debugElement.nativeElement.querySelector('#songName');
+    const songName = fixture.debugElement.nativeElement.querySelector('#songName');
     expect(songName.getAttribute('value')).toBe('Believer', 'songs name should be Beliver');
-    let authorName = fixture.debugElement.nativeElement.querySelector('#authorName');
+    const authorName = fixture.debugElement.nativeElement.querySelector('#authorName');
     expect(authorName.getAttribute('value')).toBe('Rustic', 'author name should be Rustic');
-    let songSubName = fixture.debugElement.nativeElement.querySelector('#songSubName');
+    const songSubName = fixture.debugElement.nativeElement.querySelector('#songSubName');
     expect(songSubName.getAttribute('value')).toBe('Imagine Dragons', 'song subname should be Imagine Dragons');
-    let bpm = fixture.debugElement.nativeElement.querySelector('#bpm');
+    const bpm = fixture.debugElement.nativeElement.querySelector('#bpm');
     expect(bpm.getAttribute('value')).toBe('Beats per minute: 125', 'beats per minute should be 125');
-    let duration = fixture.debugElement.nativeElement.querySelector('#duration');
+    const duration = fixture.debugElement.nativeElement.querySelector('#duration');
     const min: number = Math.round(selectedSong.difficulties[0].stats.time / selectedSong.bpm);
-    const seg: number = Math.round((selectedSong.difficulties[0].stats.time / selectedSong.bpm - min)*100); 
+    const seg: number = Math.round((selectedSong.difficulties[0].stats.time / selectedSong.bpm - min) * 100);
     expect(duration.getAttribute('value')).toBe('Duration: ' + min + 'm' + seg + 's', 'duration of the song');
   });
 
@@ -121,7 +121,7 @@ fdescribe('SinglePlayerMenuComponent', () => {
     component.ngOnInit();
     fixture.detectChanges();
     const oldShownSongs: Song[] = component.songsToBeShown.map(x => Object.assign({}, x));
-    let scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
+    const scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
     scrollDownBtn.click();
     fixture.detectChanges();
     expect(component.songsToBeShown[0].id).not.toBe(oldShownSongs[0].id);
@@ -140,11 +140,11 @@ fdescribe('SinglePlayerMenuComponent', () => {
   it('When you click on scroll up button, list of song should change', () => {
     component.ngOnInit();
     fixture.detectChanges();
-    let scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
+    const scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
     scrollDownBtn.click();
     fixture.detectChanges();
     const oldShownSongs: Song[] = component.songsToBeShown.map(x => Object.assign({}, x));
-    let scrollUpBtn = fixture.debugElement.nativeElement.querySelector('#scrollUpBtn');
+    const scrollUpBtn = fixture.debugElement.nativeElement.querySelector('#scrollUpBtn');
     scrollUpBtn.click();
     fixture.detectChanges();
     expect(component.songsToBeShown[0].id).not.toBe(oldShownSongs[0].id);
@@ -153,14 +153,14 @@ fdescribe('SinglePlayerMenuComponent', () => {
   it('At the begining, up button should not apear', () => {
     component.ngOnInit();
     fixture.detectChanges();
-    let scrollUpBtn = fixture.debugElement.nativeElement.querySelector('#scrollUpBtn');
+    const scrollUpBtn = fixture.debugElement.nativeElement.querySelector('#scrollUpBtn');
     expect(scrollUpBtn).toBeNull();
   });
 
   it('When you return to the top of disponible songs, up button should disapear', () => {
     component.ngOnInit();
     fixture.detectChanges();
-    let scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
+    const scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
     scrollDownBtn.click();
     fixture.detectChanges();
     let scrollUpBtn = fixture.debugElement.nativeElement.querySelector('#scrollUpBtn');
