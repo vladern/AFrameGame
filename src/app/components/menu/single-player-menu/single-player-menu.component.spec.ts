@@ -6,6 +6,7 @@ import { Song } from 'src/app/shared/song/song.model';
 import { SongService } from 'src/app/services/song.service';
 import { SceneOrchestratorService } from 'src/app/services/scene-orchestrator.service';
 import { of, Observable, defer } from 'rxjs';
+import { Difficulties } from 'src/app/shared/difficulty/difficulties.model';
 
 fdescribe('SinglePlayerMenuComponent', () => {
   let component: SinglePlayerMenuComponent;
@@ -29,7 +30,10 @@ fdescribe('SinglePlayerMenuComponent', () => {
     component = fixture.componentInstance;
     songService = TestBed.get(SongService);
     fixture.detectChanges();
-    songs = JSON.parse('[{"id":31,"key":"31-11","songName":"Believer","songSubName":"Imagine Dragons","authorName":"Rustic","bpm":125,"difficulties":[{"difficulty":"Expert","audioPath":"song.ogg","jsonPath":"Expert.json","rank":4,"stats":{"time":418,"events":551,"notes":546,"obstacles":10}}],"downloadUrl":"https://beatsaver.com/download/31-11","coverUrl":"https://beatsaver.com/storage/songs/31/31-11.jpg"},{"id":1183,"key":"1183-814","songName":"Harder Better Faster Stronger","songSubName":"Daft Punk","authorName":"RunRockGame","bpm":123,"difficulties":[{"difficulty":"Hard","audioPath":"Daft Punk - Harder Better Faster Stronger.ogg","jsonPath":"Hard.json","rank":4,"stats":{"time":640.7428588867187,"events":1618,"notes":480,"obstacles":33}},{"difficulty":"Expert","audioPath":"Daft Punk - Harder Better Faster Stronger.ogg","jsonPath":"Expert.json","rank":4,"stats":{"time":640.7428588867187,"events":1618,"notes":684,"obstacles":33}}],"downloadUrl":"https://beatsaver.com/download/1183-814","coverUrl":"https://beatsaver.com/storage/songs/1183/1183-814.jpg"},{"id":811,"key":"811-535","songName":"Beat it","songSubName":"Michael Jackson","authorName":"Freeek","bpm":139,"difficulties":[{"difficulty":"Easy","audioPath":"Beat it.ogg","jsonPath":"Easy.json","rank":4,"stats":{"time":328.556396484375,"events":878,"notes":188,"obstacles":84}},{"difficulty":"Normal","audioPath":"Beat it.ogg","jsonPath":"Normal.json","rank":4,"stats":{"time":328.681396484375,"events":878,"notes":259,"obstacles":70}},{"difficulty":"Hard","audioPath":"Beat it.ogg","jsonPath":"Hard.json","rank":4,"stats":{"time":328.681396484375,"events":878,"notes":428,"obstacles":72}},{"difficulty":"Expert","audioPath":"Beat it.ogg","jsonPath":"Expert.json","rank":4,"stats":{"time":328.681396484375,"events":878,"notes":669,"obstacles":69}}],"downloadUrl":"https://beatsaver.com/download/811-535","coverUrl":"https://beatsaver.com/storage/songs/811/811-535.jpg"},{"id":517,"key":"517-321","songName":"Gangnam Style","songSubName":"PSY","authorName":"GreatYazer","bpm":132,"difficulties":[{"difficulty":"Normal","audioPath":"song.ogg","jsonPath":"Normal.json","rank":4,"stats":{"time":468,"events":735,"notes":419,"obstacles":42}},{"difficulty":"Hard","audioPath":"song.ogg","jsonPath":"Hard.json","rank":4,"stats":{"time":468,"events":735,"notes":735,"obstacles":94}},{"difficulty":"Expert","audioPath":"Song.ogg","jsonPath":"Expert.json","rank":4,"stats":{"time":468,"events":735,"notes":982,"obstacles":103}}],"downloadUrl":"https://beatsaver.com/download/517-321","coverUrl":"https://beatsaver.com/storage/songs/517/517-321.jpg"},{"id":27,"key":"27-9","songName":"Take On Me","songSubName":"","authorName":"a-ha","bpm":168,"difficulties":[{"difficulty":"Expert","audioPath":"song.ogg","jsonPath":"Expert.json","rank":4,"stats":{"time":384,"events":1,"notes":505,"obstacles":52}}],"downloadUrl":"https://beatsaver.com/download/27-9","coverUrl":"https://beatsaver.com/storage/songs/27/27-9.jpg"},{"id":28,"key":"28-9","songName":"Take On Me 28","songSubName":"","authorName":"a-ha","bpm":168,"difficulties":[{"difficulty":"Expert","audioPath":"song.ogg","jsonPath":"Expert.json","rank":4,"stats":{"time":384,"events":1,"notes":505,"obstacles":52}}],"downloadUrl":"https://beatsaver.com/download/27-9","coverUrl":"https://beatsaver.com/storage/songs/27/27-9.jpg"}]');
+    songs = JSON.parse('[{"id":"5cff620c48229f7d88fc60e9","key":"b","songName":"Believer","songSubName":"Imagine Dragons","authorName":"Rustic","bpm":125,"difficulties":{"easy":false,"normal":false,"hard":false,"expert":true,"expertPlus":false},"downloadUrl":"/api/download/key/b","coverUrl":"/cdn/b/19f2879d11a91b51a5c090d63471c3e8d9b7aee3.jpg"},{"id":"5cff620c48229f7d88fc63dd","key":"32e","songName":"Harder Better Faster Stronger","songSubName":"Daft Punk","authorName":"RunRockGame","bpm":123,"difficulties":{"easy":false,"normal":false,"hard":true,"expert":true,"expertPlus":false},"downloadUrl":"/api/download/key/32e","coverUrl":"/cdn/32e/7c7f38d467bb43fe11a142581e63e324622ecc71.jpg"},{"id":"5cff620c48229f7d88fc620d","key":"141","songName":"Gangnam Style","songSubName":"PSY","authorName":"GreatYazer","bpm":132,"difficulties":{"easy":false,"normal":true,"hard":true,"expert":true,"expertPlus":false},"downloadUrl":"/api/download/key/141","coverUrl":"/cdn/141/8e7e553099436af31564adf1977a5ec42a61cfff.jpg"},{"id":"5cff620c48229f7d88fc62d6","key":"217","songName":"Beat it","songSubName":"Michael Jackson","authorName":"Freeek","bpm":139,"difficulties":{"easy":true,"normal":true,"hard":true,"expert":true,"expertPlus":false},"downloadUrl":"/api/download/key/217","coverUrl":"/cdn/217/4b2da842b687ec4cfbc948c583c21c79d4120de0.jpg"},{"id":"5cff620c48229f7d88fc60e7","key":"9","songName":"Take On Me","songSubName":"","authorName":"a-ha","bpm":168,"difficulties":{"easy":false,"normal":false,"hard":false,"expert":true,"expertPlus":false},"downloadUrl":"/api/download/key/9","coverUrl":"/cdn/9/2aa1f5192828e075c30dd015b1e132bba912eb86.jpg"},{"id":"5cff620c48229f7d88fc60e7","key":"9","songName":"Take On Me","songSubName":"","authorName":"a-ha","bpm":168,"difficulties":{"easy":false,"normal":false,"hard":false,"expert":true,"expertPlus":false},"downloadUrl":"/api/download/key/9","coverUrl":"/cdn/9/2aa1f5192828e075c30dd015b1e132bba912eb86.jpg"}]');
+    songs.forEach(element => {
+      element.difficulties = new Difficulties(element.difficulties.easy, element.difficulties.normal, element.difficulties.hard, element.difficulties.expert, element.difficulties.expertPlus);
+    });
     spyOn(songService, 'getTopRaitedSongsList').and.returnValue(new Observable((observer) => observer.next(songs)));
   });
 
@@ -63,16 +67,6 @@ fdescribe('SinglePlayerMenuComponent', () => {
     fixture.detectChanges();
     const dificulties = fixture.debugElement.nativeElement.querySelectorAll('#difficultyBtn');
     expect(dificulties.length).toBe(selectedSong.difficulties.length);
-  });
-
-  it('The name of the level button should be coherent', () => {
-    component.ngOnInit();
-    const selectedSong: Song = component.songsToBeShown[1];
-    component.selectTheSong(selectedSong);
-    fixture.detectChanges();
-    const dificulties = fixture.debugElement.nativeElement.querySelectorAll('#difficultyBtn');
-    expect(dificulties[0].getAttribute('value')).toBe(selectedSong.difficulties[0].difficulty, 'first button should be Hard');
-    expect(dificulties[1].getAttribute('value')).toBe(selectedSong.difficulties[1].difficulty, 'second button should be Expert');
   });
 
   it('While a difficulty is no selected song information panel should not apear', () => {
@@ -112,10 +106,6 @@ fdescribe('SinglePlayerMenuComponent', () => {
     expect(songSubName.getAttribute('value')).toBe('Imagine Dragons', 'song subname should be Imagine Dragons');
     const bpm = fixture.debugElement.nativeElement.querySelector('#bpm');
     expect(bpm.getAttribute('value')).toBe('Beats per minute: 125', 'beats per minute should be 125');
-    const duration = fixture.debugElement.nativeElement.querySelector('#duration');
-    const min: number = Math.round(selectedSong.difficulties[0].stats.time / selectedSong.bpm);
-    const seg: number = Math.round((selectedSong.difficulties[0].stats.time / selectedSong.bpm - min) * 100);
-    expect(duration.getAttribute('value')).toBe('Duration: ' + min + 'm' + seg + 's', 'duration of the song');
   });
 
   it('When you click on scroll down button, list of song should change', () => {
