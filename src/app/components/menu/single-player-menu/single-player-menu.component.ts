@@ -18,7 +18,7 @@ export class SinglePlayerMenuComponent implements OnInit {
   private _songs: Song[];
   private _songsToBeShown: Song[];
   private _selectedSong: Song;
-  private _selectedDifficulty: number = -1;
+  private _selectedDifficulty: string = '';
   private _songSrvSubscription: Subscription;
   private _showSongDifficulties: boolean = false;
   private _showSongInfo: boolean = false;
@@ -79,8 +79,8 @@ export class SinglePlayerMenuComponent implements OnInit {
     this.showSongInfo = false;
   }
 
-  selectTheDifficulty(index: number) {
-    this._selectedDifficulty = index;
+  selectTheDifficulty(difficulty: string) {
+    this._selectedDifficulty = difficulty;
     this.showSongInfo = true;
   }
 
@@ -98,12 +98,6 @@ export class SinglePlayerMenuComponent implements OnInit {
 
   getBPMToShow() {
     return 'Beats per minute: ' + this._selectedSong.bpm;
-  }
-
-  getDurationToShow() {
-    const min: number = Math.round(this.selectedSong.difficulties[0].stats.time / this.selectedSong.bpm);
-    const seg: number = Math.round((this.selectedSong.difficulties[0].stats.time / this.selectedSong.bpm - min) * 100);
-    return 'Duration: ' + min + 'm' + seg + 's';
   }
 
   goToInitialMenu() {
