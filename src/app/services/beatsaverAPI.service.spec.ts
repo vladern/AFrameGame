@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { BeatsaverAPIService } from './beatsaverAPI.service';
 import { HttpClientModule } from '@angular/common/http';
 import { doesNotThrow } from 'assert';
-describe('BeatsaverAPIService', () => {
+fdescribe('BeatsaverAPIService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     providers: [BeatsaverAPIService],
@@ -25,12 +25,11 @@ describe('BeatsaverAPIService', () => {
 
   it('should return a JSON with information about a song', (done: DoneFn) => {
     const service: BeatsaverAPIService = TestBed.get(BeatsaverAPIService);
-    const songKey = '2811-8516';
+    const songKey = '2811';
     service.getSongInformationJSON(songKey)
       .subscribe((response) => {
-        const song = response['song'];
-        const resultKey = song['key'];
-        expect(resultKey).toEqual(songKey);
+        const resultSongKey = response['key'];
+        expect(resultSongKey).toEqual(songKey);
         done();
     });
   });

@@ -27,12 +27,14 @@ export class SongService {
       this._beatsaverAPIsrv.getTOPAllSongsJSON().subscribe((response: any) => {
         let songsList: Song[] = [];
         if (response != undefined && response != null) {
-          response.songs.forEach(element => {
+          response.docs.forEach(element => {
             const song: Song = FormatHelper.formatFromSongInformationJSONToSong(element);
             songsList.push(song);
           });
           observer.next(songsList);
         }
+      }, error => {
+        console.error(error);
       });
     });
   }

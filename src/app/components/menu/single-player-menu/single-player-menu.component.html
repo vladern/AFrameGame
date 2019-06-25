@@ -107,16 +107,60 @@
   position="0.2 2 -3.49" rotation="0 0 0"
   panel-color="#00001f"
 >
-  <ng-container *ngFor="let difficulty of selectedSong.difficulties; let i = index">
-    <a-gui-button
+  <ng-container id="dificulties">
+    <a-gui-button *ngIf="selectedSong.difficulties.easy === true"
       id="difficultyBtn"
-      [attr.value]="difficulty.difficulty"
+      value="Easy"
       font-size="50px"
       width="0.4" height="0.2"
       font-family="Impact"
       margin="0.05 0.05 0.05 0.05"
       toggle="true"
-      (click)="selectTheDifficulty(i)"
+      (click)="selectTheDifficulty('easy')"
+    >
+    </a-gui-button>
+    <a-gui-button *ngIf="selectedSong.difficulties.normal === true"
+      id="difficultyBtn"
+      value="Normal"
+      font-size="50px"
+      width="0.4" height="0.2"
+      font-family="Impact"
+      margin="0.05 0.05 0.05 0.05"
+      toggle="true"
+      (click)="selectTheDifficulty('normal')"
+    >
+    </a-gui-button>
+    <a-gui-button *ngIf="selectedSong.difficulties.hard === true"
+      id="difficultyBtn"
+      value="Hard"
+      font-size="50px"
+      width="0.4" height="0.2"
+      font-family="Impact"
+      margin="0.05 0.05 0.05 0.05"
+      toggle="true"
+      (click)="selectTheDifficulty('hard')"
+    >
+    </a-gui-button>
+    <a-gui-button *ngIf="selectedSong.difficulties.expert === true"
+      id="difficultyBtn"
+      value="Expert"
+      font-size="50px"
+      width="0.4" height="0.2"
+      font-family="Impact"
+      margin="0.05 0.05 0.05 0.05"
+      toggle="true"
+      (click)="selectTheDifficulty('expert')"
+    >
+    </a-gui-button>
+    <a-gui-button *ngIf="selectedSong.difficulties.expertPlus === true"
+      id="difficultyBtn"
+      value="Expert Plus"
+      font-size="50px"
+      width="0.4" height="0.2"
+      font-family="Impact"
+      margin="0.05 0.05 0.05 0.05"
+      toggle="true"
+      (click)="selectTheDifficulty('expertPlus')"
     >
     </a-gui-button>
   </ng-container>
@@ -172,17 +216,6 @@
       id='bpm'
       width="1.2" height="0.2"
       [attr.value]="getBPMToShow()"
-      font-family="Arial"
-      font-size="50px"
-      background-color="#00001f"
-      font-color="white"
-      margin="0.03 0.03 0.03 0.03"
-    >
-    </a-gui-label>
-    <a-gui-label 
-      id='duration'
-      width="1.2" height="0.2"
-      [attr.value]="getDurationToShow()"
       font-family="Arial"
       font-size="50px"
       background-color="#00001f"

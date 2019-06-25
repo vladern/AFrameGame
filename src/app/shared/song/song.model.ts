@@ -1,4 +1,4 @@
-import { Difficulty } from 'src/app/shared/difficulty/difficulty.model';
+import { Difficulties } from '../difficulty/difficulties.model';
 export class Song {
     id: number;
     key: string;
@@ -6,7 +6,7 @@ export class Song {
     songSubName: string;
     authorName: string;
     bpm: number;
-    difficulties: Difficulty[];
+    difficulties: Difficulties;
     downloadUrl: string;
     coverUrl: string;
   }
