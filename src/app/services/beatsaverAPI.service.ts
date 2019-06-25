@@ -13,12 +13,12 @@ export class BeatsaverAPIService {
   private readonly _baseURL: string = 'https://beatsaver.com';
 
   public getTOPAllSongsJSON(): Observable<Object> {
-    const topAllURL: string = this._baseURL + '/api/songs/top/?time=all';
+    const topAllURL: string = this._baseURL + '/api/maps/downloads/0';
     return this._http.get(topAllURL);
   }
 
   public getSongInformationJSON(key: string): Observable<Object> {
-    const songInfoURL: string = this._baseURL + '/api/songs/detail/' + key;
+    const songInfoURL: string = this._baseURL + '/api/maps/detail/' + key;
     return this._http.get(songInfoURL);
   }
 
