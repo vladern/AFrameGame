@@ -18,10 +18,16 @@ export class Difficulties {
         if (this.easy === true) {
             lenth++;
         }
-        if (this.easy === true) {
+        if (this.normal === true) {
             lenth++;
         }
-        if (this.easy === true) {
+        if (this.hard === true) {
+            lenth++;
+        }
+        if (this.expert === true) {
+            lenth++;
+        }
+        if (this.expertPlus === true) {
             lenth++;
         }
         return lenth;
