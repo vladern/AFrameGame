@@ -12,6 +12,7 @@ import { HowToPlayComponent } from './menu/how-to-play/how-to-play.component';
 import { CreditsComponent } from './menu/credits/credits.component';
 import { SongService } from '../services/song.service';
 import { BeatsaverAPIService } from '../services/beatsaverAPI.service';
+import { BeatComponent } from './game/beat/beat.component';
 
 const appRoutes: Routes = [
   { path: '/game', component: GameComponent },
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
     PartyMenuComponent,
     HowToPlayComponent,
     CreditsComponent,
+    BeatComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ const appRoutes: Routes = [
   ],
   providers: [HttpClientModule, HttpClient, SongService, BeatsaverAPIService],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+  entryComponents: [BeatComponent]
 })
 export class AppModule { }

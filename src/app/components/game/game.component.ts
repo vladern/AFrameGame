@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
+import { BeatComponent } from './beat/beat.component';
 
 @Component({
   selector: 'a-game',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('beatContainer', { read: ViewContainerRef }) beatContainer: ViewContainerRef;
+  
+  constructor(private _resolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
+  }
+
+  getNewBoxes() {
+    const factory = this._resolver.resolveComponentFactory(BeatComponent);
+    this.beatContainer.createComponent(factory);
   }
 
   onClick($event) {
