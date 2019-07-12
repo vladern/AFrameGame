@@ -7,6 +7,7 @@ import { SongService } from 'src/app/services/song.service';
 import { SceneOrchestratorService } from 'src/app/services/scene-orchestrator.service';
 import { of, Observable, defer } from 'rxjs';
 import { Difficulties } from 'src/app/shared/difficulty/difficulties.model';
+import { Scene } from 'src/app/shared/scene/scene.enum';
 
 fdescribe('SinglePlayerMenuComponent', () => {
   let component: SinglePlayerMenuComponent;
@@ -35,6 +36,8 @@ fdescribe('SinglePlayerMenuComponent', () => {
       element.difficulties = new Difficulties(element.difficulties.easy, element.difficulties.normal, element.difficulties.hard, element.difficulties.expert, element.difficulties.expertPlus);
     });
     spyOn(songService, 'getTopRaitedSongsList').and.returnValue(new Observable((observer) => observer.next(songs)));
+    component.ngOnInit();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -42,12 +45,10 @@ fdescribe('SinglePlayerMenuComponent', () => {
   });
 
   it('On init the component shold get the songs', fakeAsync(() => {
-    component.ngOnInit();
     expect(component.songsToBeShown.length).toBeGreaterThan(0);
   }));
 
   it('When a song is selected, the panel with dificulties should apear', fakeAsync(() => {
-    component.ngOnInit();
     const selectedSong: Song = component.songsToBeShown[0];
     component.selectTheSong(selectedSong);
     fixture.detectChanges();
@@ -61,7 +62,6 @@ fdescribe('SinglePlayerMenuComponent', () => {
   });
 
   it('Level selection panel should have slected song dificulties', () => {
-    component.ngOnInit();
     const selectedSong: Song = component.songsToBeShown[1];
     component.selectTheSong(selectedSong);
     fixture.detectChanges();
@@ -70,7 +70,6 @@ fdescribe('SinglePlayerMenuComponent', () => {
   });
 
   it('While a difficulty is no selected song information panel should not apear', () => {
-    component.ngOnInit();
     const selectedSong: Song = component.songsToBeShown[1];
     component.selectTheSong(selectedSong);
     fixture.detectChanges();
@@ -79,7 +78,6 @@ fdescribe('SinglePlayerMenuComponent', () => {
   });
 
   it('When you click on a dificulty button should apear information panel', () => {
-    component.ngOnInit();
     const selectedSong: Song = component.songsToBeShown[1];
     component.selectTheSong(selectedSong);
     fixture.detectChanges();
@@ -91,7 +89,6 @@ fdescribe('SinglePlayerMenuComponent', () => {
   });
 
   it('Information of song information panel should be coherent', () => {
-    component.ngOnInit();
     const selectedSong: Song = component.songsToBeShown[0];
     component.selectTheSong(selectedSong);
     fixture.detectChanges();
@@ -109,8 +106,6 @@ fdescribe('SinglePlayerMenuComponent', () => {
   });
 
   it('When you click on scroll down button, list of song should change', () => {
-    component.ngOnInit();
-    fixture.detectChanges();
     const oldShownSongs: Song[] = component.songsToBeShown.map(x => Object.assign({}, x));
     const scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
     scrollDownBtn.click();
@@ -119,8 +114,6 @@ fdescribe('SinglePlayerMenuComponent', () => {
   });
 
   it('When list of songs shown is under 5, down button should not to be shown', () => {
-    component.ngOnInit();
-    fixture.detectChanges();
     let scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
     scrollDownBtn.click();
     fixture.detectChanges();
@@ -129,8 +122,6 @@ fdescribe('SinglePlayerMenuComponent', () => {
   });
 
   it('When you click on scroll up button, list of song should change', () => {
-    component.ngOnInit();
-    fixture.detectChanges();
     const scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
     scrollDownBtn.click();
     fixture.detectChanges();
@@ -142,15 +133,11 @@ fdescribe('SinglePlayerMenuComponent', () => {
   });
 
   it('At the begining, up button should not apear', () => {
-    component.ngOnInit();
-    fixture.detectChanges();
     const scrollUpBtn = fixture.debugElement.nativeElement.querySelector('#scrollUpBtn');
     expect(scrollUpBtn).toBeNull();
   });
 
   it('When you return to the top of disponible songs, up button should disapear', () => {
-    component.ngOnInit();
-    fixture.detectChanges();
     const scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
     scrollDownBtn.click();
     fixture.detectChanges();
@@ -162,8 +149,6 @@ fdescribe('SinglePlayerMenuComponent', () => {
   });
 
   it('When you return to the top of disponible songs, this songs should be the same as at the begining', () => {
-    component.ngOnInit();
-    fixture.detectChanges();
     const oldShownSongs: Song[] = component.songsToBeShown.map(x => Object.assign({}, x));
     const scrollDownBtn = fixture.debugElement.nativeElement.querySelector('#scrollDownBtn');
     scrollDownBtn.click();
@@ -178,6 +163,19 @@ fdescribe('SinglePlayerMenuComponent', () => {
     expect(component.songsToBeShown[2].id).toBe(oldShownSongs[2].id, '2');
     expect(component.songsToBeShown[3].id).toBe(oldShownSongs[3].id, '3');
     expect(component.songsToBeShown[4].id).toBe(oldShownSongs[4].id, '4');
+  });
+
+  it('When play button is clicked should go to game area', () => {
+    const selectedSong: Song = component.songsToBeShown[0];
+    component.selectTheSong(selectedSong);
+    fixture.detectChanges();
+    const dificulties = fixture.debugElement.nativeElement.querySelectorAll('#difficultyBtn');
+    dificulties[0].click();
+    fixture.detectChanges();
+    spyOn(component, 'goToGame');
+    const playBtn = fixture.debugElement.nativeElement.querySelector('#playBtn');
+    playBtn.click();
+    expect(component.goToGame).toHaveBeenCalled();
   });
 
 });

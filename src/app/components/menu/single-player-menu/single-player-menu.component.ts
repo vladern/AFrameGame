@@ -104,6 +104,10 @@ export class SinglePlayerMenuComponent implements OnInit {
     this._sceneOrchestratorSrv.actualScene = Scene.initialMenu;
   }
 
+  goToGame() {
+    this._sceneOrchestratorSrv.actualScene = Scene.game;
+  }
+
   nextSongsToBeShown() {
     let nextIndex: number = this._lastSongShownIndex + 5;
     let ok = true;
