@@ -1,7 +1,7 @@
 import { Difficulties } from "./difficulties.model";
 
 
-fdescribe('Difficulties', () => {
+describe('Difficulties', () => {
   it('should create an instance', () => {
     expect(new Difficulties(true, true, true, true, true)).toBeTruthy();
   });

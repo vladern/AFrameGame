@@ -9,7 +9,7 @@ import { of, Observable, defer } from 'rxjs';
 import { Difficulties } from 'src/app/shared/difficulty/difficulties.model';
 import { Scene } from 'src/app/shared/scene/scene.enum';
 
-fdescribe('SinglePlayerMenuComponent', () => {
+describe('SinglePlayerMenuComponent', () => {
   let component: SinglePlayerMenuComponent;
   let fixture: ComponentFixture<SinglePlayerMenuComponent>;
   let songService: SongService;
