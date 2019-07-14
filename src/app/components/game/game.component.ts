@@ -1,5 +1,6 @@
-import { Component, OnInit, ElementRef, ViewChild, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ComponentFactoryResolver, ViewContainerRef, ComponentFactory } from '@angular/core';
 import { BeatComponent } from './beat/beat.component';
+import { BeatService } from 'src/app/services/beat.service';
 
 @Component({
   selector: 'a-game',
@@ -10,14 +11,15 @@ export class GameComponent implements OnInit {
 
   @ViewChild('beatContainer', { read: ViewContainerRef }) beatContainer: ViewContainerRef;
   
-  constructor(private _resolver: ComponentFactoryResolver) { }
+  constructor(private _resolver: ComponentFactoryResolver,
+              private _beatSrv: BeatService) {  }
 
   ngOnInit() {
+    this.startBeatCreation();
   }
 
-  getNewBoxes() {
-    const factory = this._resolver.resolveComponentFactory(BeatComponent);
-    this.beatContainer.createComponent(factory);
+  startBeatCreation() {
+    this._beatSrv.startBeatsCreation(this.beatContainer);
   }
 
   onClick($event) {

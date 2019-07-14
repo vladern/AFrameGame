@@ -4,7 +4,7 @@ import { GameComponent } from './game.component';
 import { BeatComponent } from './beat/beat.component';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
-fdescribe('GameComponent', () => {
+describe('GameComponent', () => {
   let component: GameComponent;
   let fixture: ComponentFixture<GameComponent>;
 
@@ -29,9 +29,15 @@ fdescribe('GameComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('On call getNewBoxes() should apear new boxes', () => {
-    component.getNewBoxes();
+  it('On call startBeatCreation() should apear new beat', () => {
+    component.startBeatCreation();
     const box = fixture.debugElement.nativeElement.querySelector('#beatComponent');
     expect(box).not.toBeNull();
+  });
+
+  it('On call startBeatCreation() should apear more than one beat', () => {
+    component.startBeatCreation();
+    const resultadoObtenido = fixture.debugElement.nativeElement.querySelectorAll('#beatComponent').length;
+    expect(resultadoObtenido).toBeGreaterThan(1);
   });
 });
