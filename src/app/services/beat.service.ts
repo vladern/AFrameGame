@@ -28,10 +28,11 @@ export class BeatService {
   }
 
   notesMockList: Note[] = [
-    {time:5,lineIndex:2,lineLayer:0,type:1,cutDirection:1},
+    {time:5,lineIndex:2,lineLayer:0,type:1,cutDirection:8},
     {time:5,lineIndex:1,lineLayer:0,type:0,cutDirection:1},
     {time:7,lineIndex:3,lineLayer:1,type:1,cutDirection:3},
-    {time:9,lineIndex:1,lineLayer:0,type:0,cutDirection:0}
+    {time:9,lineIndex:1,lineLayer:0,type:0,cutDirection:0},
+    {time:10,lineIndex:0,lineLayer:1,type:1,cutDirection:2},{time:11,lineIndex:2,lineLayer:0,type:0,cutDirection:1},{time:6,lineIndex:0,lineLayer:0,type:0,cutDirection:0},{time:6,lineIndex:3,lineLayer:0,type:1,cutDirection:0},{time:8.333333015441895,lineIndex:1,lineLayer:0,type:0,cutDirection:1},{time:8.666666030883789,lineIndex:2,lineLayer:0,type:1,cutDirection:0},{time:12,lineIndex:1,lineLayer:0,type:1,cutDirection:1},{time:13,lineIndex:0,lineLayer:0,type:0,cutDirection:0},{time:12.329999923706055,lineIndex:0,lineLayer:0,type:0,cutDirection:1},{time:12.65999984741211,lineIndex:1,lineLayer:0,type:1,cutDirection:0},{time:14,lineIndex:2,lineLayer:1,type:1,cutDirection:5},{time:16,lineIndex:3,lineLayer:0,type:1,cutDirection:0},{time:15,lineIndex:0,lineLayer:0,type:1,cutDirection:2},{time:16.329999923706055,lineIndex:2,lineLayer:0,type:0,cutDirection:0},{time:16.65999984741211,lineIndex:3,lineLayer:0,type:1,cutDirection:1},{time:17,lineIndex:1,lineLayer:0,type:0,cutDirection:1},{time:19,lineIndex:2,lineLayer:2,type:1,cutDirection:0},{time:18,lineIndex:0,lineLayer:1,type:0,cutDirection:2},{time:20,lineIndex:3,lineLayer:0,type:1,cutDirection:1},{time:21,lineIndex:1,lineLayer:0,type:1,cutDirection:1},{time:22,lineIndex:3,lineLayer:1,type:1,cutDirection:3},{time:23,lineIndex:1,lineLayer:1,type:0,cutDirection:2},{time:24,lineIndex:3,lineLayer:0,type:1,cutDirection:0},{time:25,lineIndex:1,lineLayer:0,type:1,cutDirection:2},{time:26,lineIndex:1,lineLayer:0,type:0,cutDirection:1},{time:27,lineIndex:0,lineLayer:1,type:0,cutDirection:0},{time:28,lineIndex:3,lineLayer:0,type:1,cutDirection:1},{time:29,lineIndex:2,lineLayer:0,type:0,cutDirection:0},{time:28.333330154418945,lineIndex:2,lineLayer:0,type:0,cutDirection:1},{time:28.66666030883789,lineIndex:3,lineLayer:0,type:1,cutDirection:0},{time:30,lineIndex:3,lineLayer:1,type:1,cutDirection:3},{time:31,lineIndex:1,lineLayer:0,type:1,cutDirection:1}
   ];
 
   private getBeats(): Array<ComponentFactory<BeatComponent>> {
@@ -58,6 +59,8 @@ export class BeatService {
               verticalPosition: note.lineLayer
           };
           componentRef.instance.beatType = note.type;
+          componentRef.instance.beatCutDirection = note.cutDirection;
+          this.notesMockList.shift();
         }
       });
       time++;

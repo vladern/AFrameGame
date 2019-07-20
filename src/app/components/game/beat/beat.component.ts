@@ -3,6 +3,7 @@ import { BeatPosition } from 'src/app/shared/beat/beatPosition.model';
 import { HorizontalPositions } from 'src/app/shared/beat/horizontalPositions.enum';
 import { VerticalPositions } from 'src/app/shared/beat/verticalPositions.enum';
 import { BeatType } from 'src/app/shared/beat/beatType.model';
+import { BeatCutDirection } from 'src/app/shared/beat/beatCutDirection.enum';
 
 @Component({
   selector: 'a-beat',
@@ -19,20 +20,25 @@ export class BeatComponent implements OnInit, AfterViewInit {
     }
   }
   @Input() beatType: BeatType;
+  @Input() beatCutDirection: BeatCutDirection;
   @ViewChild('boxElement') boxElement;
+
   private x;
   private y;
   private z;
 
+  public isDot = false;
+
   constructor() { }
 
   ngOnInit() {
-  }
-
-  ngAfterViewInit() {
     this._setElementPosition();
     this._setAnimationAtributes();
     this._setBoxColor();
+    this._setBeatCutDirection();
+  }
+
+  ngAfterViewInit() { 
   }
 
   getBeatInitialPosition(): BeatPosition {
@@ -108,6 +114,45 @@ export class BeatComponent implements OnInit, AfterViewInit {
       default:
         return 'white';
     }
+  }
+
+  private _setBeatCutDirection() {
+    switch (this.beatCutDirection) {
+      case BeatCutDirection.UP:
+        this._setRotationAtribute(180);
+      break;
+      case BeatCutDirection.DOWN:
+        this._setRotationAtribute(0);
+      break;
+      case BeatCutDirection.LEFT:
+        this._setRotationAtribute(270);
+      break;
+      case BeatCutDirection.RIGHT:
+        this._setRotationAtribute(90);
+      break;
+      case BeatCutDirection.UPLEFT:
+        this._setRotationAtribute(225);
+      break;
+      case BeatCutDirection.UPRIGHT:
+        this._setRotationAtribute(135);
+      break;
+      case BeatCutDirection.DOWNLEFT:
+        this._setRotationAtribute(315);
+      break;
+      case BeatCutDirection.DOWNRIGHT:
+        this._setRotationAtribute(45);
+      break;
+      case BeatCutDirection.DOT:
+        this.isDot = true;
+      break;
+      default:
+        this._setRotationAtribute(0);
+        break;
+    }
+  }
+
+  private _setRotationAtribute(rotation: number) {
+    this.boxElement.nativeElement.setAttribute('rotation', {x: 0, y: 0, z: rotation});
   }
 
   // onIntersected($event) {

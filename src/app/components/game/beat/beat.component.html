@@ -6,4 +6,19 @@
   height="0.3"
   width="0.3" 
   >
+  <ng-container *ngIf="!isDot">
+    <a-plane  
+            obj-model="obj: url(assets/models/arrow.obj)"
+            color="white"
+            scale="1 1 1">
+    </a-plane>
+  </ng-container>
+  <ng-container *ngIf="isDot">
+    <a-plane *ngIf="isDot"
+    color="white"
+    position="0 0 0.15"
+    scale="0.1 0.1 0.1">
+  </a-plane>
+  </ng-container>
+
 </a-box>
