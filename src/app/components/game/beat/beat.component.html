@@ -1,4 +1,4 @@
-<a-box
+ <a-box
   id="beatComponent"
   obj-model="obj: url(assets/models/beat.obj)"
   #boxElement
@@ -12,6 +12,24 @@
             color="white"
             scale="1 1 1">
     </a-plane>
+    <a-plane color="white"
+              class="plane"
+              (hitstart)="firstPlaneColided()"
+              position="0 -0.14 0"
+              rotation="90 0 0"
+              scale="0.29 0.3 1"
+              opacity="0">
+
+    </a-plane>
+    <a-plane color="white"
+              class="plane"
+              (hitstart)="secondPlaneColided()"
+              position="0 0.14 0"
+              rotation="90 0 0"
+              scale="0.29 0.3 1"
+              opacity="0">
+
+    </a-plane>
   </ng-container>
   <ng-container *ngIf="isDot">
     <a-plane *ngIf="isDot"
@@ -19,6 +37,21 @@
     position="0 0 0.15"
     scale="0.1 0.1 0.1">
   </a-plane>
+  <a-plane color="white"
+              position="0 0 0.14"
+              rotation="0.45 0 0"
+              scale="0.29 0.3 1"
+              opacity="0">
+
+    </a-plane>
+    <a-plane color="white"
+              class="plane"
+              (hitstart)="dotPlaneColided()"
+              position="0 0 -0.14"
+              rotation="0.45 0 0"
+              scale="0.29 0.3 1"
+              opacity="0">
+    </a-plane>
   </ng-container>
 
 </a-box>

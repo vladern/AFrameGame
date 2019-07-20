@@ -3,6 +3,7 @@ import { BeatComponent } from '../components/game/beat/beat.component';
 import { Song } from '../shared/song/song.model';
 import { HorizontalPositions } from '../shared/beat/horizontalPositions.enum';
 import { VerticalPositions } from '../shared/beat/verticalPositions.enum';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface Note {
   time: number,
@@ -17,6 +18,9 @@ export interface Note {
 export class BeatService {
 
   private _currentSong: Song;
+  private _componentReferenceList  = [];
+  private _playerScored: BehaviorSubject<boolean>;
+  private _indexOfTheBeatComponentToDestroy: BehaviorSubject<number>;
   constructor(private _resolver: ComponentFactoryResolver) { }
 
   setCurrentSong(song: Song) {
@@ -25,6 +29,22 @@ export class BeatService {
 
   getCurrentSong(): Song {
     return this._currentSong;
+  }
+
+  getIfThePlayerScored(): Observable<boolean> {
+    return this._playerScored.asObservable();
+  }
+
+  getIndexOfTheBeatComponentToDestroy(): Observable<number> {
+    return this._indexOfTheBeatComponentToDestroy.asObservable();
+  }
+
+  playerScored(scored: boolean) {
+    this._playerScored.next(scored);
+  }
+
+  destroyBeatComponent(index: number) {
+    this._indexOfTheBeatComponentToDestroy.next(index);
   }
 
   notesMockList: Note[] = [
@@ -47,6 +67,7 @@ export class BeatService {
   startBeatsCreation(viewContainer: ViewContainerRef) {
     const beatList: Array<ComponentFactory<BeatComponent>> = this.getBeats();
     let time: number = 0;
+    let index: number = 0;
     setInterval(()=> {
       this.notesMockList.forEach(note => {
         if (beatList.length === 0) {
@@ -54,16 +75,34 @@ export class BeatService {
         }
         if (note.time === time) {
           const componentRef: ComponentRef<BeatComponent> = viewContainer.createComponent(beatList.pop());
+          this._componentReferenceList.push(componentRef);
           componentRef.instance.beatPosition = { 
               horizontalPosition: note.lineIndex,
               verticalPosition: note.lineLayer
           };
           componentRef.instance.beatType = note.type;
           componentRef.instance.beatCutDirection = note.cutDirection;
+          componentRef.instance.index = ++index;
+
           this.notesMockList.shift();
         }
       });
       time++;
     }, 250)
+  }
+
+  remove(index: number, beatContainer: ViewContainerRef) {
+
+    if (beatContainer.length < 1)
+        return;
+
+    let componentRef = this._componentReferenceList.filter(x => x.instance.index == index)[0];
+
+    let vcrIndex: number = beatContainer.indexOf(componentRef);
+
+    // removing component from container
+    beatContainer.remove(vcrIndex);
+
+    this._componentReferenceList = this._componentReferenceList.filter(x => x.instance.index !== index);
   }
 }

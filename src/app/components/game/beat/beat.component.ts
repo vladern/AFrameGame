@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, ElementRef, Output, EventEmitter } from '@angular/core';
 import { BeatPosition } from 'src/app/shared/beat/beatPosition.model';
 import { HorizontalPositions } from 'src/app/shared/beat/horizontalPositions.enum';
 import { VerticalPositions } from 'src/app/shared/beat/verticalPositions.enum';
@@ -26,7 +26,9 @@ export class BeatComponent implements OnInit, AfterViewInit {
   private x;
   private y;
   private z;
-
+  private _firstPlaneColided: boolean = false;
+  public showBox: boolean = true;
+  public index: number;
   public isDot = false;
 
   constructor() { }
@@ -43,6 +45,25 @@ export class BeatComponent implements OnInit, AfterViewInit {
 
   getBeatInitialPosition(): BeatPosition {
     return this.beatPosition;
+  }
+
+  firstPlaneColided(): void {
+    this._firstPlaneColided = true;
+  }
+
+  secondPlaneColided(): void {
+    if (this._firstPlaneColided) {
+      // OK
+      console.log("El cubo ha sido cortado");
+      this.showBox = false;
+    } else {
+      // fail
+      this.showBox = false;
+    }
+  }
+
+  dotPlaneColided(): void {
+    this.showBox = false;
   }
 
   private _setElementPosition() {
