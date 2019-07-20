@@ -34,6 +34,6 @@ describe('BeatService', () => {
   it('On call getBeats() should return Array of beatComponents with number of element of the current song beat', () => {
     service.setCurrentSong(songs[0]);
     const beats: Array<ComponentFactory<BeatComponent>> =  (service as any).getBeats();
-    expect(beats.length).toEqual(2);
+    expect(beats.length).toEqual(service.notesMockList.length);
   });
 });
