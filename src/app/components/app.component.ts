@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SceneOrchestratorService } from '../services/scene-orchestrator.service';
 import { Scene } from '../shared/scene/scene.enum';
-import { Position } from '../shared/position/position.model';
+import { Position } from '../shared/beat/position.model';
 
 
 @Component({
