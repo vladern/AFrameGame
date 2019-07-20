@@ -1,5 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, ComponentFactoryResolver, ViewContainerRef, ComponentFactory } from '@angular/core';
-import { BeatComponent } from './beat/beat.component';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { BeatService } from 'src/app/services/beat.service';
 
 @Component({
@@ -11,8 +10,7 @@ export class GameComponent implements OnInit {
 
   @ViewChild('beatContainer', { read: ViewContainerRef }) beatContainer: ViewContainerRef;
   
-  constructor(private _resolver: ComponentFactoryResolver,
-              private _beatSrv: BeatService) {  }
+  constructor(private _beatSrv: BeatService) {  }
 
   ngOnInit() {
     this.startBeatCreation();
@@ -20,5 +18,9 @@ export class GameComponent implements OnInit {
 
   startBeatCreation() {
     this._beatSrv.startBeatsCreation(this.beatContainer);
+  }
+
+  removeBeat(index: number) {
+    this._beatSrv.remove(index, this.beatContainer);
   }
 }
