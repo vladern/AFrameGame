@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BeatComponent } from './beat.component';
-import { Position } from 'src/app/shared/position/position.model';
-import { BeatPosition } from 'src/app/shared/position/beatPosition.model';
-import { HorizontalPositions } from 'src/app/shared/position/horizontalPositions.enum';
-import { VerticalPositions } from 'src/app/shared/position/verticalPositions.enum';
+import { Position } from 'src/app/shared/beat/position.model';
+import { BeatPosition } from 'src/app/shared/beat/beatPosition.model';
+import { HorizontalPositions } from 'src/app/shared/beat/horizontalPositions.enum';
+import { VerticalPositions } from 'src/app/shared/beat/verticalPositions.enum';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
-import { BeatPosition } from 'src/app/shared/position/beatPosition.model';
-import { HorizontalPositions } from 'src/app/shared/position/horizontalPositions.enum';
-import { VerticalPositions } from 'src/app/shared/position/verticalPositions.enum';
+import { BeatPosition } from 'src/app/shared/beat/beatPosition.model';
+import { HorizontalPositions } from 'src/app/shared/beat/horizontalPositions.enum';
+import { VerticalPositions } from 'src/app/shared/beat/verticalPositions.enum';
+import { BeatType } from 'src/app/shared/beat/beatType.model';
 
 @Component({
   selector: 'a-beat',
@@ -11,7 +12,17 @@ import { VerticalPositions } from 'src/app/shared/position/verticalPositions.enu
 export class BeatComponent implements OnInit, AfterViewInit {
 
   @Input() beatPosition: BeatPosition;
+  private duration: number = 1000;
+  @Input() set durationOfAnimation (duration:number){
+    if (!!duration) {
+      this.duration = duration;
+    }
+  }
+  @Input() beatType: BeatType;
   @ViewChild('boxElement') boxElement;
+  private x;
+  private y;
+  private z;
 
   constructor() { }
 
@@ -19,51 +30,88 @@ export class BeatComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if ( this.beatPosition !== undefined ) {
-      this.setElementPosition(this.beatPosition);
-    } else {
-      this.setElementPosition({horizontalPosition: HorizontalPositions.left, verticalPosition: VerticalPositions.middle});
-    }
+    this._setElementPosition();
+    this._setAnimationAtributes();
+    this._setBoxColor();
   }
 
   getBeatInitialPosition(): BeatPosition {
     return this.beatPosition;
   }
 
-  setElementPosition(position: BeatPosition) {
-    switch (position.horizontalPosition) {
+  private _setElementPosition() {
+    switch (this.beatPosition.horizontalPosition) {
       case HorizontalPositions.left:
-        this.boxElement.nativeElement.object3D.position.x = -0.75;
+        this.x = -0.75;
         break;
       case HorizontalPositions.middleLeft:
-        this.boxElement.nativeElement.object3D.position.x = -0.25;
+        this.x = -0.25;
         break;
       case HorizontalPositions.middleRight:
-        this.boxElement.nativeElement.object3D.position.x = 0.25;
+        this.x = 0.25;
         break;
       case HorizontalPositions.right:
-        this.boxElement.nativeElement.object3D.position.x = 0.75;
+        this.x = 0.75;
         break;
       default:
+        this.x = 0;
         break;
     }
 
-    switch (position.verticalPosition) {
+    switch (this.beatPosition.verticalPosition) {
       case VerticalPositions.bottom:
-        this.boxElement.nativeElement.object3D.position.y = 0.7;
+        this.y = 0.7;
         break;
       case VerticalPositions.middle:
-        this.boxElement.nativeElement.object3D.position.y = 1.2;
+        this.y = 1.2;
         break;
       case VerticalPositions.top:
-        this.boxElement.nativeElement.object3D.position.y = 1.7;
+        this.y = 1.7;
         break;
       default:
+        this.y = 0;
         break;
     }
 
-    this.boxElement.nativeElement.object3D.position.z = -5;
-
+    if (!!this.beatPosition) {
+          this.z = -5;
+    } else {
+         this.z = 0;
+    }
+    this.boxElement.nativeElement.object3D.position.x = this.x;
+    this.boxElement.nativeElement.object3D.position.y = this.y;
+    this.boxElement.nativeElement.object3D.position.z = this.z;
   }
+
+  private _setAnimationAtributes() {
+    this.boxElement.nativeElement
+        .setAttribute('animation',
+                      "property: position;"+
+                      "dur: "+ this.duration+ ";"+
+                      "to:  "+ this.x +
+                      " "+ this.y +
+                      " 0;");
+  }
+
+  private _setBoxColor() {
+    this.boxElement.nativeElement
+      .setAttribute('material',
+                    'color', this._getColor());
+  }
+
+  private _getColor(): string {
+    switch (this.beatType) {
+      case BeatType.RIGHT:
+        return 'blue';
+      case BeatType.LEFT:
+        return 'red';
+      default:
+        return 'white';
+    }
+  }
+
+  // onIntersected($event) {
+  //   event.srcElement.setAttribute('animation__2', 'property: position; dur: 1000; to: 5 5 -5;');
+  // }
 
 }
