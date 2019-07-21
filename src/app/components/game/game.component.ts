@@ -15,8 +15,8 @@ export class GameComponent implements OnInit {
   
 
   ngOnInit() {
-    this.startBeatCreation();
     this._beatSrv.beatContainer = this.beatContainer;
+    this._playSong();
   }
 
   startBeatCreation() {
@@ -28,6 +28,15 @@ export class GameComponent implements OnInit {
   }
   get failedText(): string {
     return 'font: mozillavr; width: 3; value: Failed beats: '+ this._beatSrv.failedBeats;
+  }
+
+  private _playSong() {
+    let audio = new Audio();
+    audio.src = "assets/audio/song.egg"
+    audio.load();
+    audio.play().then(()=>{
+      this.startBeatCreation();
+    });
   }
 
   
