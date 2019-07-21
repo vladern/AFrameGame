@@ -4,7 +4,9 @@
         <a-text id="areaWarning" *ngIf="showPositionWarning" value="Warning you are out of play area!" color="red" position="0 -0.1 -0.5" height="0.5" width="1" align="center"></a-text>
       </a-camera>
       <a-entity windows-motion-controls="hand: left" aabb-collider="objects: .plane"></a-entity>
-      <a-entity windows-motion-controls="hand: right" laser-controls="hand: right" aabb-collider="objects: .plane"></a-entity>
+      <a-entity laser-controls="hand: right" line="color: orange; opacity: 0.5; visible: true" aabb-collider="objects: .plane"></a-entity>
+
+      
     </a-entity>
     <ng-container *ngIf="actualScene == 0">
         <a-game></a-game>

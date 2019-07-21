@@ -118,7 +118,7 @@ export class BeatComponent implements OnInit, AfterViewInit {
                       "dur: "+ this.duration+ ";"+
                       "to:  "+ this.x +
                       " "+ this.y +
-                      " 0;");
+                      " -0.5;");
   }
 
   private _setBoxColor() {
