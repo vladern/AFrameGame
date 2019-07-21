@@ -23,11 +23,13 @@ export class BeatComponent implements OnInit, AfterViewInit {
   @Input() beatCutDirection: BeatCutDirection;
   @ViewChild('boxElement') boxElement;
   @Output() removeElement: EventEmitter<number> = new EventEmitter();
+  @Output() playerScored: EventEmitter<boolean> = new EventEmitter();
 
   private x;
   private y;
   private z;
   private _firstPlaneColided: boolean = false;
+  private _firstDotPlaneColided: boolean = false;
   public showBox: boolean = true;
   public index: number;
   public isDot = false;
@@ -39,6 +41,7 @@ export class BeatComponent implements OnInit, AfterViewInit {
     this._setAnimationAtributes();
     this._setBoxColor();
     this._setBeatCutDirection();
+    this._listenAnimationComplete();
   }
 
   ngAfterViewInit() { 
@@ -49,22 +52,49 @@ export class BeatComponent implements OnInit, AfterViewInit {
   }
 
   firstPlaneColided(): void {
-    this._firstPlaneColided = true;
-  }
-
-  secondPlaneColided(): void {
-    if (this._firstPlaneColided) {
-      // OK
-      console.log("El cubo ha sido cortado");
-      this.removeElement.emit(this.index);
-    } else {
+    if (this.beatCutDirection === BeatCutDirection.DOT) {
       // fail
       this.removeElement.emit(this.index);
+    } else {
+      this._firstPlaneColided = true;
     }
   }
 
-  dotPlaneColided(): void {
-    this.showBox = false;
+  secondPlaneColided(): void {
+    if (this._firstPlaneColided && this.beatCutDirection !== BeatCutDirection.DOT) {
+      // OK
+      console.log("El cubo ha sido cortado");
+      this.removeElement.emit(this.index);
+      this.playerScored.emit(true);
+    } else {
+      // fail
+      this.removeElement.emit(this.index);
+      this.playerScored.emit(false);
+    }
+  }
+
+  firstDotPlaneColided(): void {
+    this._firstDotPlaneColided = true;
+  }
+
+  secondDotPlaneColided(): void {
+    if (this._firstDotPlaneColided) {
+      // OK
+      console.log("El cubo ha sido cortado");
+      this.removeElement.emit(this.index);
+      this.playerScored.emit(true);
+    } else {
+      // fail
+      this.removeElement.emit(this.index);
+      this.playerScored.emit(false);
+    }
+  }
+
+  private _listenAnimationComplete(): void {
+    this.boxElement.nativeElement.addEventListener('animationcomplete', ()=> {
+      this.removeElement.emit(this.index);
+      this.playerScored.emit(false);
+    });
   }
 
   private _setElementPosition() {
@@ -118,7 +148,7 @@ export class BeatComponent implements OnInit, AfterViewInit {
                       "dur: "+ this.duration+ ";"+
                       "to:  "+ this.x +
                       " "+ this.y +
-                      " -0.5;");
+                      " 1;");
   }
 
   private _setBoxColor() {

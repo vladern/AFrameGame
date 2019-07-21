@@ -22,6 +22,8 @@ export class BeatService {
   private _playerScored: BehaviorSubject<boolean>;
   private _indexOfTheBeatComponentToDestroy: BehaviorSubject<number>;
   private _beatContainer: ViewContainerRef;
+  public destroyedBeats: number = 0;
+  public failedBeats: number = 0;
   
   constructor(private _resolver: ComponentFactoryResolver) { }
 
@@ -92,6 +94,9 @@ export class BeatService {
           componentRef.instance.removeElement.subscribe((index)=> {
             this.remove(index);
           });
+          componentRef.instance.playerScored.subscribe((scored: boolean) => {
+            this._manageScore(scored);
+          });
           this.notesMockList.shift();
         }
       });
@@ -112,5 +117,13 @@ export class BeatService {
     this._beatContainer.remove(vcrIndex);
 
     this._componentReferenceList = this._componentReferenceList.filter(x => x.instance.index !== index);
+  }
+
+  private _manageScore(scored: boolean): void {
+    if (scored) {
+      this.destroyedBeats++;
+    } else {
+      this.failedBeats++;
+    }
   }
 }

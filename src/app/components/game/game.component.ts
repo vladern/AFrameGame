@@ -12,6 +12,8 @@ export class GameComponent implements OnInit {
   
   constructor(private _beatSrv: BeatService) {  }
 
+  
+
   ngOnInit() {
     this.startBeatCreation();
     this._beatSrv.beatContainer = this.beatContainer;
@@ -20,4 +22,14 @@ export class GameComponent implements OnInit {
   startBeatCreation() {
     this._beatSrv.startBeatsCreation(this.beatContainer);
   }
+
+  get scoreText(): string {
+    return 'font: mozillavr; width: 3; value: Cuted beats: '+ this._beatSrv.destroyedBeats;
+  }
+  get failedText(): string {
+    return 'font: mozillavr; width: 3; value: Failed beats: '+ this._beatSrv.failedBeats;
+  }
+
+  
+
 }
