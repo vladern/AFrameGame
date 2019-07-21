@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { BeatService } from 'src/app/services/beat.service';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'a-game',
@@ -10,24 +10,24 @@ export class GameComponent implements OnInit {
 
   @ViewChild('beatContainer', { read: ViewContainerRef }) beatContainer: ViewContainerRef;
   
-  constructor(private _beatSrv: BeatService) {  }
+  constructor(private _gameSrv: GameService) {  }
 
   
 
   ngOnInit() {
-    this._beatSrv.beatContainer = this.beatContainer;
+    this._gameSrv.beatContainer = this.beatContainer;
     this._playSong();
   }
 
   startBeatCreation() {
-    this._beatSrv.startBeatsCreation(this.beatContainer);
+    this._gameSrv.startBeatsCreation(this.beatContainer);
   }
 
   get scoreText(): string {
-    return 'font: mozillavr; width: 3; value: Cuted beats: '+ this._beatSrv.destroyedBeats;
+    return 'font: mozillavr; width: 3; value: Cuted beats: '+ this._gameSrv.destroyedBeats;
   }
   get failedText(): string {
-    return 'font: mozillavr; width: 3; value: Failed beats: '+ this._beatSrv.failedBeats;
+    return 'font: mozillavr; width: 3; value: Failed beats: '+ this._gameSrv.failedBeats;
   }
 
   private _playSong() {

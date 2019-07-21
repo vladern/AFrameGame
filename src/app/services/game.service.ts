@@ -1,8 +1,6 @@
 import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRef, ComponentRef } from '@angular/core';
 import { BeatComponent } from '../components/game/beat/beat.component';
 import { Song } from '../shared/song/song.model';
-import { HorizontalPositions } from '../shared/beat/horizontalPositions.enum';
-import { VerticalPositions } from '../shared/beat/verticalPositions.enum';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface Note {
@@ -15,7 +13,7 @@ export interface Note {
 @Injectable({
   providedIn: 'root'
 })
-export class BeatService {
+export class GameService {
 
   private _currentSong: Song;
   private _componentReferenceList  = [];
