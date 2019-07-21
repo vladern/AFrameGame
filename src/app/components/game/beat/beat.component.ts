@@ -13,7 +13,7 @@ import { BeatCutDirection } from 'src/app/shared/beat/beatCutDirection.enum';
 export class BeatComponent implements OnInit, AfterViewInit {
 
   @Input() beatPosition: BeatPosition;
-  private duration: number = 1000;
+  private duration: number = 2000;
   @Input() set durationOfAnimation (duration:number){
     if (!!duration) {
       this.duration = duration;
@@ -22,6 +22,7 @@ export class BeatComponent implements OnInit, AfterViewInit {
   @Input() beatType: BeatType;
   @Input() beatCutDirection: BeatCutDirection;
   @ViewChild('boxElement') boxElement;
+  @Output() removeElement: EventEmitter<number> = new EventEmitter();
 
   private x;
   private y;
@@ -55,10 +56,10 @@ export class BeatComponent implements OnInit, AfterViewInit {
     if (this._firstPlaneColided) {
       // OK
       console.log("El cubo ha sido cortado");
-      this.showBox = false;
+      this.removeElement.emit(this.index);
     } else {
       // fail
-      this.showBox = false;
+      this.removeElement.emit(this.index);
     }
   }
 
@@ -87,13 +88,13 @@ export class BeatComponent implements OnInit, AfterViewInit {
 
     switch (this.beatPosition.verticalPosition) {
       case VerticalPositions.bottom:
-        this.y = 0.7;
+        this.y = 1.1;
         break;
       case VerticalPositions.middle:
-        this.y = 1.2;
+        this.y = 1.6;
         break;
       case VerticalPositions.top:
-        this.y = 1.7;
+        this.y = 2.1;
         break;
       default:
         this.y = 0;
@@ -101,7 +102,7 @@ export class BeatComponent implements OnInit, AfterViewInit {
     }
 
     if (!!this.beatPosition) {
-          this.z = -5;
+          this.z = -10;
     } else {
          this.z = 0;
     }

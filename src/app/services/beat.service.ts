@@ -21,6 +21,8 @@ export class BeatService {
   private _componentReferenceList  = [];
   private _playerScored: BehaviorSubject<boolean>;
   private _indexOfTheBeatComponentToDestroy: BehaviorSubject<number>;
+  private _beatContainer: ViewContainerRef;
+  
   constructor(private _resolver: ComponentFactoryResolver) { }
 
   setCurrentSong(song: Song) {
@@ -29,6 +31,10 @@ export class BeatService {
 
   getCurrentSong(): Song {
     return this._currentSong;
+  }
+
+  public set beatContainer(value: ViewContainerRef) {
+    this._beatContainer = value;
   }
 
   getIfThePlayerScored(): Observable<boolean> {
@@ -83,7 +89,9 @@ export class BeatService {
           componentRef.instance.beatType = note.type;
           componentRef.instance.beatCutDirection = note.cutDirection;
           componentRef.instance.index = ++index;
-
+          componentRef.instance.removeElement.subscribe((index)=> {
+            this.remove(index);
+          });
           this.notesMockList.shift();
         }
       });
@@ -91,17 +99,17 @@ export class BeatService {
     }, 250)
   }
 
-  remove(index: number, beatContainer: ViewContainerRef) {
+  remove(index: number) {
 
-    if (beatContainer.length < 1)
+    if (!this._beatContainer && this._beatContainer.length < 1)
         return;
 
     let componentRef = this._componentReferenceList.filter(x => x.instance.index == index)[0];
 
-    let vcrIndex: number = beatContainer.indexOf(componentRef);
+    let vcrIndex: number = this._beatContainer.indexOf(componentRef);
 
     // removing component from container
-    beatContainer.remove(vcrIndex);
+    this._beatContainer.remove(vcrIndex);
 
     this._componentReferenceList = this._componentReferenceList.filter(x => x.instance.index !== index);
   }

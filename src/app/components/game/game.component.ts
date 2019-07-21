@@ -14,13 +14,10 @@ export class GameComponent implements OnInit {
 
   ngOnInit() {
     this.startBeatCreation();
+    this._beatSrv.beatContainer = this.beatContainer;
   }
 
   startBeatCreation() {
     this._beatSrv.startBeatsCreation(this.beatContainer);
-  }
-
-  removeBeat(index: number) {
-    this._beatSrv.remove(index, this.beatContainer);
   }
 }
