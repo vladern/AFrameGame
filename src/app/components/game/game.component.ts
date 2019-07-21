@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { BeatService } from 'src/app/services/beat.service';
 
 @Component({
   selector: 'a-game',
@@ -7,16 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('beatContainer', { read: ViewContainerRef }) beatContainer: ViewContainerRef;
+  
+  constructor(private _beatSrv: BeatService) {  }
+
+  
 
   ngOnInit() {
+    this.startBeatCreation();
+    this._beatSrv.beatContainer = this.beatContainer;
   }
 
-  onClick($event) {
-    event.srcElement.setAttribute('animation', "property: position; dur: 1000; to: 0 1.5 -0.3;");
+  startBeatCreation() {
+    this._beatSrv.startBeatsCreation(this.beatContainer);
   }
 
-  onIntersected($event) {
-    event.srcElement.setAttribute('animation__2', 'property: position; dur: 1000; to: 5 5 -5;');
+  get scoreText(): string {
+    return 'font: mozillavr; width: 3; value: Cuted beats: '+ this._beatSrv.destroyedBeats;
   }
+  get failedText(): string {
+    return 'font: mozillavr; width: 3; value: Failed beats: '+ this._beatSrv.failedBeats;
+  }
+
+  
+
 }
