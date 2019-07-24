@@ -33,6 +33,7 @@ export class BeatComponent implements OnInit, AfterViewInit {
   public showBox: boolean = true;
   public index: number;
   public isDot = false;
+  public isVisible = true;
 
   constructor() { }
 
@@ -53,8 +54,8 @@ export class BeatComponent implements OnInit, AfterViewInit {
 
   firstPlaneColided(): void {
     if (this.beatCutDirection === BeatCutDirection.DOT) {
-      // fail
-      this.removeElement.emit(this.index);
+      this._listenAnimationComplete()
+      this.playerScored.emit(false);
     } else {
       this._firstPlaneColided = true;
     }
@@ -63,12 +64,10 @@ export class BeatComponent implements OnInit, AfterViewInit {
   secondPlaneColided(): void {
     if (this._firstPlaneColided && this.beatCutDirection !== BeatCutDirection.DOT) {
       // OK
-      console.log("El cubo ha sido cortado");
-      this.removeElement.emit(this.index);
+      this._listenAnimationComplete()
       this.playerScored.emit(true);
     } else {
-      // fail
-      this.removeElement.emit(this.index);
+      this._listenAnimationComplete()
       this.playerScored.emit(false);
     }
   }
@@ -80,19 +79,25 @@ export class BeatComponent implements OnInit, AfterViewInit {
   secondDotPlaneColided(): void {
     if (this._firstDotPlaneColided) {
       // OK
-      console.log("El cubo ha sido cortado");
-      this.removeElement.emit(this.index);
+      this._listenAnimationComplete()
       this.playerScored.emit(true);
     } else {
       // fail
-      this.removeElement.emit(this.index);
+      this._listenAnimationComplete()
       this.playerScored.emit(false);
     }
   }
 
+  private _destroyAframeCompomponent() {
+    // this.boxElement.nativeElement.setAttribute('visible', 'false');
+    // this.boxElement.nativeElement.parentNode.removeChild(this.boxElement.nativeElement);
+    this.removeElement.emit(this.index);
+    this.boxElement.nativeElement.remove();
+  }
+
   private _listenAnimationComplete(): void {
     this.boxElement.nativeElement.addEventListener('animationcomplete', ()=> {
-      this.removeElement.emit(this.index);
+      this._destroyAframeCompomponent();
       this.playerScored.emit(false);
     });
   }
@@ -118,13 +123,13 @@ export class BeatComponent implements OnInit, AfterViewInit {
 
     switch (this.beatPosition.verticalPosition) {
       case VerticalPositions.bottom:
-        this.y = 1.1;
+        this.y = 0.7;
         break;
       case VerticalPositions.middle:
-        this.y = 1.6;
+        this.y = 1.2;
         break;
       case VerticalPositions.top:
-        this.y = 2.1;
+        this.y = 1.7;
         break;
       default:
         this.y = 0;
@@ -132,7 +137,7 @@ export class BeatComponent implements OnInit, AfterViewInit {
     }
 
     if (!!this.beatPosition) {
-          this.z = -10;
+          this.z = -5;
     } else {
          this.z = 0;
     }

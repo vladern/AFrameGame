@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
+import { Difficulties } from 'src/app/shared/difficulty/difficulties.enum';
 
 @Component({
   selector: 'a-game',
@@ -16,11 +17,7 @@ export class GameComponent implements OnInit {
 
   ngOnInit() {
     this._gameSrv.beatContainer = this.beatContainer;
-    this._playSong();
-  }
-
-  startBeatCreation() {
-    this._gameSrv.startBeatsCreation(this.beatContainer);
+    this._gameSrv.playTheSong(Difficulties.expert);
   }
 
   get scoreText(): string {
@@ -28,15 +25,6 @@ export class GameComponent implements OnInit {
   }
   get failedText(): string {
     return 'font: mozillavr; width: 3; value: Failed beats: '+ this._gameSrv.failedBeats;
-  }
-
-  private _playSong() {
-    let audio = new Audio();
-    audio.src = "assets/audio/song.egg"
-    audio.load();
-    audio.play().then(()=>{
-      this.startBeatCreation();
-    });
   }
 
   
