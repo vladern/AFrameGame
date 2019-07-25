@@ -22,6 +22,7 @@ export class GameService {
   private _playerScored: BehaviorSubject<boolean>;
   private _indexOfTheBeatComponentToDestroy: BehaviorSubject<number>;
   private _beatContainer: ViewContainerRef;
+  private _audio: HTMLAudioElement;
   public destroyedBeats: number = 0;
   public failedBeats: number = 0;
   
@@ -65,43 +66,56 @@ export class GameService {
     return arrayToReturn;
   }
 
-  startBeatsCreation(dificultie: Difficulties, dificultieJSONContainerList: DificultieJSONContainer[]) {
+  startBeatsCreation(dificultie: Difficulties, dificultieJSONContainerList: DificultieJSONContainer[], audio: HTMLAudioElement) {
     let dificultieJSON = dificultieJSONContainerList.find((difficultie)=>{
       return difficultie.dificulty === dificultie;
     });
     const beatList: Array<ComponentFactory<BeatComponent>> = this.getBeats(dificultieJSON);
-    let time: number = 0;
     let index: number = 0;
+    const notes = JSON.parse(JSON.stringify(dificultieJSON.json._notes));
+    notes.sort((a, b) => {
+      if (a._time > b._time) {
+        return 1;
+      } else if (a._time < b._time) {
+        return -1;
+      } else {
+        return 0
+      }
+    });
     setInterval(()=> {
-      dificultieJSON.json._notes.forEach(note => {
+        const note0 = notes[0];
+        const note1 = notes[1];
+        const note2 = notes[2];
+        const note3 = notes[3];
         if (beatList.length === 0) {
           return;
         }
-        if (note._time === time) {
-          const componentRef: ComponentRef<BeatComponent> = this._beatContainer.createComponent(beatList.pop());
-          this._componentReferenceList.push(componentRef);
-          componentRef.instance.beatPosition = { 
-              horizontalPosition: note._lineIndex,
-              verticalPosition: note._lineLayer
-          };
-          componentRef.instance.beatType = note._type;
-          componentRef.instance.beatCutDirection = note._cutDirection;
-          componentRef.instance.index = ++index;
-          componentRef.instance.removeElement.subscribe((index)=> {
-            this.remove(index);
-          });
-          componentRef.instance.playerScored.subscribe((scored: boolean) => {
-            this._manageScore(scored);
-          });
-          dificultieJSON.json._notes.shift();
+        const time0  = this._calculateNoteTimeInSeconds(note0._time);
+        const time1  = this._calculateNoteTimeInSeconds(note1._time);
+        const time2  = this._calculateNoteTimeInSeconds(note2._time);
+        const time3  = this._calculateNoteTimeInSeconds(note3._time);
+        const audioCurrentTime = audio.currentTime;
+        if (time0 <= audioCurrentTime) {
+          this._instantiateBeatComponent(note0, beatList, index);
+          notes.shift();
+          if (time1 <= audioCurrentTime) {
+            this._instantiateBeatComponent(note1, beatList, index);
+            notes.shift();
+            if (time2 <= audioCurrentTime) {
+              this._instantiateBeatComponent(note2, beatList, index);
+              notes.shift();
+              if (time3 <= audioCurrentTime) {
+                this._instantiateBeatComponent(note3, beatList, index);
+                notes.shift();
+              }
+            }
+          }
+          audio.play(); 
         }
-      });
-      time++;
-    }, 250)
+    }, 50)
   }
 
   remove(index: number) {
-
     if (!this._beatContainer && this._beatContainer.length < 1)
         return;
 
@@ -117,12 +131,35 @@ export class GameService {
 
   public playTheSong(dificultie: Difficulties): void {
     this._beatsaverAPI.getSongResources(this._currentSong).subscribe((resources) => {
-      let audio = new Audio(resources.audioBlobUrl);
-      audio.load();
-      audio.play().then(()=>{
-        this.startBeatsCreation(dificultie, resources.dificulties);
-      })
+      this._audio = new Audio(resources.audioBlobUrl);
+      this._audio.load();
+      this._audio.play().then(() => {
+        this.startBeatsCreation(dificultie, resources.dificulties, this._audio);
+      });
     });
+  }
+
+  private _instantiateBeatComponent(note, beatList, index): void {
+    const componentRef: ComponentRef<BeatComponent> = this._beatContainer.createComponent(beatList.pop());
+    this._componentReferenceList.push(componentRef);
+    componentRef.instance.beatPosition = { 
+        horizontalPosition: note._lineIndex,
+        verticalPosition: note._lineLayer
+    };
+    componentRef.instance.beatType = note._type;
+    componentRef.instance.beatCutDirection = note._cutDirection;
+    componentRef.instance.index = ++index;
+    componentRef.instance.removeElement.subscribe((index)=> {
+      this.remove(index);
+    });
+    componentRef.instance.playerScored.subscribe((scored: boolean) => {
+      this._manageScore(scored);
+    });
+  }
+
+  private _calculateNoteTimeInSeconds(time: number) {
+    const msPerBeat = 60 / this._currentSong.bpm;
+    return time * msPerBeat;
   }
 
   private _manageScore(scored: boolean): void {
