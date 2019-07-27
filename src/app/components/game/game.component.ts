@@ -22,7 +22,7 @@ export class GameComponent implements OnInit {
 
   public playTheSong() {
     this.playButton.nativeElement.setAttribute('animation', 'property: rotation; to: 0 360 0; loop: true; dur: 1000');
-    this._gameSrv.playTheSong(Difficulties.expert).subscribe( () => {
+    this._gameSrv.playTheSong().subscribe( () => {
       this.playButton.nativeElement.setAttribute('visible', 'false');
     });
   }
