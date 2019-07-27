@@ -98,20 +98,24 @@ export class GameService {
         if (time0 <= audioCurrentTime) {
           this._instantiateBeatComponent(note0, beatList, index);
           notes.shift();
+          index++;
           if (time1 <= audioCurrentTime) {
             this._instantiateBeatComponent(note1, beatList, index);
             notes.shift();
+            index++;
             if (time2 <= audioCurrentTime) {
               this._instantiateBeatComponent(note2, beatList, index);
               notes.shift();
+              index++;
               if (time3 <= audioCurrentTime) {
                 this._instantiateBeatComponent(note3, beatList, index);
                 notes.shift();
+                index++;
               }
             }
           }
-          audio.play(); 
         }
+        
     }, 50)
   }
 

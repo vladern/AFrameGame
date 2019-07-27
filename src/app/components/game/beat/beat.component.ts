@@ -54,8 +54,8 @@ export class BeatComponent implements OnInit, AfterViewInit {
 
   firstPlaneColided(): void {
     if (this.beatCutDirection === BeatCutDirection.DOT) {
-      this._listenAnimationComplete()
       this.playerScored.emit(false);
+      this._destroyAframeCompomponent();
     } else {
       this._firstPlaneColided = true;
     }
@@ -64,32 +64,33 @@ export class BeatComponent implements OnInit, AfterViewInit {
   secondPlaneColided(): void {
     if (this._firstPlaneColided && this.beatCutDirection !== BeatCutDirection.DOT) {
       // OK
-      this._listenAnimationComplete()
       this.playerScored.emit(true);
+      this._destroyAframeCompomponent();
     } else {
-      this._listenAnimationComplete()
       this.playerScored.emit(false);
+      this._destroyAframeCompomponent();
     }
   }
 
   firstDotPlaneColided(): void {
     this._firstDotPlaneColided = true;
+    this._destroyAframeCompomponent();
   }
 
   secondDotPlaneColided(): void {
     if (this._firstDotPlaneColided) {
       // OK
-      this._listenAnimationComplete()
       this.playerScored.emit(true);
+      this._destroyAframeCompomponent();
     } else {
       // fail
-      this._listenAnimationComplete()
       this.playerScored.emit(false);
+      this._destroyAframeCompomponent();
     }
   }
 
   private _destroyAframeCompomponent() {
-    // this.boxElement.nativeElement.setAttribute('visible', 'false');
+    this.boxElement.nativeElement.setAttribute('visible', 'false');
     // this.boxElement.nativeElement.parentNode.removeChild(this.boxElement.nativeElement);
     this.removeElement.emit(this.index);
     this.boxElement.nativeElement.remove();
