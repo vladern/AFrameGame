@@ -5,3 +5,15 @@
 <a-entity [attr.text] = "failedText"
           position="-0.55 1.8 -3"></a-entity>
 
+    <a-gui-button #playButton
+        id="playButton"
+        position="0 1.6 -2"
+        value="Play the song"
+        font-size="80px"
+        width="1" height="0.4"
+        font-family="Impact"
+        (click)="playTheSong()"
+        toggle="true"
+    >
+    </a-gui-button>
+

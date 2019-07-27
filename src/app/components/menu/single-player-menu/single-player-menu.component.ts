@@ -20,7 +20,7 @@ export class SinglePlayerMenuComponent implements OnInit {
   private _songs: Song[];
   private _songsToBeShown: Song[];
   private _selectedSong: Song;
-  private _selectedDifficulty: string = '';
+  private _selectedDifficulty: number;
   private _songSrvSubscription: Subscription;
   private _showSongDifficulties: boolean = false;
   private _showSongInfo: boolean = false;
@@ -81,7 +81,7 @@ export class SinglePlayerMenuComponent implements OnInit {
     this.showSongInfo = false;
   }
 
-  selectTheDifficulty(difficulty: string) {
+  selectTheDifficulty(difficulty: number) {
     this._selectedDifficulty = difficulty;
     this.showSongInfo = true;
   }
@@ -108,6 +108,7 @@ export class SinglePlayerMenuComponent implements OnInit {
 
   goToGame() {
     this._gameSrv.setCurrentSong(this.selectedSong);
+    this._gameSrv.setCurrentDifficultie(this._selectedDifficulty);
     this._sceneOrchestratorSrv.actualScene = Scene.game;
   }
 

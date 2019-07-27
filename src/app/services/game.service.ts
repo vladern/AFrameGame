@@ -18,6 +18,7 @@ export interface Note {
 export class GameService {
 
   private _currentSong: Song;
+  private _currentDifficultie: Difficulties;
   private _componentReferenceList  = [];
   private _playerScored: BehaviorSubject<boolean>;
   private _indexOfTheBeatComponentToDestroy: BehaviorSubject<number>;
@@ -35,6 +36,14 @@ export class GameService {
 
   getCurrentSong(): Song {
     return this._currentSong;
+  }
+
+  setCurrentDifficultie(dif: Difficulties) {
+    this._currentDifficultie = dif;
+  }
+
+  getCurrentDifficultie(): Difficulties {
+    return this._currentDifficultie;
   }
 
   public set beatContainer(value: ViewContainerRef) {
@@ -115,7 +124,6 @@ export class GameService {
             }
           }
         }
-        
     }, 50)
   }
 
@@ -133,14 +141,18 @@ export class GameService {
     this._componentReferenceList = this._componentReferenceList.filter(x => x.instance.index !== index);
   }
 
-  public playTheSong(dificultie: Difficulties): void {
-    this._beatsaverAPI.getSongResources(this._currentSong).subscribe((resources) => {
-      this._audio = new Audio(resources.audioBlobUrl);
-      this._audio.load();
-      this._audio.play().then(() => {
-        this.startBeatsCreation(dificultie, resources.dificulties, this._audio);
+  public playTheSong(): Observable<void> {
+    return new Observable(observer => {
+      this._beatsaverAPI.getSongResources(this._currentSong).subscribe((resources) => {
+        observer.next();
+        this._audio = new Audio(resources.audioBlobUrl);
+        this._audio.load();
+        this._audio.play().then(() => {
+          this.startBeatsCreation(this._currentDifficultie, resources.dificulties, this._audio);
+        });
       });
     });
+    
   }
 
   private _instantiateBeatComponent(note, beatList, index): void {
