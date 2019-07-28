@@ -1,6 +1,8 @@
  <a-box
+  visible="true"
   id="beatComponent"
   obj-model="obj: url(assets/models/beat.obj)"
+  scale="1.5 1.5 1.5"
   #boxElement
   depth="0.3"
   height="0.3"
@@ -8,9 +10,10 @@
   >
   <ng-container *ngIf="!isDot">
     <a-plane  
-            obj-model="obj: url(assets/models/arrow.obj)"
-            color="white"
-            scale="1 1 1">
+      obj-model="obj: url(assets/models/arrow.obj)"
+      position="0 0 0.01"
+      color="white"
+      >
     </a-plane>
     <a-plane color="white"
               class="plane"

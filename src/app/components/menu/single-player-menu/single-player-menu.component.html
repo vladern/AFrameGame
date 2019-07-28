@@ -116,7 +116,7 @@
       font-family="Impact"
       margin="0.05 0.05 0.05 0.05"
       toggle="true"
-      (click)="selectTheDifficulty('easy')"
+      (click)="selectTheDifficulty(0)"
     >
     </a-gui-button>
     <a-gui-button *ngIf="selectedSong.difficulties.normal === true"
@@ -127,7 +127,7 @@
       font-family="Impact"
       margin="0.05 0.05 0.05 0.05"
       toggle="true"
-      (click)="selectTheDifficulty('normal')"
+      (click)="selectTheDifficulty(1)"
     >
     </a-gui-button>
     <a-gui-button *ngIf="selectedSong.difficulties.hard === true"
@@ -138,7 +138,7 @@
       font-family="Impact"
       margin="0.05 0.05 0.05 0.05"
       toggle="true"
-      (click)="selectTheDifficulty('hard')"
+      (click)="selectTheDifficulty(2)"
     >
     </a-gui-button>
     <a-gui-button *ngIf="selectedSong.difficulties.expert === true"
@@ -149,7 +149,7 @@
       font-family="Impact"
       margin="0.05 0.05 0.05 0.05"
       toggle="true"
-      (click)="selectTheDifficulty('expert')"
+      (click)="selectTheDifficulty(3)"
     >
     </a-gui-button>
     <a-gui-button *ngIf="selectedSong.difficulties.expertPlus === true"
@@ -160,7 +160,7 @@
       font-family="Impact"
       margin="0.05 0.05 0.05 0.05"
       toggle="true"
-      (click)="selectTheDifficulty('expertPlus')"
+      (click)="selectTheDifficulty(4)"
     >
     </a-gui-button>
   </ng-container>

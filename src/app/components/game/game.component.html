@@ -5,3 +5,52 @@
 <a-entity [attr.text] = "failedText"
           position="-0.55 1.8 -3"></a-entity>
 
+<a-gui-button #playButton
+    id="playButton"
+    visible="false"
+    position="0 1.6 -2"
+    value="Play the song"
+    font-size="80px"
+    width="1" height="0.4"
+    font-family="Impact"
+    (click)="playTheSong()"
+    toggle="true"
+>
+</a-gui-button>
+
+<ng-container *ngFor="let position of boxPositionList">
+    <a-box #scenarioBox
+            depth="0.3"
+            height="0.3"
+            width="2.1"
+            color="black"
+            [attr.position]="position"
+    >
+    </a-box>
+</ng-container>
+<ng-container>
+    <a-box 
+        depth="0.3"
+        height="0.3"
+        width="7"
+        rotation="0 0 0"
+        color="black"
+        position="-1 1 3"
+        animation="property: rotation; to: 0 0 90; dur: 2000"
+        animation__2="property: position; to: -0.9 -3 -5.5"
+    >
+    </a-box>
+    <a-box
+        depth="0.3"
+        height="0.3"
+        width="7"
+        rotation="0 0 0"
+        color="black"
+        position="-1 1 3"
+        animation="property: rotation; to: 0 0 90; dur: 2000"
+        animation__2="property: position; to: 0.9 -3 -5.5"
+    >
+    </a-box>
+</ng-container>
+
+
