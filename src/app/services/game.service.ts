@@ -165,6 +165,7 @@ export class GameService {
     componentRef.instance.beatType = note._type;
     componentRef.instance.beatCutDirection = note._cutDirection;
     componentRef.instance.index = ++index;
+    componentRef.instance.durationOfAnimation = 1500;
     componentRef.instance.removeElement.subscribe((index)=> {
       this.remove(index);
     });

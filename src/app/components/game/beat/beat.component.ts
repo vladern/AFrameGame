@@ -124,13 +124,13 @@ export class BeatComponent implements OnInit, AfterViewInit {
 
     switch (this.beatPosition.verticalPosition) {
       case VerticalPositions.bottom:
-        this.y = 0.7;
+        this.y = 0.9;
         break;
       case VerticalPositions.middle:
-        this.y = 1.2;
+        this.y = 1.4;
         break;
       case VerticalPositions.top:
-        this.y = 1.7;
+        this.y = 1.9;
         break;
       default:
         this.y = 0;
@@ -138,7 +138,7 @@ export class BeatComponent implements OnInit, AfterViewInit {
     }
 
     if (!!this.beatPosition) {
-          this.z = -5;
+          this.z = -15;
     } else {
          this.z = 0;
     }
