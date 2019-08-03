@@ -1,0 +1,8 @@
+      <!-- <a-entity windows-motion-controls="hand: left"  haptics="events: triggerdown; dur: 1000; force: 0.5"></a-entity>
+      <a-entity  visible: true" aabb-collider="objects: .plane"></a-entity> -->
+      <a-entity [attr.windows-motion-controls]="getMotionControls()"
+                [attr.geometry]="getControllerGeometry()"
+                controller-cursor="radius: 0.005"
+                raycaster="objects: a-gui-button; far: 5"
+                aabb-collider="objects: .plane">
+      </a-entity>
