@@ -21,6 +21,7 @@ export class GameService {
   private _currentDifficultie: Difficulties;
   private _componentReferenceList  = [];
   private _playerScored: BehaviorSubject<boolean>;
+  private _gameStarted: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private _indexOfTheBeatComponentToDestroy: BehaviorSubject<number>;
   private _beatContainer: ViewContainerRef;
   private _audio: HTMLAudioElement;
@@ -44,6 +45,10 @@ export class GameService {
 
   getCurrentDifficultie(): Difficulties {
     return this._currentDifficultie;
+  }
+
+  gameStarted(): Observable<boolean> {
+    return this._gameStarted.asObservable();
   }
 
   public set beatContainer(value: ViewContainerRef) {
@@ -76,6 +81,7 @@ export class GameService {
   }
 
   startBeatsCreation(dificultie: Difficulties, dificultieJSONContainerList: DificultieJSONContainer[], audio: HTMLAudioElement) {
+    this._gameStarted.next(true);
     let dificultieJSON = dificultieJSONContainerList.find((difficultie)=>{
       return difficultie.dificulty === dificultie;
     });
