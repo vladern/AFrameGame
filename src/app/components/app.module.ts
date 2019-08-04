@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
@@ -13,6 +13,7 @@ import { CreditsComponent } from './menu/credits/credits.component';
 import { SongService } from '../services/song.service';
 import { BeatsaverAPIService } from '../services/beatsaverAPI.service';
 import { BeatComponent } from './game/beat/beat.component';
+import { ControllerComponent } from './controller/controller.component';
 
 const appRoutes: Routes = [
   { path: '/game', component: GameComponent },
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
     HowToPlayComponent,
     CreditsComponent,
     BeatComponent,
+    ControllerComponent,
   ],
   imports: [
     BrowserModule,

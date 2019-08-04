@@ -1,0 +1,24 @@
+      <!-- <a-entity windows-motion-controls="hand: left"  haptics="events: triggerdown; dur: 1000; force: 0.5"></a-entity>
+      <a-entity  visible: true" aabb-collider="objects: .plane"></a-entity> -->
+      <ng-container *ngIf="!gameStartedPlayTheSong">
+            <a-entity
+                  id="noGameScenario"
+                  [attr.windows-motion-controls]="getMotionControls()"
+                  [attr.geometry]="getControllerGeometry()"
+                  aabb-collider="objects: .plane"
+                  raycaster="objects: a-gui-button; far: 5"
+                  controller-cursor="radius: 0.005; color: red">    
+            </a-entity>
+      </ng-container>
+
+      <ng-container *ngIf="gameStartedPlayTheSong">
+            <a-entity
+                  id="gameScenario"
+                  [attr.windows-motion-controls]="getMotionControls()"
+                  [attr.geometry]="getControllerGeometry()"
+                  aabb-collider="objects: .plane"
+                  raycaster="objects: a-gui-button; far: 1"
+                  [attr.controller-cursor]="getControllerCursor()">
+            </a-entity>
+      </ng-container>
+      
