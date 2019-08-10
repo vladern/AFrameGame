@@ -16,18 +16,18 @@
       >
     </a-plane>
     <a-plane color="white"
-              class="plane"
+              [attr.class]="className()"
               (hitstart)="firstPlaneColided()"
-              position="0 -0.14 0"
+              position="0 0.14 0"
               rotation="90 0 0"
               scale="0.29 0.3 1"
               opacity="0">
 
     </a-plane>
     <a-plane color="white"
-              class="plane"
-              (hitstart)="secondPlaneColided()"
-              position="0 0.14 0"
+              [attr.class]="className()"
+              (hitstart)="secondPlaneColided($event)"
+              position="0 -0.14 0"
               rotation="90 0 0"
               scale="0.29 0.3 1"
               opacity="0">
@@ -41,7 +41,7 @@
     scale="0.1 0.1 0.1">
   </a-plane>
   <a-plane color="white"
-              class="plane"
+              [attr.class]="className()"
               (hitstart)="firstDotPlaneColided()"
               position="0 0 0.14"
               rotation="0.45 0 0"
@@ -50,30 +50,12 @@
 
     </a-plane>
     <a-plane color="white"
-              class="plane"
+              [attr.class]="className()"
               (hitstart)="secondDotPlaneColided()"
               position="0 0 -0.14"
               rotation="0.45 0 0"
               scale="0.29 0.3 1"
               opacity="0">
-    </a-plane>
-    <a-plane color="white"
-              class="plane"
-              (hitstart)="firstPlaneColided()"
-              position="0 -0.14 0"
-              rotation="90 0 0"
-              scale="0.29 0.3 1"
-              opacity="0">
-
-    </a-plane>
-    <a-plane color="white"
-              class="plane"
-              (hitstart)="secondPlaneColided()"
-              position="0 0.14 0"
-              rotation="90 0 0"
-              scale="0.29 0.3 1"
-              opacity="0">
-
     </a-plane>
   </ng-container>
 

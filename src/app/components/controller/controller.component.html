@@ -5,7 +5,6 @@
                   id="noGameScenario"
                   [attr.windows-motion-controls]="getMotionControls()"
                   [attr.geometry]="getControllerGeometry()"
-                  aabb-collider="objects: .plane"
                   raycaster="objects: a-gui-button; far: 5"
                   controller-cursor="radius: 0.005; color: red">    
             </a-entity>
@@ -16,7 +15,7 @@
                   id="gameScenario"
                   [attr.windows-motion-controls]="getMotionControls()"
                   [attr.geometry]="getControllerGeometry()"
-                  aabb-collider="objects: .plane"
+                  [attr.aabb-collider]="getAABBColider()"
                   raycaster="objects: a-gui-button; far: 1"
                   [attr.controller-cursor]="getControllerCursor()">
             </a-entity>

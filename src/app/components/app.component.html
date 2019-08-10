@@ -3,8 +3,8 @@
       <a-camera id="camera" #camera [attr.position]="getCameraPosition()">
         <a-text id="areaWarning" *ngIf="showPositionWarning" value="Warning you are out of play area!" color="red" position="0 -0.1 -0.5" height="0.5" width="1" align="center"></a-text>
       </a-camera>
-      <a-controller [hand]="'left'"></a-controller>
-      <a-controller [hand]="'right'"></a-controller>
+      <a-controller id="leftController" [hand]="'left'"></a-controller>
+      <a-controller id="rightController" [hand]="'right'"></a-controller>
     </a-entity>
     <ng-container *ngIf="actualScene == 0">
         <a-game></a-game>
