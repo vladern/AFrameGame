@@ -13,7 +13,7 @@ import { BeatCutDirection } from 'src/app/shared/beat/beatCutDirection.enum';
 export class BeatComponent implements OnInit, AfterViewInit {
 
   @Input() beatPosition: BeatPosition;
-  private duration: number = 2000;
+  private duration: number = 2500;
   @Input() set durationOfAnimation (duration:number){
     if (!!duration) {
       this.duration = duration;
@@ -53,6 +53,7 @@ export class BeatComponent implements OnInit, AfterViewInit {
   }
 
   firstPlaneColided(): void {
+    console.log(`firstPlaneColided() of ${this.index}`);
     if (this.beatCutDirection === BeatCutDirection.DOT) {
       this.playerScored.emit(false);
       this._destroyAframeCompomponent();
@@ -61,7 +62,8 @@ export class BeatComponent implements OnInit, AfterViewInit {
     }
   }
 
-  secondPlaneColided(): void {
+  secondPlaneColided($event): void {
+    console.log(`secondPlaneColided() of ${this.index}`);
     if (this._firstPlaneColided && this.beatCutDirection !== BeatCutDirection.DOT) {
       // OK
       this.playerScored.emit(true);
@@ -73,11 +75,12 @@ export class BeatComponent implements OnInit, AfterViewInit {
   }
 
   firstDotPlaneColided(): void {
+    console.log(`firstDotPlaneColided() of ${this.index}`);
     this._firstDotPlaneColided = true;
-    this._destroyAframeCompomponent();
   }
 
   secondDotPlaneColided(): void {
+    console.log(`secondDotPlaneColided() of ${this.index}`);
     if (this._firstDotPlaneColided) {
       // OK
       this.playerScored.emit(true);
@@ -86,6 +89,14 @@ export class BeatComponent implements OnInit, AfterViewInit {
       // fail
       this.playerScored.emit(false);
       this._destroyAframeCompomponent();
+    }
+  }
+
+  className() {
+    if (this._getColor() === 'red') {
+      return 'leftBox';
+    } else {
+      return 'rightBox';
     }
   }
 
@@ -151,7 +162,7 @@ export class BeatComponent implements OnInit, AfterViewInit {
     this.boxElement.nativeElement
         .setAttribute('animation',
                       "property: position;"+
-                      "dur: "+ this.duration+ ";"+
+                      "dur: "+ this.duration + ";"+
                       "to:  "+ this.x +
                       " "+ this.y +
                       " 1;");
