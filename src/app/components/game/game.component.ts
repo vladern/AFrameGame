@@ -36,10 +36,13 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   get scoreText(): string {
-    return 'font: mozillavr; width: 3; value: Cuted beats: '+ this._gameSrv.destroyedBeats;
+    return `font: mozillavr; width: 4; value: ${this._gameSrv.score}`;
   }
-  get failedText(): string {
-    return 'font: mozillavr; width: 3; value: Failed beats: '+ this._gameSrv.failedBeats;
+  get comboText(): string {
+    return `font: mozillavr; width: 4; value: ${this._gameSrv.combo}`;
+  }
+  get multiplierText(): string {
+    return `font: mozillavr; width: 6; value: X ${this._gameSrv.multiplier}`;
   }
 
   get boxPositionList(): string[] {

@@ -43,9 +43,9 @@ export class ControllerComponent implements OnInit {
   getAABBColider(): string {
     switch (this.hand) {
       case 'left':
-        return 'objects: .leftBox; interval: 10';
+        return 'objects: .leftBox; interval: 5';
       case 'right':
-        return  'objects: .rightBox; interval: 10';
+        return  'objects: .rightBox; interval: 5';
       default:
         console.error('hand input should be: left or right');
         break;

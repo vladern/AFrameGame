@@ -1,9 +1,15 @@
 <ng-container #beatContainer>
 </ng-container>
+<a-entity text = "font: mozillavr; width: 4; value: COMBO"
+          position="0 2.2 -3"></a-entity>
+<a-entity [attr.text] = "comboText"
+          position="0 2 -3"></a-entity>
+<a-entity text = "font: mozillavr; width: 4; value: SCORE"
+          position="0 1.8 -3"></a-entity>
 <a-entity [attr.text] = "scoreText"
-          position="-0.55 2 -3"></a-entity>
-<a-entity [attr.text] = "failedText"
-          position="-0.55 1.8 -3"></a-entity>
+          position="0 1.6 -3"></a-entity>
+<a-entity [attr.text] = "multiplierText"
+          position="4 1.8 -3"></a-entity>
 
 <a-gui-button #playButton
     id="playButton"

@@ -27,6 +27,9 @@ export class GameService {
   private _audio: HTMLAudioElement;
   public destroyedBeats: number = 0;
   public failedBeats: number = 0;
+  public combo: number = 0;
+  public score: number = 0;
+  public multiplier: number = 1;
   
   constructor(private _resolver: ComponentFactoryResolver,
               private _beatsaverAPI: BeatsaverAPIService) { }
@@ -89,9 +92,9 @@ export class GameService {
     let index: number = 0;
     const notes = JSON.parse(JSON.stringify(dificultieJSON.json._notes));
     notes.sort((a, b) => {
-      if (a._time > b._time) {
+      if (a !== undefined && b !== undefined && a._time > b._time) {
         return 1;
-      } else if (a._time < b._time) {
+      } else if (a !== undefined && b !== undefined && a._time < b._time) {
         return -1;
       } else {
         return 0
@@ -158,7 +161,6 @@ export class GameService {
         });
       });
     });
-    
   }
 
   private _instantiateBeatComponent(note, beatList, index): void {
@@ -175,7 +177,8 @@ export class GameService {
       this.remove(index);
     });
     componentRef.instance.playerScored.subscribe((scored: boolean) => {
-      this._manageScore(scored);
+      this._manageStats(scored);
+      this._manageTheSoundOfScore(scored);
     });
   }
 
@@ -184,11 +187,50 @@ export class GameService {
     return time * msPerBeat;
   }
 
-  private _manageScore(scored: boolean): void {
+  private _manageTheSoundOfScore(playerScored: boolean) {
+    if (playerScored) {
+      this._audio = new Audio(`assets/sounds/hit2.ogg`);
+      this._audio.load();
+      this._audio.volume = 0.2;
+      this._audio.play();
+    }
+  }
+
+  private _manageStats(scored: boolean): void {
     if (scored) {
       this.destroyedBeats++;
+      this.combo++;
+      this._manageMultiplier(this.combo);
+      this._manageScore(this.multiplier);
     } else {
       this.failedBeats++;
+      this.combo = 0;
+      this.multiplier = 1;
     }
+  }
+
+  private _manageMultiplier(combo: number) {
+    switch (combo) {
+      case 5:
+        this.multiplier = 2;
+      break;
+      case 10:
+        this.multiplier = 3;
+      break;
+      case 15:
+        this.multiplier = 4;
+      case 20:
+          this.multiplier = 5;
+      break;
+      case 40:
+        this.multiplier = 10;
+      break;
+      default:
+        break;
+    }
+  }
+  
+  private _manageScore(multiplier: number): void {
+    this.score += (multiplier * 100);
   }
 }
