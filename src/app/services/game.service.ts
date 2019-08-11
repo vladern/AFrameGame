@@ -25,6 +25,8 @@ export class GameService {
   private _indexOfTheBeatComponentToDestroy: BehaviorSubject<number>;
   private _beatContainer: ViewContainerRef;
   private _audio: HTMLAudioElement;
+  private _stopBeatsCreation: boolean = false;
+  private _failedBeatsOnIntervalOfTime: number = 0;
   public destroyedBeats: number = 0;
   public failedBeats: number = 0;
   public combo: number = 0;
@@ -105,7 +107,7 @@ export class GameService {
         const note1 = notes[1];
         const note2 = notes[2];
         const note3 = notes[3];
-        if (beatList.length === 0) {
+        if (beatList.length === 0 || this._stopBeatsCreation) {
           return;
         }
         const time0  = this._calculateNoteTimeInSeconds(note0._time);
@@ -177,8 +179,8 @@ export class GameService {
       this.remove(index);
     });
     componentRef.instance.playerScored.subscribe((scored: boolean) => {
-      this._manageStats(scored);
-      this._manageTheSoundOfScore(scored);
+      this._manageStatics(scored);
+      this._playSoundOfCutedBeat(scored);
     });
   }
 
@@ -187,16 +189,27 @@ export class GameService {
     return time * msPerBeat;
   }
 
-  private _manageTheSoundOfScore(playerScored: boolean) {
+  private _playSoundOfCutedBeat(playerScored: boolean) {
     if (playerScored) {
-      this._audio = new Audio(`assets/sounds/hit2.ogg`);
-      this._audio.load();
-      this._audio.volume = 0.2;
-      this._audio.play();
+      const hitSound = new Audio(`assets/sounds/hit2.ogg`);
+      hitSound.load();
+      hitSound.volume = 0.2;
+      hitSound.play();
     }
   }
 
-  private _manageStats(scored: boolean): void {
+  private _playFailLevelSound() {
+    if (!this._audio.paused) {
+      this._audio.pause();
+      const failSound = new Audio(`assets/sounds/fail.wav`);
+      failSound.load();
+      failSound.volume = 0.8;
+      failSound.play();
+    }
+
+  }
+
+  private _manageStatics(scored: boolean): void {
     if (scored) {
       this.destroyedBeats++;
       this.combo++;
@@ -206,6 +219,7 @@ export class GameService {
       this.failedBeats++;
       this.combo = 0;
       this.multiplier = 1;
+      this._manageFailLevel();
     }
   }
 
@@ -232,5 +246,16 @@ export class GameService {
   
   private _manageScore(multiplier: number): void {
     this.score += (multiplier * 100);
+  }
+
+  private _manageFailLevel() {
+    this._failedBeatsOnIntervalOfTime++;
+      setTimeout(() => {
+        this._failedBeatsOnIntervalOfTime = 0;
+      }, 5000);
+      if (this._failedBeatsOnIntervalOfTime > 5) {
+        this._stopBeatsCreation = true;
+        this._playFailLevelSound();
+      }
   }
 }
