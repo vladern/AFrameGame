@@ -1,17 +1,18 @@
 <ng-container #beatContainer>
 </ng-container>
-<a-entity text = "font: mozillavr; width: 4; value: COMBO"
-          position="0 2.2 -3"></a-entity>
-<a-entity [attr.text] = "comboText"
-          position="0 2 -3"></a-entity>
-<a-entity text = "font: mozillavr; width: 4; value: SCORE"
-          position="0 1.8 -3"></a-entity>
-<a-entity [attr.text] = "scoreText"
-          position="0 1.6 -3"></a-entity>
-<a-entity [attr.text] = "multiplierText"
+<a-entity id="comboText" text = "font: mozillavr; width: 4; value: COMBO"
+          position="0.05 2.2 -3"></a-entity>
+<a-entity id="comboIterator" [attr.text] = "comboText"
+          position="0.05 2 -3"></a-entity>
+<a-entity id="scoreText" text = "font: mozillavr; width: 4; value: SCORE"
+          position="0.05 1.8 -3"></a-entity>
+<a-entity id="scoreIterator" [attr.text] = "scoreText"
+          position="0.05 1.6 -3"></a-entity>
+<a-entity id="multiplier" [attr.text] = "multiplierText"
           position="4 1.8 -3"></a-entity>
 
 <a-gui-button #playButton
+    *ngIf="!levelFailed"
     id="playButton"
     visible="false"
     position="0 1.6 -2"
@@ -23,6 +24,62 @@
     toggle="true"
 >
 </a-gui-button>
+<ng-container *ngIf="levelFailed">
+    <a-entity [attr.visible]="levelFailed" id="failedLevelText" text = "font: mozillavr; width: 8; value: Level failed !"
+              position="3 2.3 -2.8"
+              animation="property: position; to: 3 2.3 -2.0; loop: true; dir: alternate">
+    </a-entity>
+    <a-gui-button [attr.visible]="levelFailed" #backToTheMenuButton
+    id="backToTheMenuButton"
+    position="-0.5 1.6 -2.8"
+    value="Go back"
+    font-size="80px"
+    width="0.8" height="0.4"
+    font-family="Impact"
+    (click)="goBackToTheMenu()"
+    toggle="true"
+    >
+    </a-gui-button>
+    <a-gui-button [attr.visible]="levelFailed" #resetButton
+    id="resetButton"
+    position="0.35 1.6 -2.8"
+    value="Reset level"
+    font-size="80px"
+    width="0.8" height="0.4"
+    font-family="Impact"
+    (click)="resetLevel()"
+    toggle="true"
+    >
+    </a-gui-button>
+</ng-container>
+<ng-container *ngIf="songEnded">
+    <a-entity [attr.visible]="songEnded" id="failedLevelText" text = "font: mozillavr; width: 8; value: Congratulations !"
+              position="3 2.3 -2.8"
+              animation="property: position; to: 3 2.3 -2.0; loop: true; dir: alternate">
+    </a-entity>
+    <a-gui-button [attr.visible]="songEnded" #backToTheMenuButton
+    id="backToTheMenuButton"
+    position="-0.5 1.6 -2.8"
+    value="Go back"
+    font-size="80px"
+    width="0.8" height="0.4"
+    font-family="Impact"
+    (click)="goBackToTheMenu()"
+    toggle="true"
+    >
+    </a-gui-button>
+    <a-gui-button [attr.visible]="songEnded" #resetButton
+    id="resetButton"
+    position="0.35 1.6 -2.8"
+    value="Reset level"
+    font-size="80px"
+    width="0.8" height="0.4"
+    font-family="Impact"
+    (click)="resetLevel()"
+    toggle="true"
+    >
+    </a-gui-button>
+</ng-container>
 
 <ng-container *ngFor="let position of boxPositionList">
     <a-box #scenarioBox

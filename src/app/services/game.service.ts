@@ -1,4 +1,4 @@
-import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRef, ComponentRef } from '@angular/core';
+import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRef, ComponentRef, EventEmitter } from '@angular/core';
 import { BeatComponent } from '../components/game/beat/beat.component';
 import { Song } from '../shared/song/song.model';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -21,10 +21,12 @@ export class GameService {
   private _currentDifficultie: Difficulties;
   private _componentReferenceList  = [];
   private _playerScored: BehaviorSubject<boolean>;
-  private _gameStarted: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  private _gameStarted: EventEmitter<void> =  new EventEmitter();
+  private _levelFailed: EventEmitter<void> =  new EventEmitter();
+  private _songEnded: EventEmitter<void> =  new EventEmitter();
   private _indexOfTheBeatComponentToDestroy: BehaviorSubject<number>;
   private _beatContainer: ViewContainerRef;
-  private _audio: HTMLAudioElement;
+  private _song: HTMLAudioElement;
   private _stopBeatsCreation: boolean = false;
   private _failedBeatsOnIntervalOfTime: number = 0;
   public destroyedBeats: number = 0;
@@ -35,6 +37,35 @@ export class GameService {
   
   constructor(private _resolver: ComponentFactoryResolver,
               private _beatsaverAPI: BeatsaverAPIService) { }
+
+  resesAllServiceData() {
+    this._currentSong = undefined;
+    this._currentDifficultie = undefined;
+    this._componentReferenceList  = [];
+    this._playerScored = undefined;
+    this._gameStarted =  new EventEmitter();
+    this._levelFailed =  new EventEmitter();
+    this._indexOfTheBeatComponentToDestroy = undefined;
+    this._beatContainer = undefined;
+    this._stopBeatsCreation = false;
+    this._failedBeatsOnIntervalOfTime = 0;
+    this.destroyedBeats = 0;
+    this.failedBeats = 0;
+    this.combo = 0;
+    this.score = 0;
+    this.multiplier = 1;
+    this._song = undefined;
+  }
+
+  resetStats() {
+    this._stopBeatsCreation = false;
+    this._failedBeatsOnIntervalOfTime = 0;
+    this.destroyedBeats = 0;
+    this.failedBeats = 0;
+    this.combo = 0;
+    this.score = 0;
+    this.multiplier = 1;
+  }
 
   setCurrentSong(song: Song) {
     this._currentSong = song;
@@ -52,8 +83,16 @@ export class GameService {
     return this._currentDifficultie;
   }
 
-  gameStarted(): Observable<boolean> {
-    return this._gameStarted.asObservable();
+  gameStarted(): EventEmitter<void> {
+    return this._gameStarted;
+  }
+
+  levelFailed(): EventEmitter<void>{
+    return this._levelFailed;
+  }
+
+  songEnded(): EventEmitter<void> {
+    return this._songEnded;
   }
 
   public set beatContainer(value: ViewContainerRef) {
@@ -86,7 +125,7 @@ export class GameService {
   }
 
   startBeatsCreation(dificultie: Difficulties, dificultieJSONContainerList: DificultieJSONContainer[], audio: HTMLAudioElement) {
-    this._gameStarted.next(true);
+    this._gameStarted.next();
     let dificultieJSON = dificultieJSONContainerList.find((difficultie)=>{
       return difficultie.dificulty === dificultie;
     });
@@ -102,13 +141,14 @@ export class GameService {
         return 0
       }
     });
-    setInterval(()=> {
+    const intervalId = setInterval(function() {
         const note0 = notes[0];
         const note1 = notes[1];
         const note2 = notes[2];
         const note3 = notes[3];
-        if (beatList.length === 0 || this._stopBeatsCreation) {
-          return;
+        if (beatList.length === 0 || this._stopBeatsCreation || this._song.ended) {
+          this._songEnded.emit();
+          clearInterval(intervalId);
         }
         const time0  = this._calculateNoteTimeInSeconds(note0._time);
         const time1  = this._calculateNoteTimeInSeconds(note1._time);
@@ -135,7 +175,7 @@ export class GameService {
             }
           }
         }
-    }, 50)
+    }.bind(this), 50)
   }
 
   remove(index: number) {
@@ -156,10 +196,10 @@ export class GameService {
     return new Observable(observer => {
       this._beatsaverAPI.getSongResources(this._currentSong).subscribe((resources) => {
         observer.next();
-        this._audio = new Audio(resources.audioBlobUrl);
-        this._audio.load();
-        this._audio.play().then(() => {
-          this.startBeatsCreation(this._currentDifficultie, resources.dificulties, this._audio);
+        this._song = new Audio(resources.audioBlobUrl);
+        this._song.load();
+        this._song.play().then(() => {
+          this.startBeatsCreation(this._currentDifficultie, resources.dificulties, this._song);
         });
       });
     });
@@ -191,16 +231,17 @@ export class GameService {
 
   private _playSoundOfCutedBeat(playerScored: boolean) {
     if (playerScored) {
-      const hitSound = new Audio(`assets/sounds/hit2.ogg`);
+      const hitSound = new Audio(`assets/sounds/hit4.ogg`);
       hitSound.load();
-      hitSound.volume = 0.2;
+      hitSound.volume = 0.3;
       hitSound.play();
     }
   }
 
   private _playFailLevelSound() {
-    if (!this._audio.paused) {
-      this._audio.pause();
+    if (!this._song.paused) {
+      this._levelFailed.next();
+      this._song.pause();
       const failSound = new Audio(`assets/sounds/fail.wav`);
       failSound.load();
       failSound.volume = 0.8;
