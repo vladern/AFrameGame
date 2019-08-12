@@ -13,7 +13,7 @@ import { BeatCutDirection } from 'src/app/shared/beat/beatCutDirection.enum';
 export class BeatComponent implements OnInit, AfterViewInit {
 
   @Input() beatPosition: BeatPosition;
-  private duration: number = 2500;
+  private duration: number = 3200;
   @Input() set durationOfAnimation (duration:number){
     if (!!duration) {
       this.duration = duration;
@@ -110,7 +110,9 @@ export class BeatComponent implements OnInit, AfterViewInit {
   private _listenAnimationComplete(): void {
     this.boxElement.nativeElement.addEventListener('animationcomplete', ()=> {
       this._destroyAframeCompomponent();
-      this.playerScored.emit(false);
+      if (this.beatType !== BeatType.BOMB) {
+        this.playerScored.emit(false);
+      }
     });
   }
 

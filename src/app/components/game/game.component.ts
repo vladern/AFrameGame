@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ViewChildren, AfterViewInit } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
-import { timeout } from 'q';
+import { SceneOrchestratorService } from 'src/app/services/scene-orchestrator.service';
+import { Scene } from 'src/app/shared/scene/scene.enum';
+import { ControllerService } from 'src/app/services/controller.service';
 
 @Component({
   selector: 'a-game',
@@ -9,16 +11,25 @@ import { timeout } from 'q';
 })
 export class GameComponent implements OnInit, AfterViewInit {
 
+  public levelFailed: boolean = false;
+  public songEnded: boolean = false;
+
   @ViewChild('beatContainer', { read: ViewContainerRef }) beatContainer: ViewContainerRef;
   @ViewChild('playButton') playButton;
   @ViewChildren('scenarioBox') scenarioBoxList;
   
-  constructor(private _gameSrv: GameService) {  }
+  constructor(private _gameSrv: GameService, private _scenarioSrv: SceneOrchestratorService, private _controllerSrv: ControllerService) {  }
 
   
 
   ngOnInit() {
     this._gameSrv.beatContainer = this.beatContainer;
+    this._gameSrv.levelFailed().subscribe(function() {
+      setTimeout(()=> {
+        this.levelFailed = true;
+        this._controllerSrv.switchControllerMode();
+      }, 1000);
+    }.bind(this));
   }
 
   ngAfterViewInit() {
@@ -29,10 +40,28 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   public playTheSong() {
-    this.playButton.nativeElement.setAttribute('animation', 'property: rotation; to: 0 360 0; loop: true; dur: 1000');
+    this._controllerSrv.switchControllerMode();
+    if (this.playButton !== undefined) {
+      this.playButton.nativeElement.setAttribute('animation', 'property: rotation; to: 0 360 0; loop: true; dur: 1000');
+    }
     this._gameSrv.playTheSong().subscribe( () => {
       this.playButton.nativeElement.setAttribute('visible', 'false');
+      this._gameSrv.songEnded().subscribe(()=>{
+        this.songEnded = true;
+        this._controllerSrv.switchControllerMode();
+      });
     });
+  }
+
+  public goBackToTheMenu() {
+    this._scenarioSrv.actualScene = Scene.singlePlayerMenu;
+    this._gameSrv.resesAllServiceData();
+  }
+
+  public resetLevel() {
+    this._gameSrv.resetStats();
+    this.levelFailed = false;
+    this.playTheSong();
   }
 
   get scoreText(): string {

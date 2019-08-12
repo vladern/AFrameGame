@@ -1,6 +1,6 @@
       <!-- <a-entity windows-motion-controls="hand: left"  haptics="events: triggerdown; dur: 1000; force: 0.5"></a-entity>
       <a-entity  visible: true" aabb-collider="objects: .plane"></a-entity> -->
-      <ng-container *ngIf="!gameStartedPlayTheSong">
+      <ng-container *ngIf="!showSaver">
             <a-entity
                   id="noGameScenario"
                   [attr.windows-motion-controls]="getMotionControls()"
@@ -10,7 +10,7 @@
             </a-entity>
       </ng-container>
 
-      <ng-container *ngIf="gameStartedPlayTheSong">
+      <ng-container *ngIf="showSaver">
             <a-entity
                   id="gameScenario"
                   [attr.windows-motion-controls]="getMotionControls()"

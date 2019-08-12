@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Scene } from 'src/app/shared/scene/scene.enum';
 import { GameService } from 'src/app/services/game.service';
 import { SceneOrchestratorService } from 'src/app/services/scene-orchestrator.service';
+import { ControllerService } from 'src/app/services/controller.service';
 
 @Component({
   selector: 'a-controller',
@@ -11,15 +12,13 @@ import { SceneOrchestratorService } from 'src/app/services/scene-orchestrator.se
 export class ControllerComponent implements OnInit {
 
   @Input('hand') hand: string;
-  public gameStartedPlayTheSong = false;
+  public showSaver = false;
   @ViewChild('saver') saver: ElementRef;
-  constructor(private _gameSrv: GameService, private _sceneOrchestratorService: SceneOrchestratorService) { }
+  constructor(private _controllerSrv: ControllerService) { }
 
   ngOnInit() {
-    this._gameSrv.gameStarted().subscribe(function() {
-      if (this._sceneOrchestratorService.actualScene === Scene.game) {
-        this.gameStartedPlayTheSong = true;
-      }
+    this._controllerSrv.switchControllerModeEvent().subscribe(function() {
+      this.showSaver = !this.showSaver;
     }.bind(this));
   }
 
@@ -43,9 +42,9 @@ export class ControllerComponent implements OnInit {
   getAABBColider(): string {
     switch (this.hand) {
       case 'left':
-        return 'objects: .leftBox; interval: 5';
+        return 'objects: .leftBox; interval: 1';
       case 'right':
-        return  'objects: .rightBox; interval: 5';
+        return  'objects: .rightBox; interval: 1';
       default:
         console.error('hand input should be: left or right');
         break;
