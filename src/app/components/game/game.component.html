@@ -24,40 +24,16 @@
     toggle="true"
 >
 </a-gui-button>
-<ng-container *ngIf="levelFailed">
+<ng-container *ngIf="levelFailed || levelCompled">
     <a-entity [attr.visible]="levelFailed" id="failedLevelText" text = "font: mozillavr; width: 8; value: Level failed !"
               position="3 2.3 -2.8"
               animation="property: position; to: 3 2.3 -2.0; loop: true; dir: alternate">
     </a-entity>
-    <a-gui-button [attr.visible]="levelFailed" #backToTheMenuButton
-    id="backToTheMenuButton"
-    position="-0.5 1.6 -2.8"
-    value="Go back"
-    font-size="80px"
-    width="0.8" height="0.4"
-    font-family="Impact"
-    (click)="goBackToTheMenu()"
-    toggle="true"
-    >
-    </a-gui-button>
-    <a-gui-button [attr.visible]="levelFailed" #resetButton
-    id="resetButton"
-    position="0.35 1.6 -2.8"
-    value="Reset level"
-    font-size="80px"
-    width="0.8" height="0.4"
-    font-family="Impact"
-    (click)="resetLevel()"
-    toggle="true"
-    >
-    </a-gui-button>
-</ng-container>
-<ng-container *ngIf="songEnded">
-    <a-entity [attr.visible]="songEnded" id="failedLevelText" text = "font: mozillavr; width: 8; value: Congratulations !"
-              position="3 2.3 -2.8"
-              animation="property: position; to: 3 2.3 -2.0; loop: true; dir: alternate">
+    <a-entity [attr.visible]="levelCompled && !levelFailed" id="failedLevelText" text = "font: mozillavr; width: 8; value: Congratulations !"
+            position="3 2.3 -2.8"
+            animation="property: position; to: 3 2.3 -2.0; loop: true; dir: alternate">
     </a-entity>
-    <a-gui-button [attr.visible]="songEnded" #backToTheMenuButton
+    <a-gui-button [attr.visible]="levelFailed || levelCompled" #backToTheMenuButton
     id="backToTheMenuButton"
     position="-0.5 1.6 -2.8"
     value="Go back"
@@ -68,7 +44,7 @@
     toggle="true"
     >
     </a-gui-button>
-    <a-gui-button [attr.visible]="songEnded" #resetButton
+    <a-gui-button [attr.visible]="levelFailed || levelCompled" #resetButton
     id="resetButton"
     position="0.35 1.6 -2.8"
     value="Reset level"
@@ -80,6 +56,7 @@
     >
     </a-gui-button>
 </ng-container>
+
 
 <ng-container *ngFor="let position of boxPositionList">
     <a-box #scenarioBox

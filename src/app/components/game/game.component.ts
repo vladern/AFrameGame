@@ -12,7 +12,7 @@ import { ControllerService } from 'src/app/services/controller.service';
 export class GameComponent implements OnInit, AfterViewInit {
 
   public levelFailed: boolean = false;
-  public songEnded: boolean = false;
+  public levelCompled: boolean = false;
 
   @ViewChild('beatContainer', { read: ViewContainerRef }) beatContainer: ViewContainerRef;
   @ViewChild('playButton') playButton;
@@ -24,12 +24,7 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this._gameSrv.beatContainer = this.beatContainer;
-    this._gameSrv.levelFailed().subscribe(function() {
-      setTimeout(()=> {
-        this.levelFailed = true;
-        this._controllerSrv.switchControllerMode();
-      }, 1000);
-    }.bind(this));
+    this._subscriteToFailTheLevel();
   }
 
   ngAfterViewInit() {
@@ -46,10 +41,10 @@ export class GameComponent implements OnInit, AfterViewInit {
     }
     this._gameSrv.playTheSong().subscribe( () => {
       this.playButton.nativeElement.setAttribute('visible', 'false');
-      this._gameSrv.songEnded().subscribe(()=>{
-        this.songEnded = true;
-        this._controllerSrv.switchControllerMode();
-      });
+    });
+    this._gameSrv.levelCompled().subscribe( () => {
+      this.levelCompled = true;
+      this._controllerSrv.switchControllerMode();
     });
   }
 
@@ -61,6 +56,7 @@ export class GameComponent implements OnInit, AfterViewInit {
   public resetLevel() {
     this._gameSrv.resetStats();
     this.levelFailed = false;
+    this.levelCompled = false;
     this.playTheSong();
   }
 
@@ -88,6 +84,16 @@ export class GameComponent implements OnInit, AfterViewInit {
     }
     return boxPositionList;
   }
+
+  private _subscriteToFailTheLevel() {
+    this._gameSrv.levelFailed().subscribe(function() {
+      setTimeout(()=> {
+        this.levelFailed = true;
+        this._controllerSrv.switchControllerMode();
+      }, 1000);
+    }.bind(this));
+  }
+
   private _setAnimationToSecenariosBoxeList() {
     const numOfBoxes = 35
     let x = 0;

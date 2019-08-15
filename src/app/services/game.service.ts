@@ -23,7 +23,7 @@ export class GameService {
   private _playerScored: BehaviorSubject<boolean>;
   private _gameStarted: EventEmitter<void> =  new EventEmitter();
   private _levelFailed: EventEmitter<void> =  new EventEmitter();
-  private _songEnded: EventEmitter<void> =  new EventEmitter();
+  private _levelCompled: EventEmitter<void> =  new EventEmitter();
   private _indexOfTheBeatComponentToDestroy: BehaviorSubject<number>;
   private _beatContainer: ViewContainerRef;
   private _song: HTMLAudioElement;
@@ -91,8 +91,8 @@ export class GameService {
     return this._levelFailed;
   }
 
-  songEnded(): EventEmitter<void> {
-    return this._songEnded;
+  levelCompled(): EventEmitter<void> {
+    return this._levelCompled;
   }
 
   public set beatContainer(value: ViewContainerRef) {
@@ -142,14 +142,17 @@ export class GameService {
       }
     });
     const intervalId = setInterval(function() {
-        const note0 = notes[0];
-        const note1 = notes[1];
-        const note2 = notes[2];
-        const note3 = notes[3];
-        if (beatList.length === 0 || this._stopBeatsCreation || this._song.ended) {
-          this._songEnded.emit();
+      
+        const [note0, note1, note2, note3] = notes;
+
+        if (this._song.currentTime >= this._song.duration) {
+          this._levelCompled.next();
           clearInterval(intervalId);
         }
+        if (this._stopBeatsCreation || this._song.ended) {
+          clearInterval(intervalId);
+        }
+        
         const time0  = this._calculateNoteTimeInSeconds(note0._time);
         const time1  = this._calculateNoteTimeInSeconds(note1._time);
         const time2  = this._calculateNoteTimeInSeconds(note2._time);
