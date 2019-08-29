@@ -93,9 +93,9 @@ export class BeatComponent implements OnInit, AfterViewInit {
   }
 
   className() {
-    if (this._getColor() === 'red') {
+    if (this._getColor() === 'red' && this.boxElement.nativeElement.object3D.position.y < 2) {
       return 'leftBox';
-    } else {
+    } else if (this._getColor() === 'blue' && this.boxElement.nativeElement.object3D.position.y < 2) {
       return 'rightBox';
     }
   }

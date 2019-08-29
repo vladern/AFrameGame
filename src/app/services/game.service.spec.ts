@@ -30,10 +30,4 @@ describe('GameService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-
-  it('On call getBeats() should return Array of beatComponents with number of element of the current song beat', () => {
-    service.setCurrentSong(songs[0]);
-    const beats: Array<ComponentFactory<BeatComponent>> =  (service as any).getBeats();
-    expect(beats.length).toEqual(service.notesList.length);
-  });
 });

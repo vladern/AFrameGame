@@ -29,14 +29,14 @@ describe('GameComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('On call startBeatCreation() should apear new beat', () => {
-    component.startBeatCreation();
+  it('On call playTheSong() should apear new beat', () => {
+    component.playTheSong();
     const box = fixture.debugElement.nativeElement.querySelector('#beatComponent');
     expect(box).not.toBeNull();
   });
 
-  it('On call startBeatCreation() should apear more than one beat', () => {
-    component.startBeatCreation();
+  it('On call playTheSong() should apear more than one beat', () => {
+    component.playTheSong();
     const resultadoObtenido = fixture.debugElement.nativeElement.querySelectorAll('#beatComponent').length;
     expect(resultadoObtenido).toBeGreaterThan(1);
   });
