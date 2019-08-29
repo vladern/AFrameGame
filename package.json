@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "engines":{
+  "engines": {
     "node": "10.15.1",
     "npm": "6.4.1"
   },
@@ -31,6 +31,8 @@
     "aframe-html-shader": "^0.2.0",
     "aframe-physics-system": "^3.3.0",
     "core-js": "^2.5.4",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
     "rxjs": "~6.3.3",
     "save": "^2.3.3",
     "tslib": "^1.9.0",
