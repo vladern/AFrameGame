@@ -3,11 +3,11 @@ const path = require('path');
 const app = express();
 
 // Serve static files....
-app.use(express.static(__dirname + '/dist/MY_APP_NAME_HERE'));
+app.use(express.static(__dirname + '/dist/aframe-game'));
 
 // Send all requests to index.html
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/MY_APP_NAME_HERE/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/aframe-game/index.html'));
 });
 
 // default Heroku PORT
