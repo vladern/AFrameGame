@@ -1,221 +1,118 @@
-
-<!-- left panel -->
-<a-gui-flex-container
-  id="leftPanel"
-  flex-direction="column" 
-  justify-content="center" 
-  align-items="normal" 
-  component-padding="0.1"
-  opacity="0.7" 
-  width="4" 
-  height="2.5"
-  position="-3.17 2 -1.54" rotation="0 70 0"
-  panel-color="#00001f"
+<!-- #region left panel -->
+<a-entity
+  id="main"
+  class="screen dark main"
+  htmlembed="ppu:256"
+  style="opacity: 1"
+  position="-4 2 -1"
+  rotation="0 70 0"
 >
-<ng-container id="leftPanelText" *ngFor="let line of leftPanelLines">
-  <a-gui-label 
-    width="3.8" height="0.2"
-    [attr.value]="line.text"
-    font-family="Impact"
-    [attr.font-size]="line.fontSize"
-    background-color="#00001f"
-    font-color="white"
-  >
-  </a-gui-label>
-</ng-container>
-</a-gui-flex-container>
-<!-- center panel -->
-<a-gui-flex-container
-  id="centerPanel"
-  flex-direction="row" 
-  justify-content="center" 
-  align-items="normal" 
-  component-padding="0.1"
-  opacity="0.7" 
-  width="4" 
-  height="2.5"
-  position="0 2 -3.5" rotation="0 0 0"
-  panel-color="#00001f"
+  <div style="margin-top: 15%">
+    <div *ngFor="let line of leftPanelLines" class="col-md-12 textFont">
+      {{ line.text }}
+    </div>
+  </div>
+</a-entity>
+<!-- #endregion -->
+<!-- #region center panel -->
+<a-entity
+  id="main"
+  class="screen dark main"
+  htmlembed="ppu:256"
+  style="opacity: 1"
+  position="0 2 -3.5"
 >
-  <a-gui-button
-    position="-1 0.025 0.01"
-    value="Single Player"
-    font-size="70px"
-    width="1" height="1"
-    font-family="Impact"
-    margin="0.1 0.1 0.1 0.1"
-    (click)="goToSinglePlayerMenu()"
-    toggle="true"
-  >
-  </a-gui-button>
-  <a-gui-button
-    value="Party"
-    font-size="70px"
-    width="1" height="1"
-    font-family="Impact"
-    margin="0.1 0.1 0.1 0.1"
-    (click)="goToParty()"
-    toggle="true"
+  <div class="row">
+    <div class="col textFont" style="font-size: 50px; border-radius: 20px; background-color: rgba(2, 2, 12, 0.048); ">Main menu</div>
+  </div>
+  <div class="row" style="margin-top: 15%">
+    <button
+      class="button col textFont"
+      style=" width: 230px; height: 220px; text-align: center;  margin-left: 3%"
+      (click)="goToSinglePlayerMenu()"
     >
-  </a-gui-button>
-  <a-gui-flex-container
-    component-padding="0.1"
-    opacity="0.7" 
-    width="1" 
-    height="1"
-    panel-color="#00001f"
-    flex-direction="column">
-      <a-gui-button
-            #howToPlayBtn
-            id="howToPlayBtn"
-            value="How to play"
-            font-size="80px"
-            width="1" height="0.4"
-            font-family="Impact"
-            margin="0 0 0.05 0"
-            (click)="goHowToPlay()"
-            toggle="true"
-          >
-      </a-gui-button>
-      <a-gui-button
-            id="creditsBtn"
-            value="Credits"
-            font-size="70px"
-            width="1" height="0.4"
-            font-family="Impact"
-            margin="0 0 0.05 0"
-            (click)="goToCredits()"
-            toggle="true"
-          >
-      </a-gui-button>
-  </a-gui-flex-container>
-</a-gui-flex-container>
-<!-- right panel -->
-<a-gui-flex-container
-  id="rightPanel"
-  flex-direction="column" 
-  justify-content="center" 
-  align-items="normal" 
-  component-padding="0.1"
-  opacity="0.7" 
-  width="4" height="2.5"
-  position="3.17 2 -1.54" rotation="0 -70 0"
-  panel-color="#00001f"
+      Single player
+    </button>
+    <button
+      class="button col textFont"
+      style=" width: 230px; height: 220px; text-align: center;  margin-left: 2%"
+      (click)="goToParty()"
+    >
+      Party
+    </button>
+    <button
+      class="button col textFont"
+      style=" width: 230px; height: 220px; text-align: center;  margin-left: 2%"
+      (click)="goToParty()"
+    >
+      Party
+    </button>
+    <div class="col">
+      <button
+        class="button col-md-12 textFont"
+        style=" width: 230px; height: 100px; text-align: center;  margin-left: 2%"
+        (click)="goHowToPlay()"
+      >
+        How to play
+      </button>
+      <button
+        class="button col-md-12 textFont"
+        style="position: relative ; width: 230px; height: 100px; text-align: center; "
+        (click)="goHowToCredits()"
+      >
+        Credits
+      </button>
+    </div>
+  </div>
+</a-entity>
+<!-- #endregion -->
+<!-- #region right panel -->
+<a-entity
+  class="screen dark main"
+  htmlembed="ppu:256"
+  position="4 2 -1"
+  rotation="0 -70 0"
 >
-  <a-gui-flex-container
-    id="topLabel"
-    flex-direction="column" 
-    justify-content="center" 
-    align-items="normal" 
-    component-padding="0.1"
-    opacity="0.9" 
-    width="4" height="0.3"
-    panel-color="#00001f"
+  <div class="col-md-12">
+    <h1 class="textFont" style="font-size: 50px; padding-top: 10px">Player statistics</h1>
+  </div>
+  <div class="row" style="width: 30%; margin-left: 35%; margin-top:3%; border-radius: 20px; background-color: rgba(2, 2, 12, 0.048)">
+    <button
+      class="button col textFont"
+      style="width: 100px; height: 50px; text-align: center; font-size: 20px;"
+      (click)="goHowToCredits()"
+    >
+      All
+    </button>
+    <button
+      class="button col-6 textFont"
+      style="width: 400px; height: 50px; text-align: center; font-size: 20px; margin-left: 2%"
+      (click)="goHowToCredits()"
+    >
+      Single player
+    </button>
+    <button
+      class="button col textFont"
+      style="width: 100px; height: 50px; text-align: center; font-size: 20px; margin-left: 2%"
+      (click)="goHowToCredits()"
+    >
+      Party
+    </button>
+  </div>
+  <div
+    class="row"
+    style="margin-top: 5%; background-color: rgba(2, 2, 12, 0.199); border-radius: 20px;"
   >
-    <a-gui-label 
-                width="1.5" height="0.2"
-                value="Player statistics"
-                font-family="Impact"
-                font-size="50px"
-                background-color="#00001f"
-                font-color="white"
-              >
-    </a-gui-label>
-  </a-gui-flex-container>
-  <a-gui-flex-container
-    id="buttonsContainer"
-    flex-direction="row" 
-    justify-content="center" 
-    align-items="normal" 
-    component-padding="0.1"
-    opacity="0.5" 
-    width="4" height="0.3"
-    panel-color="#00001f"
-  >
-    <a-gui-button
-      value="All"
-      font-size="30px"
-      width="0.3" height="0.2"
-      font-family="Impact"
-      margin="0.01 0.01 0.01 0.01"
-      (click)="onPlay()"
-      toggle="true"
-    >
-    </a-gui-button>
-    <a-gui-button
-      value="Single player"
-      font-size="30px"
-      width="0.5" height="0.2"
-      font-family="Impact"
-      margin="0.01 0.01 0.01 0.01"
-      (click)="onPlay()"
-      toggle="true"
-    >
-    </a-gui-button>
-    <a-gui-button
-      value="Party"
-      font-size="30px"
-      width="0.3" height="0.2"
-      font-family="Impact"
-      margin="0.01 0.01 0.01 0.01"
-      (click)="onPlay()"
-      toggle="true"
-    >
-    </a-gui-button>
-  </a-gui-flex-container>
-  <a-gui-flex-container
-    id="informationContainer"
-    flex-direction="row" 
-    justify-content="center" 
-    align-items="normal" 
-    component-padding="0.1"
-    opacity="0.5" 
-    width="4" height="2"
-    panel-color="#00001f"
-  >
-    <a-gui-flex-container
-      id="leftLabelContainer"
-      flex-direction="column" 
-      justify-content="center" 
-      align-items="normal" 
-      component-padding="0.1"
-      opacity="0.5" 
-      width="2" height="2"
-      panel-color="#00001f"
-    >
-    <ng-container id="rightPanelText" *ngFor="let line of rightPanelLines">
-          <a-gui-label 
-            width="1.5" height="0.2"
-            [attr.value]="line.text"
-            font-family="Impact"
-            [attr.font-size]="line.fontSize"
-            background-color="#00001f"
-            font-color="white"
-          >
-          </a-gui-label>
-    </ng-container>
-    </a-gui-flex-container>
-    <a-gui-flex-container
-      id="rightLabelContainer"
-      flex-direction="column" 
-      justify-content="center" 
-      align-items="normal" 
-      component-padding="0.1"
-      opacity="0.5" 
-      width="2" height="2"
-      panel-color="#00001f"
-    >
-      <ng-container id="rightPanelText" *ngFor="let line of rightPanelLines">
-        <a-gui-label 
-          width="1.5" height="0.2"
-          [attr.value]="line.text"
-          font-family="Impact"
-          [attr.font-size]="line.fontSize"
-          background-color="#00001f"
-          font-color="white"
-        >
-        </a-gui-label>
-      </ng-container>
-    </a-gui-flex-container>
-  </a-gui-flex-container>
-</a-gui-flex-container>
+    <div class="col">
+      <div *ngFor="let line of rightPanelLines" class="col-md-12 textFont">
+        {{ line.text }}
+      </div>
+    </div>
+    <div class="col">
+      <div *ngFor="let line of rightPanelLines" class="col-md-12 textFont">
+        {{ line.text }}
+      </div>
+    </div>
+  </div>
+</a-entity>
+<!-- #endregion -->

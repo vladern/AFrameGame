@@ -5,6 +5,7 @@
       </a-camera>
       <a-controller id="leftController" [hand]="'left'"></a-controller>
       <a-controller id="rightController" [hand]="'right'"></a-controller>
+      <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .screen"></a-entity>
     </a-entity>
     <ng-container *ngIf="actualScene == 0">
         <a-game></a-game>

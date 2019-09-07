@@ -54,7 +54,7 @@
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
-import 'aframe';
+// import 'aframe';
 import '../init_scripts/register-ng-primitives';
 import 'aframe-extras';
 import 'aframe-controller-cursor-component';

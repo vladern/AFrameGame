@@ -5,7 +5,7 @@
                   id="noGameScenario"
                   [attr.windows-motion-controls]="getMotionControls()"
                   [attr.geometry]="getControllerGeometry()"
-                  raycaster="objects: a-gui-button; far: 5"
+                  raycaster="objects: .screen"
                   controller-cursor="radius: 0.005; color: red">    
             </a-entity>
       </ng-container>
@@ -16,7 +16,7 @@
                   [attr.windows-motion-controls]="getMotionControls()"
                   [attr.geometry]="getControllerGeometry()"
                   [attr.aabb-collider]="getAABBColider()"
-                  raycaster="objects: a-gui-button; far: 1"
+                  raycaster="objects: button; far: 1"
                   [attr.controller-cursor]="getControllerCursor()">
             </a-entity>
       </ng-container>
