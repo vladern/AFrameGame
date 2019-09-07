@@ -159,7 +159,7 @@ export class SinglePlayerMenuComponent implements OnInit {
       (result: Song[]) => {
         this._songs = result;
         if (result.length >= 5) {
-          this._songsToBeShown = result.slice(0, 5);
+          this._songsToBeShown = result.slice(0, 6);
         } else {
           this._songsToBeShown = result;
         }

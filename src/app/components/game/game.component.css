@@ -1,0 +1,90 @@
+.textFont {
+    font-family: "Roboto", sans-serif;
+    text-shadow: 0px 0px 10px #00d2ff;
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 1000;
+  }
+  .dark {
+    background-color: rgba(2, 29, 44, 0.623);
+    border-radius: 50px;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    padding: 40px;
+  }
+  .main {
+    width: 1240px;
+    height: 768px;
+    overflow: hidden;
+  }
+  .menu {
+    width: 256px;
+    height: 768px;
+    text-align: center;
+  }
+  .menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  button {
+    display: inline-block;
+    width: 100%;
+    border-radius: 20px;
+    background-color: rgba(14, 24, 29, 0.8);
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+  }
+  button:hover {
+    background-color: #fff;
+    color: #888;
+  }
+  button:active {
+    background-color: #fff;
+    color: #888;
+    box-shadow: 0px 0px 50px #00d2ff;
+  }
+  a.imgLink {
+    width: 100%;
+    border-radius: 20px;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    background-color: #444;
+    border: 3px solid #444;
+    text-shadow: none;
+    display: block;
+  }
+  a.imgLink:hover {
+    border: 3px solid #fff;
+    background-color: #444;
+  }
+  .code {
+    white-space: pre;
+    font-size: 0.7em;
+    background-color: #000;
+    margin-bottom: 30px;
+  }
+  .next,
+  .prev {
+    position: absolute;
+    bottom: 0px;
+    right: 30px;
+    display: inline-block;
+    width: auto !important;
+    padding: 20px 30px !important;
+  }
+  .prev {
+    right: auto;
+    left: 30px;
+  }
+  .slide {
+    height: 100%;
+  }
+  

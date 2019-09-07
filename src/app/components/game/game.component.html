@@ -12,6 +12,7 @@
           position="4 1.8 -3"></a-entity>
 
 <a-gui-button #playButton
+    class="screen"
     *ngIf="!levelCompled && !levelFailed"
     id="playButton"
     visible="false"
@@ -33,7 +34,7 @@
             position="3 2.3 -2.8"
             animation="property: position; to: 3 2.3 -2.0; loop: true; dir: alternate">
     </a-entity>
-    <a-gui-button [attr.visible]="levelFailed || levelCompled" #backToTheMenuButton
+    <a-gui-button class="screen" [attr.visible]="levelFailed || levelCompled" #backToTheMenuButton
     id="backToTheMenuButton"
     position="-0.5 1.6 -2.8"
     value="Go back"
@@ -44,7 +45,7 @@
     toggle="true"
     >
     </a-gui-button>
-    <a-gui-button [attr.visible]="levelFailed || levelCompled" #resetButton
+    <a-gui-button class="screen" [attr.visible]="levelFailed || levelCompled" #resetButton
     id="resetButton"
     position="0.35 1.6 -2.8"
     value="Reset level"

@@ -1,6 +1,5 @@
-
 <!-- left panel -->
-<a-gui-flex-container
+<!-- <a-gui-flex-container
   id="leftPanel"
   flex-direction="column" 
   justify-content="center" 
@@ -11,9 +10,9 @@
   height="2.5"
   position="-3.17 2 -1.54" rotation="0 70 0"
   panel-color="#00001f"
-></a-gui-flex-container>
+></a-gui-flex-container> -->
 <!-- center panel -->
-<a-gui-flex-container
+<!-- <a-gui-flex-container
   id="centerPanel"
   flex-direction="row" 
   justify-content="center" 
@@ -235,9 +234,9 @@
     >
     </a-gui-button>
   </ng-container>
-</a-gui-flex-container>
+</a-gui-flex-container> -->
 <!-- right panel -->
-<a-gui-flex-container
+<!-- <a-gui-flex-container
   id="rightPanel"
   flex-direction="column" 
   justify-content="center" 
@@ -247,4 +246,123 @@
   width="4" height="2.5"
   position="3.17 2 -1.54" rotation="0 -70 0"
   panel-color="#00001f"
-></a-gui-flex-container> 
+></a-gui-flex-container>  -->
+
+<!-- #region central panel -->
+<a-entity
+  id="centerPanel"
+  class="screen dark main"
+  htmlembed="ppu:256"
+  rotation="0 70 0"
+  position="0 2 -3.5"
+  rotation="0 0 0"
+>
+  <div class="slide row">
+    <button
+      id="goBackPanel"
+      class="button col-1 textFont"
+      style=" width: 200px; height: 100%; text-align: center;"
+      (click)="goToInitialMenu()"
+    >
+      <i style="font-weight: 900; font-size: 50px">
+        ←
+      </i>
+    </button>
+    <div class="col backGroundColor" style="margin-left: 10px">
+      <button
+        class="button textFont"
+        *ngIf="showScrollUpBtn"
+        style="text-align: center;"
+        (click)="lastSongsToBeShown()"
+      >
+        ↑
+      </button>
+      <ng-container *ngFor="let song of songsToBeShown">
+        <button class="button textFont" (click)="selectTheSong(song)">
+          {{ song.songName }}
+        </button>
+      </ng-container>
+      <button
+        class="button textFont"
+        *ngIf="showScrollDownBtn"
+        style="text-align: center;"
+        (click)="nextSongsToBeShown()"
+      >
+        ↓
+      </button>
+    </div>
+    <div class="col-2 backGroundColor" style="margin-left: 10px">
+      <div
+        id="dificulties"
+        *ngIf="showSongDifficulties"
+        style="margin-top: 200px"
+      >
+        <button
+          class="button textFont"
+          *ngIf="selectedSong.difficulties.easy === true"
+          id="difficultyBtn"
+          (click)="selectTheDifficulty(0)"
+        >
+          Easy
+        </button>
+        <button
+          class="button textFont"
+          *ngIf="selectedSong.difficulties.normal === true"
+          (click)="selectTheDifficulty(1)"
+        >
+          Normal
+        </button>
+        <button
+          class="button textFont"
+          *ngIf="selectedSong.difficulties.hard === true"
+          id="difficultyBtn"
+          (click)="selectTheDifficulty(2)"
+        >
+          Hard
+        </button>
+        <button
+          class="button textFont"
+          *ngIf="selectedSong.difficulties.expert === true"
+          id="difficultyBtn"
+          (click)="selectTheDifficulty(3)"
+        >
+          Expert
+        </button>
+        <button
+          class="button textFont"
+          *ngIf="selectedSong.difficulties.expertPlus === true"
+          id="difficultyBtn"
+          (click)="selectTheDifficulty(4)"
+        >
+          Expert Plus
+        </button>
+      </div>
+    </div>
+    <div class="col backGroundColor" style="margin-left: 10px">
+      <ng-container *ngIf="showSongInfo">
+        <div style="margin-top: 25%">
+            <div class="textFont">
+                {{ getSongNameToShow() }}
+              </div>
+              <div class="textFont" style="margin-top: 5%">
+                {{ getSongSubnameToShow() }}
+              </div>
+              <div class="textFont" style="margin-top: 5%">
+                {{ getAuthorNameToShow() }}
+              </div>
+              <div class="textFont" style="margin-top: 5%">
+                {{ getBPMToShow() }}
+              </div>
+              <div class="textFont" style="margin-top: 5%">
+                {{ getAuthorNameToShow() }}
+              </div>
+              <button style="margin-top: 10%; margin-left: 30%; width: 150px; height: 100px;" class="button" id="playBtn" (click)="goToGame()">
+                Play
+              </button>
+        </div>
+        
+      </ng-container>
+    </div>
+  </div>
+</a-entity>
+<!-- #endregion -->
