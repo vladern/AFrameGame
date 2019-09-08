@@ -13,6 +13,7 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   public levelFailed: boolean = false;
   public levelCompled: boolean = false;
+  private _disabledPlayButton: boolean = false;
 
   @ViewChild('beatContainer', { read: ViewContainerRef }) beatContainer: ViewContainerRef;
   @ViewChild('playButton') playButton;
@@ -35,17 +36,22 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   public playTheSong() {
-    this._controllerSrv.switchControllerMode();
-    if (this.playButton !== undefined) {
-      this.playButton.nativeElement.setAttribute('animation', 'property: rotation; to: 0 360 0; loop: true; dur: 1000');
-    }
-    this._gameSrv.playTheSong().subscribe( () => {
-      this.playButton.nativeElement.setAttribute('visible', 'false');
-    });
-    this._gameSrv.levelCompled().subscribe( () => {
-      this.levelCompled = true;
+    if (!this._disabledPlayButton) {
+      this._disabledPlayButton = true;
       this._controllerSrv.switchControllerMode();
-    });
+      if (this.playButton !== undefined) {
+        this.playButton.nativeElement.setAttribute('animation', 'property: rotation; to: 0 360 0; loop: true; dur: 1000');
+      }
+      this._gameSrv.playTheSong().subscribe( () => {
+        this.playButton.nativeElement.setAttribute('visible', 'false');
+        this._disabledPlayButton = false;
+      });
+      this._gameSrv.levelCompled().subscribe( () => {
+        this.levelCompled = true;
+        this._controllerSrv.switchControllerMode();
+      });
+    }
+    
   }
 
   public goBackToTheMenu() {
