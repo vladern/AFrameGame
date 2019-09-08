@@ -199,11 +199,13 @@ export class GameService {
     return new Observable(observer => {
       this._beatsaverAPI.getSongResources(this._currentSong).subscribe((resources) => {
         observer.next();
-        this._song = new Audio(resources.audioBlobUrl);
-        this._song.load();
-        this._song.play().then(() => {
-          this.startBeatsCreation(this._currentDifficultie, resources.dificulties, this._song);
-        });
+        if (this._song === undefined || this._song.paused) {
+          this._song = new Audio(resources.audioBlobUrl);
+          this._song.load();
+          this._song.play().then(() => {
+            this.startBeatsCreation(this._currentDifficultie, resources.dificulties, this._song);
+          });
+        }
       });
     });
   }

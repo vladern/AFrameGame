@@ -54,14 +54,14 @@
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
-import 'aframe';
+// import 'aframe';
 import '../init_scripts/register-ng-primitives';
 // import 'aframe-extras';
 import 'aframe-controller-cursor-component';
 // import 'aframe-physics-system';
 import 'aframe-aabb-collider-component';
 import 'aframe-html-shader';
-import 'aframe-htmlembed-component';
+// import 'aframe-htmlembed-component';
 import 'aframe-gui';
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
