@@ -60,6 +60,6 @@ export class ControllerComponent implements OnInit, OnDestroy {
   }
 
   getControllerCursor(): string {
-    return `radius: 0.018; color: ${this.hand === 'right'? 'blue': 'red'}`;
+    return `radius: 0.018; color: ${this.hand === 'right'? '#75B305': '#8E17B3'}`;
   }
 }

@@ -93,9 +93,9 @@ export class BeatComponent implements OnInit, AfterViewInit {
   }
 
   className() {
-    if (this._getColor() === 'red' && this.boxElement.nativeElement.object3D.position.y < 2) {
+    if (this._getColor() === '#8E17B3' && this.boxElement.nativeElement.object3D.position.y < 2) {
       return 'leftBox';
-    } else if (this._getColor() === 'blue' && this.boxElement.nativeElement.object3D.position.y < 2) {
+    } else if (this._getColor() === '#75B305' && this.boxElement.nativeElement.object3D.position.y < 2) {
       return 'rightBox';
     }
   }
@@ -179,9 +179,9 @@ export class BeatComponent implements OnInit, AfterViewInit {
   private _getColor(): string {
     switch (this.beatType) {
       case BeatType.RIGHT:
-        return 'blue';
+        return '#75B305';
       case BeatType.LEFT:
-        return 'red';
+        return '#8E17B3';
       default:
         return 'white';
     }
