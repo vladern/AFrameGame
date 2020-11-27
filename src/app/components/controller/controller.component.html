@@ -3,7 +3,7 @@
       <ng-container *ngIf="!showSaver">
             <a-entity
                   id="noGameScenario"
-                  [attr.windows-motion-controls]="getMotionControls()"
+                  [attr.hand-controls]="getMotionControls()"
                   [attr.geometry]="getControllerGeometry()"
                   raycaster="objects: .screen"
                   controller-cursor="radius: 0.005; color: red">    
@@ -13,7 +13,7 @@
       <ng-container *ngIf="showSaver">
             <a-entity
                   id="gameScenario"
-                  [attr.windows-motion-controls]="getMotionControls()"
+                  [attr.hand-controls]="getMotionControls()"
                   [attr.geometry]="getControllerGeometry()"
                   [attr.aabb-collider]="getAABBColider()"
                   raycaster="objects: button; far: 1"
